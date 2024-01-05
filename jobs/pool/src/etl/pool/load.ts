@@ -490,56 +490,29 @@ export async function upsertPools(pools: Prisma.SushiPoolCreateManyInput[]) {
 
 export async function updatePoolsWithIncentivesTotalApr() {
   const client = await createClient()
-  const poolsWithIncentives = await client.sushiPool.findMany({
-    where: {
-      incentives: { some: {} },
-    },
-    include: {
-      incentives: {
-        include: {
-          rewardToken: true,
-        },
-      },
-    },
-  })
-
-  const poolsToUpdate = poolsWithIncentives.map((pool) => {
-    const incentiveApr = pool.incentives.reduce(
-      (totalIncentiveApr, incentive) => {
-        return totalIncentiveApr + incentive.apr
-      },
-      0,
-    )
-
-    const isIncentivized = pool.incentives.some(
-      (incentive) => incentive.rewardPerDay > 0,
-    )
-
-    return client.sushiPool.update({
-      select: { id: true },
-      where: {
-        id: pool.id,
-      },
-      data: {
-        totalApr1h: incentiveApr + (pool.feeApr1h ?? 0),
-        totalApr1d: incentiveApr + (pool.feeApr1d ?? 0),
-        totalApr1w: incentiveApr + (pool.feeApr1w ?? 0),
-        totalApr1m: incentiveApr + (pool.feeApr1m ?? 0),
-        incentiveApr,
-        isIncentivized,
-        wasIncentivized: true,
-      },
-    })
-  })
-
   const startTime = performance.now()
-  const updatedPools = await Promise.all(poolsToUpdate)
+
+  const updatedPoolsCount = await client.$executeRaw`
+  UPDATE
+    SushiPool p
+  SET
+    totalApr1h = COALESCE((SELECT SUM(i.apr) FROM Incentive i WHERE i.poolId = p.id), 0) + COALESCE(p.feeApr1h, 0),
+    totalApr1d = COALESCE((SELECT SUM(i.apr) FROM Incentive i WHERE i.poolId = p.id), 0) + COALESCE(p.feeApr1d, 0),
+    totalApr1w = COALESCE((SELECT SUM(i.apr) FROM Incentive i WHERE i.poolId = p.id), 0) + COALESCE(p.feeApr1w, 0),
+    totalApr1m = COALESCE((SELECT SUM(i.apr) FROM Incentive i WHERE i.poolId = p.id), 0) + COALESCE(p.feeApr1m, 0),
+    incentiveApr = COALESCE((SELECT SUM(i.apr) FROM Incentive i WHERE i.poolId = p.id), 0),
+    isIncentivized = COALESCE((SELECT MAX(i.rewardPerDay > 0) FROM Incentive i WHERE i.poolId = p.id), false),
+    wasIncentivized = true
+  WHERE
+    EXISTS (SELECT 1 FROM Incentive i WHERE i.poolId = p.id);
+`
+
   const endTime = performance.now()
 
   await client.$disconnect()
 
   console.log(
-    `LOAD - Updated ${updatedPools.length} pools with total APR (${(
+    `LOAD - Updated ${updatedPoolsCount} pools with total APR (${(
       (endTime - startTime) /
       1000
     ).toFixed(1)}s) `,
@@ -548,47 +521,30 @@ export async function updatePoolsWithIncentivesTotalApr() {
 
 export async function updatePoolsWithSteerVaults() {
   const client = await createClient()
-  const poolsWithSteerVaults = await client.sushiPool.findMany({
-    where: {
-      steerVaults: { some: {} },
-    },
-    include: {
-      steerVaults: {
-        include: {
-          pool: true,
-        },
-      },
-    },
-  })
-
   const startTime = performance.now()
 
-  for (const pool of poolsWithSteerVaults) {
-    const hasSteerVault = pool.steerVaults.some(
-      (steerVault) => steerVault.isEnabled,
-    )
-    const hadSteerVault =
-      hasSteerVault ||
-      pool.steerVaults.some((steerVault) => steerVault.wasEnabled)
-
-    await client.sushiPool.update({
-      select: { id: true },
-      where: {
-        id: pool.id,
-      },
-      data: {
-        hasEnabledSteerVault: hasSteerVault,
-        hadEnabledSteerVault: hadSteerVault,
-      },
-    })
-  }
+  const poolsUpdatedCount = await client.$executeRaw`
+    UPDATE
+      SushiPool p
+    SET
+      hasEnabledSteerVault = COALESCE(
+        (SELECT MAX(sv.isEnabled) FROM SteerVault sv WHERE sv.poolId = p.id),
+        false
+      ),
+      hadEnabledSteerVault = COALESCE(
+        (SELECT MAX(sv.isEnabled OR sv.wasEnabled) FROM SteerVault sv WHERE sv.poolId = p.id),
+        false
+      )
+    WHERE
+      EXISTS (SELECT 1 FROM SteerVault sv WHERE sv.poolId = p.id AND (sv.isEnabled OR sv.wasEnabled));
+  `;
 
   const endTime = performance.now()
 
   await client.$disconnect()
 
   console.log(
-    `LOAD - Updated ${poolsWithSteerVaults.length} pools with steer vaults (${(
+    `LOAD - Updated ${poolsUpdatedCount} pools with steer vaults (${(
       (endTime - startTime) /
       1000
     ).toFixed(1)}s) `,
