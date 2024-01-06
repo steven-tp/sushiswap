@@ -1,6 +1,13 @@
 import { Prisma, createClient } from '@sushiswap/database'
 import { performance } from 'perf_hooks'
 
+function clipDecimal(value: any) {
+  if (Number(value) >= 1e32) {
+    return 1e32
+  }
+  return value
+}
+
 export async function upsertPools(pools: Prisma.SushiPoolCreateManyInput[]) {
   if (pools.length === 0) return
   const client = await createClient()
@@ -343,149 +350,158 @@ export async function upsertPools(pools: Prisma.SushiPoolCreateManyInput[]) {
     : Prisma.empty
 
   const query = Prisma.sql`
-    UPDATE SushiPool
-    SET 
-      reserve0 = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.reserve0}`,
-          ),
-          ' ',
-        )}
-        ELSE reserve0 
-      END,
-      reserve1 = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.reserve1}`,
-          ),
-          ' ',
-        )}
-        ELSE reserve1 
-      END,
-      totalSupply = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.totalSupply}`,
-          ),
-          ' ',
-        )}
-        ELSE totalSupply 
-      END,
-      liquidityUSD = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.liquidityUSD}`,
-          ),
-          ' ',
-        )}
-        ELSE liquidityUSD 
-      END,
-      feesUSD = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.feesUSD}`,
-          ),
-          ' ',
-        )}
-        ELSE feesUSD 
-      END,
-      liquidityNative = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.liquidityNative}`,
-          ),
-          ' ',
-        )}
-        ELSE liquidityNative 
-      END,
-      volumeUSD = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.volumeUSD}`,
-          ),
-          ' ',
-        )}
-        ELSE volumeUSD 
-      END,
-      volumeNative = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.volumeNative}`,
-          ),
-          ' ',
-        )}
-        ELSE volumeNative 
-      END,
-      token0Price = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.token0Price}`,
-          ),
-          ' ',
-        )}
-        ELSE token0Price 
-      END,
-      token1Price = CASE 
-        ${Prisma.join(
-          poolsToUpdate.map(
-            (update) =>
-              Prisma.sql`WHEN id = ${update.id} THEN ${update.token1Price}`,
-          ),
-          ' ',
-        )}
-        ELSE token1Price 
-      END,
-      ${feeApr1hQuery}
-      ${feeApr1dQuery}
-      ${feeApr1wQuery}
-      ${feeApr1mQuery}
-      ${totalApr1hQuery}
-      ${totalApr1dQuery}
-      ${totalApr1wQuery}
-      ${totalApr1mQuery}
-      ${fees1hQuery}
-      ${fees1dQuery}
-      ${fees1wQuery}
-      ${fees1mQuery}
-      ${volume1hQuery}
-      ${volume1dQuery}
-      ${volume1wQuery}
-      ${volume1mQuery}
-      ${liquidityUSDChange1hQuery}
-      ${liquidityUSDChange1dQuery}
-      ${liquidityUSDChange1wQuery}
-      ${liquidityUSDChange1mQuery}
-      ${volumeChange1hQuery}
-      ${volumeChange1dQuery}
-      ${volumeChange1wQuery}
-      ${volumeChange1mQuery}
-      ${feesChange1hQuery}
-      ${feesChange1dQuery}
-      ${feesChange1wQuery}
-      ${feesChange1mQuery}
-      updatedAt = NOW()
-    WHERE id IN (${Prisma.join(poolsToUpdate.map((update) => update.id))});
-`
-  const [updated, created] = await Promise.all([
-    poolsToUpdate.length ? client.$executeRaw`${query}` : Promise.resolve(0),
-    client.sushiPool.createMany({
-      data: poolsToCreate,
-      skipDuplicates: true,
-    }),
-  ])
+      UPDATE SushiPool
+      SET
+        reserve0 = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.reserve0}`,
+            ),
+            ' ',
+          )}
+          ELSE reserve0
+        END,
+        reserve1 = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.reserve1}`,
+            ),
+            ' ',
+          )}
+          ELSE reserve1
+        END,
+        totalSupply = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.totalSupply}`,
+            ),
+            ' ',
+          )}
+          ELSE totalSupply
+        END,
+        liquidityUSD = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.liquidityUSD}`,
+            ),
+            ' ',
+          )}
+          ELSE liquidityUSD
+        END,
+        feesUSD = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${clipDecimal(
+                  update.feesUSD,
+                )}`,
+            ),
+            ' ',
+          )}
+          ELSE feesUSD
+        END,
+        liquidityNative = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.liquidityNative}`,
+            ),
+            ' ',
+          )}
+          ELSE liquidityNative
+        END,
+        volumeUSD = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.volumeUSD}`,
+            ),
+            ' ',
+          )}
+          ELSE volumeUSD
+        END,
+        volumeNative = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.volumeNative}`,
+            ),
+            ' ',
+          )}
+          ELSE volumeNative
+        END,
+        token0Price = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.token0Price}`,
+            ),
+            ' ',
+          )}
+          ELSE token0Price
+        END,
+        token1Price = CASE
+          ${Prisma.join(
+            poolsToUpdate.map(
+              (update) =>
+                Prisma.sql`WHEN id = ${update.id} THEN ${update.token1Price}`,
+            ),
+            ' ',
+          )}
+          ELSE token1Price
+        END,
+        ${feeApr1hQuery}
+        ${feeApr1dQuery}
+        ${feeApr1wQuery}
+        ${feeApr1mQuery}
+        ${totalApr1hQuery}
+        ${totalApr1dQuery}
+        ${totalApr1wQuery}
+        ${totalApr1mQuery}
+        ${fees1hQuery}
+        ${fees1dQuery}
+        ${fees1wQuery}
+        ${fees1mQuery}
+        ${volume1hQuery}
+        ${volume1dQuery}
+        ${volume1wQuery}
+        ${volume1mQuery}
+        ${liquidityUSDChange1hQuery}
+        ${liquidityUSDChange1dQuery}
+        ${liquidityUSDChange1wQuery}
+        ${liquidityUSDChange1mQuery}
+        ${volumeChange1hQuery}
+        ${volumeChange1dQuery}
+        ${volumeChange1wQuery}
+        ${volumeChange1mQuery}
+        ${feesChange1hQuery}
+        ${feesChange1dQuery}
+        ${feesChange1wQuery}
+        ${feesChange1mQuery}
+        updatedAt = NOW()
+      WHERE id IN (${Prisma.join(poolsToUpdate.map((update) => update.id))});
+  `
 
-  await client.$disconnect()
-  console.log(`LOAD - Updated ${updated} and created ${created.count} pools. `)
+  try {
+    const [updated, created] = await Promise.all([
+      poolsToUpdate.length ? client.$executeRaw`${query}` : Promise.resolve(0),
+      client.sushiPool.createMany({
+        data: poolsToCreate,
+        skipDuplicates: true,
+      }),
+    ])
+
+    await client.$disconnect()
+    console.error(
+      `LOAD - Updated ${updated} and created ${created.count} pools. `,
+    )
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 export async function updatePoolsWithIncentivesTotalApr() {
@@ -537,7 +553,7 @@ export async function updatePoolsWithSteerVaults() {
       )
     WHERE
       EXISTS (SELECT 1 FROM SteerVault sv WHERE sv.poolId = p.id AND (sv.isEnabled OR sv.wasEnabled));
-  `;
+  `
 
   const endTime = performance.now()
 
