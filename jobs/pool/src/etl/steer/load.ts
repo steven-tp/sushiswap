@@ -384,3 +384,18 @@ export async function upsertVaults(vaults: Prisma.SteerVaultCreateManyInput[]) {
 
   console.log(`LOAD - Updated ${updated} and created ${created.count} vaults. `)
 }
+
+export async function deprecateVaults(vaultIds: string[]) {
+  const client = await createClient()
+
+  const deprecated = await client.steerVault.updateMany({
+    data: {
+      isDeprecated: true,
+    },
+    where: { id: { in: vaultIds } },
+  })
+
+  await client.$disconnect()
+
+  console.log(`LOAD - Deprecated ${deprecated.count} vaults.`)
+}

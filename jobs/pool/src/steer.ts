@@ -14,7 +14,7 @@ import { getIdFromChainIdAddress } from 'sushi/format'
 
 import { getBuiltGraphSDK } from '../.graphclient/index.js'
 import { updatePoolsWithSteerVaults } from './etl/pool/load.js'
-import { upsertVaults } from './etl/steer/load.js'
+import { deprecateVaults, upsertVaults } from './etl/steer/load.js'
 
 export async function steer() {
   console.log('Starting steer')
@@ -27,6 +27,7 @@ export async function steer() {
 
     await upsertVaults(transformed)
     await updatePoolsWithSteerVaults()
+    await deprecate()
 
     const endTime = performance.now()
     console.log(
@@ -37,6 +38,20 @@ export async function steer() {
   } catch (e) {
     console.error(e)
   }
+}
+
+async function deprecate() {
+  const deprecatedVaults = await fetch(
+    'https://ro81h8hq6b.execute-api.us-east-1.amazonaws.com/deprecated-bundles',
+  )
+    .then((data) => data.json())
+    .then((data: { id: string; chainId: number; type: string }[]) =>
+      data.filter((el) => el.type === 'VAULT'),
+    )
+
+  await deprecateVaults(
+    deprecatedVaults.map((vault) => `${vault.chainId}:${vault.id}`),
+  )
 }
 
 async function extract() {

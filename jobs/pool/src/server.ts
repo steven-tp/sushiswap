@@ -95,18 +95,4 @@ app.get(
   timeout('600s'),
 )
 
-app.get(
-  '/bonds',
-  async (req, res) => {
-    req.setTimeout(600_000)
-    try {
-      await bonds()
-      res.sendStatus(200)
-    } catch (err) {
-      res.status(500).send(err)
-    }
-  },
-  timeout('600s'),
-)
-
 app.listen(8080)
