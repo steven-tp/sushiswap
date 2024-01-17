@@ -391,6 +391,7 @@ export async function deprecateVaults(vaultIds: string[]) {
   const deprecated = await client.steerVault.updateMany({
     data: {
       isDeprecated: true,
+      isEnabled: false,
     },
     where: { id: { in: vaultIds } },
   })
