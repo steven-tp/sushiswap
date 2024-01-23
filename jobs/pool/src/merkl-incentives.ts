@@ -33,26 +33,64 @@ const isTokenErrorResponse = (
 ): token is TokenError => token.status === 'error'
 
 type MerklResponse = {
+  [chainId: string]: ChainData
+}
+
+type ChainData = {
   pools: {
-    [poolId: string]: {
-      chainId: number
-      aprs: {
-        [incentiveName: string]: number
-      }[]
-      distributionData: MerklDistribution[]
-      tvl: number
-    }
+    [poolId: string]: Pool
   }
 }
 
+type Pool = {
+  amm: number;
+  ammAlgo: number;
+  ammAlgoName: string;
+  ammName: string;
+  aprs: Record<string, number>; // Changed from array to Record
+  chainId: number;
+  decimalsToken0: number;
+  decimalsToken1: number;
+  disputeLive: boolean;
+  distributionData: MerklDistribution[];
+  endOfDisputePeriod: number;
+  meanAPR: number;
+  pool: string;
+  poolBalanceToken0: number;
+  poolBalanceToken1: number;
+  poolFee: number;
+  poolTotalLiquidity: number;
+  rewardsPerToken: Record<string, unknown>; // Update this type based on the actual structure
+  symbolToken0: string;
+  symbolToken1: string;
+  tick: number;
+  token0: string;
+  token1: string;
+  tvl: number;
+};
+
 type MerklDistribution = {
-  amount: number
-  start: number
-  end: number
-  token: string
-  isMock: boolean
-  isLive: boolean
-}
+  amount: number;
+  apr: number;
+  blacklist: string[];
+  breakdown: Record<string, unknown>; // Adjust the type based on the actual structure
+  decimalsRewardToken: number;
+  endTimestamp: number;
+  id: string;
+  isBoosted: boolean;
+  isLive: boolean;
+  isMock: boolean;
+  isOutOfRangeIncentivized: boolean;
+  propFees: number;
+  propToken0: number;
+  propToken1: number;
+  rewardToken: string;
+  startTimestamp: number;
+  symbolRewardToken: string;
+  unclaimed: number;
+  whitelist: string[];
+};
+
 
 type PriceResponse = {
   [token: string]: number
@@ -108,6 +146,10 @@ export async function execute() {
       prices,
     )
 
+    console.log(
+      `TRANSFORM - ${incentivesToCreate.length} incentives to create, ${incentivesToUpdate.length} incentives to update, ${tokens.length} tokens to create.`,
+    )
+
     // LOAD
     await createTokens(tokens)
     await mergeIncentives(incentivesToCreate, incentivesToUpdate)
@@ -128,13 +170,15 @@ export async function execute() {
 }
 
 async function extract() {
-  return await fetch('https://api.angle.money/v1/merkl').then(
-    (data) => data.json() as Promise<MerklResponse>,
-  )
+  const response = await fetch('https://api.angle.money/v2/merkl')
+  if (response.status !== 200) {
+    throw new Error('Failed to fetch merkl incentives.')
+  }
+  return response.json() as Promise<MerklResponse>
 }
 
 async function transform(
-  merkl: MerklResponse,
+  response: MerklResponse,
   prices: PriceResponse,
 ): Promise<{
   incentivesToCreate: Prisma.IncentiveCreateManyInput[]
@@ -145,19 +189,33 @@ async function transform(
   const tokensToCreate: Prisma.TokenCreateManyInput[] = []
   const rewardTokens: Map<string, { chainId: ChainId; address: string }> =
     new Map()
-  if (merkl === undefined || merkl.pools === undefined) {
+
+    const pools: { address: string; pool: Pool }[] = [];
+
+    for (const [chainId, value] of Object.entries(response)) {
+      if ((MERKL_SUPPORTED_NETWORKS as number[]).includes(Number(chainId))) {
+        const chainPools = Object.entries(value.pools).map(([address, pool]) => ({
+          address,
+          pool,
+        }));
+        pools.push(...chainPools);
+      }
+    }
+    
+    const sushiPools = pools.filter((item) => item.pool.ammName === 'SushiSwapV3');
+    
+  if (response === undefined || sushiPools === undefined || sushiPools.length === 0) {
     return { incentivesToCreate: [], incentivesToUpdate: [], tokens: [] }
   }
-
-  for (const [poolAddress, pool] of Object.entries(merkl.pools)) {
+  sushiPools.forEach(({ address, pool }) => {
     if (pool.distributionData.length > 0) {
       const rewardsByToken: Map<string, MerklDistribution[]> = new Map()
       // Group rewards by token
       for (const distributionData of pool.distributionData) {
-        if (!rewardsByToken.has(distributionData.token)) {
-          rewardsByToken.set(distributionData.token, [])
+        if (!rewardsByToken.has(distributionData.rewardToken)) {
+          rewardsByToken.set(distributionData.rewardToken, [])
         }
-        rewardsByToken.get(distributionData.token)!.push(distributionData)
+        rewardsByToken.get(distributionData.rewardToken)!.push(distributionData)
       }
 
       for (const [token, rewards] of rewardsByToken) {
@@ -169,7 +227,7 @@ async function transform(
           ) {
             return acc
           }
-          const duration = distData.end - distData.start
+          const duration = distData.endTimestamp - distData.startTimestamp
           const durationInDays = duration / 86400
           const amountPerDay = distData.amount / durationInDays
           return acc + amountPerDay
@@ -180,7 +238,7 @@ async function transform(
         const apr = pool.tvl ? rewardPerYearUSD / pool.tvl : 0
 
         const incentive = Prisma.validator<Prisma.IncentiveCreateManyInput>()({
-          id: poolAddress
+          id: address
             .toLowerCase()
             .concat(':')
             .concat(token.toLowerCase())
@@ -197,7 +255,7 @@ async function transform(
           poolId: pool.chainId
             .toString()
             .concat(':')
-            .concat(poolAddress.toLowerCase()),
+            .concat(address.toLowerCase()),
           pid: 0, // Does not exist for merkl
           rewarderAddress: '0x0000000000000000000000000000000000000000',
           rewarderType: RewarderType.Primary,
@@ -209,7 +267,7 @@ async function transform(
         })
       }
     }
-  }
+  })
 
   const missingTokens = await getMissingTokens(
     Array.from(rewardTokens.values()),
