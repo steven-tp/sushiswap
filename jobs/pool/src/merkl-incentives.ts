@@ -223,7 +223,8 @@ async function transform(
           if (
             !distData.isLive ||
             distData.isMock ||
-            !(MERKL_SUPPORTED_NETWORKS as number[]).includes(pool.chainId)
+            !(MERKL_SUPPORTED_NETWORKS as number[]).includes(pool.chainId) ||
+            distData.whitelist.length > 0
           ) {
             return acc
           }
