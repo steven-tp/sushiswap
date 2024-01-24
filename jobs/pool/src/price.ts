@@ -43,7 +43,7 @@ export async function prices() {
     const startTime = performance.now()
     for (const chainId of SWAP_ENABLED_NETWORKS) {
       const price = Price.USD
-      const base = USDC_ADDRESS[chainId as keyof typeof USDC_ADDRESS]
+      const base = chainId === ChainId.OPTIMISM ? '0x7f5c764cbc14f9669b88837ca1490cca17c31607' : USDC_ADDRESS[chainId as keyof typeof USDC_ADDRESS]
       if (!isAddress(base) || !base) {
         console.log(
           `Base token (${base}) is not a valid address, given the chainId: ${chainId}. SKIPPING`,
