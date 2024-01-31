@@ -913,6 +913,37 @@ export default [
     },
     "name": "Palm",
     "shortName": "palm"
+  },
+  {
+    "chainId": 2484,
+    "explorers": [
+      {
+        "name": "Blockscout",
+        "url": "https://blockscout.scroll.io",
+        "standard": "EIP3091"
+      },
+      {
+        "name": "Scrollscan",
+        "url": "https://scrollscan.com",
+        "standard": "EIP3091"
+      }
+    ],
+    "nativeCurrency": {
+      "name": "Ether",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "name": "Scroll",
+    "shortName": "scr",
+    "parent": {
+      "type": "L2",
+      "chain": "eip155-1",
+      "bridges": [
+        {
+          "url": "https://scroll.io/bridge"
+        }
+      ]
+    }
   }
 ] as const;
 

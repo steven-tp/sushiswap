@@ -36,6 +36,7 @@ export const SUSHISWAP_ENABLED_NETWORKS = [
   ChainId.METIS,
   ChainId.BTTC,
   ChainId.FILECOIN,
+  ChainId.U2U_NEBULAS
   // ChainId.PALM,
   // ChainId.HECO,
   // ChainId.OKEX
@@ -67,6 +68,7 @@ export const SUSHISWAP_V3_ENABLED_NETWORKS = [
   ChainId.BTTC,
   ChainId.FILECOIN,
   ChainId.HAQQ,
+  ChainId.U2U_NEBULAS
 ]
 export type SushiSwapV3ChainId = typeof SUSHISWAP_V3_ENABLED_NETWORKS[number]
 
@@ -96,6 +98,7 @@ export const THUNDERCORE_HOST = 'graph-node.thundercore.com/subgraphs/name'
 export const CORE_HOST = 'thegraph.coredao.org/subgraphs/name'
 export const LINEA_HOST = 'graph-query.linea.build/subgraphs/name'
 export const HAQQ_HOST = 'haqq.graph.p2p.org/subgraphs/name'
+export const U2U_NEBULAS_HOST = 'subgraph-amm-dev.uniultra.xyz/subgraphs/name'
 
 export const SUSHI_HOST = 'subgraphs.sushi.com/subgraphs/name'
 
@@ -133,6 +136,8 @@ export const CHAIN_NAME: Record<number, string> = {
   [ChainId.SCROLL]: 'Scroll',
   [ChainId.FILECOIN]: 'Filecoin',
   [ChainId.HAQQ]: 'HAQQ',
+  [ChainId.HAQQ]: 'HAQQ',
+  [ChainId.U2U_NEBULAS]: 'U2U Nebulas Testnet'
 } as const
 
 export const SUBGRAPH_HOST: Record<number, string> = {
@@ -168,6 +173,7 @@ export const SUBGRAPH_HOST: Record<number, string> = {
   [ChainId.SCROLL]: STUDIO_HOST,
   [ChainId.FILECOIN]: FILECOIN_HOST,
   [ChainId.HAQQ]: HAQQ_HOST,
+  [ChainId.U2U_NEBULAS]: U2U_NEBULAS_HOST
 } as const
 
 export const BENTOBOX_SUBGRAPH_NAME = {
@@ -325,6 +331,7 @@ export const SUSHISWAP_V3_SUBGRAPH_NAME: Record<number, string> = {
   [ChainId.BTTC]: 'sushi-v3/v3-bttc',
   [ChainId.FILECOIN]: 'sushiswap/v3-filecoin',
   [ChainId.HAQQ]: 'sushi/v3-haqq',
+  [ChainId.U2U_NEBULAS]: 'sushi-v3/v3-u2u'
 }
 
 export const TRIDENT_SUBGRAPH_NAME: Record<number, string> = {

@@ -48,6 +48,7 @@ export const ChainId = {
   LINEA: 59144,
   BASE: 8453,
   SCROLL: 534352,
+  U2U_NEBULAS: 2484
 } as const
 export type ChainId = typeof ChainId[keyof typeof ChainId]
 
@@ -64,6 +65,7 @@ export const TESTNET_CHAIN_IDS = [
   ChainId.RINKEBY,
   ChainId.GÖRLI,
   ChainId.KOVAN,
+  ChainId.U2U_NEBULAS
 ] as const
 export type TestnetChainId = typeof TESTNET_CHAIN_IDS[number]
 
@@ -121,5 +123,6 @@ export const ChainKey = {
   [ChainId.FILECOIN]: 'filecoin',
   // [ChainId.SEPOLIA]: 'sepolia',
   [ChainId.SCROLL]: 'scroll',
+  [ChainId.U2U_NEBULAS]: 'u2u-nebulas'
 } as const
 export type ChainKey = typeof ChainKey[keyof typeof ChainKey]

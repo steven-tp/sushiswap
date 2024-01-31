@@ -603,6 +603,7 @@ export const WNATIVE = {
     symbol: 'WFIL',
     name: 'Wrapped FIL',
   }),
+  [ChainId.U2U_NEBULAS]: WETH9[ChainId.BASE],
 } as const
 
 export const SUSHI = addressMapToTokenMap(
