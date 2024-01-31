@@ -4,9 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider     = "postgresql"
+  url = "postgres://default:c1e9pGqdlQLb@ep-dark-heart-a44un5wb-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb?pgbouncer=true&connect_timeout=15" // uses connection pooling
+  directUrl = "postgres://default:c1e9pGqdlQLb@ep-dark-heart-a44un5wb.us-east-1.postgres.vercel-storage.com:5432/verceldb" // 
 }
 
 enum TokenStatus {
@@ -37,7 +37,7 @@ enum RewarderType {
 model Token {
   id       String      @id // chainId:address
   address  String
-  chainId  Int
+  chainId  Float
   name     String
   symbol   String
   decimals Int
@@ -76,7 +76,7 @@ model Pool {
   id            String  @id // chainId:address
   address       String
   name          String
-  chainId       Int
+  chainId       Float
   protocol      String
   version       String
   type          String
@@ -110,7 +110,7 @@ model SushiPool {
   id              String   @id // chainId_address
   address         String
   name            String
-  chainId         Int
+  chainId         Float
   protocol        Protocol
   token0          Token    @relation("token0", fields: [token0Id], references: [id])
   token0Id        String
@@ -172,7 +172,7 @@ model SushiPool {
   hadEnabledSteerVault  Boolean @default(false)
   steerVaults           SteerVault[]
 
-  createdAtBlockNumber BigInt   @db.UnsignedBigInt
+  createdAtBlockNumber Float  
   isBlacklisted        Boolean  @default(false)
   generatedAt          DateTime @default(now())
   updatedAt            DateTime @updatedAt
@@ -191,7 +191,7 @@ model SushiPool {
 
 model Incentive {
   id              String       @id // poolAddress_rewarderAddress
-  chainId         Int
+  chainId         Float
   chefType        ChefType
   apr             Float
   rewardPerDay    Float
@@ -235,7 +235,7 @@ enum VaultState {
 model SteerVault {
   id                      String      @id // chainId:address
   address                 String      @default("")
-  chainId                 Int         @default(69)
+  chainId                 Float       @default(69)
   
   pool                    SushiPool   @relation(fields: [poolId], references: [id])
   poolId                  String
