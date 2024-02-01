@@ -20,6 +20,7 @@ export const SWAP_API_ENABLED_NETWORKS = [
   ChainId.SCROLL,
   ChainId.LINEA,
   ChainId.HAQQ,
+  ChainId.U2U_NEBULAS
 ]
 export type SwapApiEnabledChainId = typeof SWAP_API_ENABLED_NETWORKS[number]
 export const isSwapApiEnabledChainId = (
@@ -42,6 +43,7 @@ const PREFERRED_CHAINID_ORDER = [
   ChainId.FANTOM,
   ChainId.ARBITRUM_NOVA,
   ChainId.HARMONY,
+  ChainId.U2U_NEBULAS
 ] as const
 
 export const CHAIN_IDS = [
