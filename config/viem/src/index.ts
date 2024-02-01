@@ -598,6 +598,10 @@ export const config: Record<
     chain: scroll,
     transport: http(`https://lb.drpc.org/ogrpc?network=scroll&dkey=${drpcId}`),
   },
+  [ChainId.U2U_NEBULAS]: {
+    chain: scroll,
+    transport: http(`https://lb.drpc.org/ogrpc?network=u2u&dkey=${drpcId}`),
+  },
   [ChainId.FILECOIN]: {
     chain: filecoin,
     transport: fallback(

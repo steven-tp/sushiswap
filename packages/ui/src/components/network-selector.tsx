@@ -37,6 +37,7 @@ const PREFERRED_CHAINID_ORDER: ChainId[] = [
   ChainId.FANTOM,
   ChainId.ARBITRUM_NOVA,
   ChainId.HARMONY,
+  ChainId.U2U_NEBULAS
 ]
 
 export interface NetworkSelectorProps<T extends number = ChainId> {

@@ -65,7 +65,6 @@ export const TESTNET_CHAIN_IDS = [
   ChainId.RINKEBY,
   ChainId.GÖRLI,
   ChainId.KOVAN,
-  ChainId.U2U_NEBULAS
 ] as const
 export type TestnetChainId = typeof TESTNET_CHAIN_IDS[number]
 
