@@ -52,6 +52,7 @@ export const CHAIN_IDS = [
   ...SushiSwapV3ChainIds,
 ] as const
 
+
 export const SUPPORTED_CHAIN_IDS = Array.from(
   new Set([
     ...PREFERRED_CHAINID_ORDER.filter((el) =>
