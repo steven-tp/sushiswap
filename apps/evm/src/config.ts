@@ -51,6 +51,12 @@ export const CHAIN_IDS = [
   ...SushiSwapV2ChainIds,
   ...SushiSwapV3ChainIds,
 ] as const
+console.log("🚀 ~ SushiSwapV2ChainIds:", SushiSwapV2ChainIds,   new Set([
+  ...PREFERRED_CHAINID_ORDER.filter((el) =>
+    CHAIN_IDS.includes(el as typeof CHAIN_IDS[number]),
+  ),
+  ...CHAIN_IDS,
+]),)
 
 export const SUPPORTED_CHAIN_IDS = Array.from(
   new Set([

@@ -5,7 +5,8 @@ export const defaultPrismaClientOptions = {
     db: {
       url: process.env['DATABASE_URL'] as string,
     },
-  },
+  }
+    // log: ['query'],
   // log: ['query'],
 } satisfies Prisma.PrismaClientOptions
 

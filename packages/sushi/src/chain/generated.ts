@@ -918,31 +918,26 @@ export default [
     "chainId": 2484,
     "explorers": [
       {
-        "name": "Blockscout",
+        "name": "U2U Nebulas",
         "url": "https://blockscout.scroll.io",
         "standard": "EIP3091"
       },
-      {
-        "name": "Scrollscan",
-        "url": "https://scrollscan.com",
-        "standard": "EIP3091"
-      }
     ],
     "nativeCurrency": {
-      "name": "Ether",
-      "symbol": "ETH",
+      "name": "U2U",
+      "symbol": "U2U",
       "decimals": 18
     },
-    "name": "Scroll",
+    "name": "U2U",
     "shortName": "scr",
     "parent": {
       "type": "L2",
       "chain": "eip155-1",
-      "bridges": [
-        {
-          "url": "https://scroll.io/bridge"
-        }
-      ]
+      // "bridges": [
+      //   {
+      //     "url": "https://scroll.io/bridge"
+      //   }
+      // ]
     }
   }
 ] as const;
