@@ -508,6 +508,13 @@ module.exports.defaultConfig = {
       live: true,
       saveDeployments: true,
     },
+    'u2u-nebulas': {
+      url: 'https://rpc-nebulas-testnet.uniultra.xyz/',
+      accounts,
+      chainId: 2484,
+      live: true,
+      saveDeployments: true,
+    }
   },
   namedAccounts: {
     // e.g. ledger://0x18dd4e0Eb8699eA4fee238dE41ecF115e32272F8

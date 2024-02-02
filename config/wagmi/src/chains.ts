@@ -774,6 +774,40 @@ export const otherChains: Chain[] = [
       },
     },
   },
+  {
+    id: ChainId.U2U_NEBULAS,
+    name: 'U2U Nebulas',
+    network: 'u2u',
+    nativeCurrency: {
+      name: 'U2U',
+      symbol: 'U2U',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: {
+        http: ['https://rpc-nebulas-testnet.uniultra.xyz'],
+      },
+      public: {
+        http: ['https://rpc-nebulas-testnet.uniultra.xyz'],
+      },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'U2U Nebulas Scan',
+        url: 'https://testnet.u2uscan.xyz/',
+      },
+      default: {
+        name: 'U2U Nebulas Scan',
+        url: 'https://testnet.u2uscan.xyz/',
+      },
+    },
+    contracts: {
+      multicall3: {
+        address: '0x1689ec416daE726e4fb162b132b8250c153f6a5B',
+        blockCreated: 15921452,
+      },
+    },
+  },
 ]
 
 export const allChains = [...defaultChains, ...otherChains]

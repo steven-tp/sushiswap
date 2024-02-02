@@ -82,6 +82,7 @@ export const TokenSelector: FC<TokenSelectorProps> = ({
   const { data: defaultTokenMap, isLoading: isTokensLoading } = useTokens({
     chainId,
   })
+
   const { data: otherTokenMap, isLoading: isOtherTokensLoading } =
     useOtherTokenListsQuery({ chainId, query })
   const { data: pricesMap } = usePrices({ chainId })
