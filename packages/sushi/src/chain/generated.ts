@@ -919,7 +919,7 @@ export default [
     "explorers": [
       {
         "name": "U2U Nebulas",
-        "url": "https://blockscout.scroll.io",
+        "url": "https://rpc-nebulas-testnet.uniultra.xyz",
         "standard": "EIP3091"
       },
     ],

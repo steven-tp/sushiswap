@@ -15,10 +15,12 @@ type Data = {
   decimals: number
 }
 
+import dataToken from './token.json'
 export const fetchTokensQueryFn = async () => {
-  const resp = await fetch('https://tokens.sushi.com/v0')
-  if (resp.status === 200) {
-    const data: Data[] = await resp.json()
+  // const resp = await fetch('https://tokens.sushi.com/v0')
+  // if (resp.status === 200) {
+    const data: Data[] = dataToken //await resp.json() 
+    
     await saveTokens({
       tokens: data.map(({ id, address, symbol, decimals, name }) => {
         const [chainId] = id.split(':')
@@ -57,9 +59,9 @@ export const fetchTokensQueryFn = async () => {
       },
       {},
     )
-  }
+  // }
 
-  throw new Error('Could not fetch tokens')
+  // throw new Error('Could not fetch tokens')
 }
 
 export const useTokens = ({ chainId }: UseTokensParams) => {

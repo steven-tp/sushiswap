@@ -136,7 +136,6 @@ export const CHAIN_NAME: Record<number, string> = {
   [ChainId.SCROLL]: 'Scroll',
   [ChainId.FILECOIN]: 'Filecoin',
   [ChainId.HAQQ]: 'HAQQ',
-  [ChainId.HAQQ]: 'HAQQ',
   [ChainId.U2U_NEBULAS]: 'U2U Nebulas Testnet'
 } as const
 

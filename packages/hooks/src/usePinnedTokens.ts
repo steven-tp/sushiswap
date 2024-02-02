@@ -328,6 +328,13 @@ export const DEFAULT_BASES = {
     USDC[ChainId.FILECOIN],
     DAI[ChainId.FILECOIN],
   ],
+  [ChainId.U2U_NEBULAS]: [
+    Native.onChain(ChainId.U2U_NEBULAS),
+    SUSHI[ChainId.U2U_NEBULAS],
+    USDC[ChainId.U2U_NEBULAS],
+    USDT[ChainId.U2U_NEBULAS],
+    DAI[ChainId.U2U_NEBULAS],
+  ],
   // [ChainId.SEPOLIA]: [Native.onChain(ChainId.SEPOLIA), WNATIVE[ChainId.SEPOLIA]],
 } as const
 
