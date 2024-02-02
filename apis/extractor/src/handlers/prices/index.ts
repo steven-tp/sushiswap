@@ -80,7 +80,6 @@ function getPrices(chainId: number, currency: Currency, pools: RPool[]) {
     currency === Currency.USD
       ? (STABLES[chainId as keyof typeof STABLES] as unknown as RToken[])
       : ([WNATIVE[chainId as keyof typeof WNATIVE]] as unknown as RToken[])
-
   const prices = calculateTokenPrices(bases, pools, 1000)
 
   return prices

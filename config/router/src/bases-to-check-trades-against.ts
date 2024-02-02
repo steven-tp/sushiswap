@@ -35,6 +35,14 @@ import {
 export const BASES_TO_CHECK_TRADES_AGAINST: {
   readonly [chainId: number]: Token[]
 } = {
+  [ChainId.U2U_NEBULAS]: [
+    WETH9[ChainId.U2U_NEBULAS],
+    WBTC[ChainId.U2U_NEBULAS],
+    USDC[ChainId.U2U_NEBULAS],
+    USDT[ChainId.U2U_NEBULAS],
+    DAI[ChainId.U2U_NEBULAS],
+    SUSHI[ChainId.U2U_NEBULAS],
+  ],
   [ChainId.ETHEREUM]: [
     WNATIVE[ChainId.ETHEREUM],
     WBTC[ChainId.ETHEREUM],

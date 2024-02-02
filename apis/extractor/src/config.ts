@@ -29,6 +29,24 @@ import { ChainId } from 'sushi/chain'
 import { type Address, createPublicClient } from 'viem'
 
 const RPC_MAX_CALLS_IN_ONE_BATCH = 1000
+
+// function u2uswapV2Factory(chainId: SushiSwapV2ChainId) {
+//   return {
+//     address: SUSHISWAP_V2_FACTORY_ADDRESS[chainId],
+//     provider: LiquidityProviders.SushiSwapV2,
+//     fee: 0.003,
+//     initCodeHash: SUSHISWAP_V2_INIT_CODE_HASH[chainId],
+//   } as const
+// }
+
+function u2uswapV3Factory(chainId: SushiSwapV3ChainId) {
+  return {
+    address: SUSHISWAP_V3_FACTORY_ADDRESS[chainId],
+    provider: LiquidityProviders.U2UNebulas,
+    initCodeHash: SUSHISWAP_V3_INIT_CODE_HASH[chainId],
+  } as const
+}
+
 function sushiswapV2Factory(chainId: SushiSwapV2ChainId) {
   return {
     address: SUSHISWAP_V2_FACTORY_ADDRESS[chainId],
@@ -45,7 +63,6 @@ function sushiswapV3Factory(chainId: SushiSwapV3ChainId) {
     initCodeHash: SUSHISWAP_V3_INIT_CODE_HASH[chainId],
   } as const
 }
-
 function uniswapV3Factory(chainId: UniswapV3ChainId) {
   return {
     address: UNISWAP_V3_FACTORY_ADDRESS[chainId],
@@ -425,6 +442,15 @@ export const EXTRACTOR_CONFIG = {
       // pancakeswapV3Factory(ChainId.LINEA),
     ],
     tickHelperContract: SUSHISWAP_V3_TICK_LENS[ChainId.LINEA],
+    cacheDir: './cache',
+    logDepth: 50,
+    logging: true,
+  },
+  [ChainId.U2U_NEBULAS]: {
+    client: createPublicClient(config[ChainId.U2U_NEBULAS]),
+    // factoriesV2: [u2uswapV2Factory(ChainId.U2U_NEBULAS)],
+    factoriesV3: [u2uswapV3Factory(ChainId.U2U_NEBULAS)],
+    tickHelperContract: SUSHISWAP_V3_TICK_LENS[ChainId.U2U_NEBULAS],
     cacheDir: './cache',
     logDepth: 50,
     logging: true,

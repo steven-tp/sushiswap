@@ -36,6 +36,10 @@ kubectl create secret generic extractor \
     --from-literal=SENTRY_DSN=XXX \
     --from-literal=SENTRY_ENVIRONMENT=XXX
 ```
+kubectl create secret generic extractor \
+    --from-literal=DRPC_ID= \
+    --from-literal=SENTRY_DSN=https://b037adc966a17823d6cf6304b71c3518@o4506669403471872.ingest.sentry.io/4506669566590976 \
+    --from-literal=SENTRY_ENVIRONMENT=local
 
 Create a static ip for the staging environment
 ```bash

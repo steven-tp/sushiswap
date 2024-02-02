@@ -5,7 +5,6 @@ import { ChainId } from 'sushi/chain'
 // import { Token } from 'sushi/currency'
 // import { TokenList } from 'sushi/token-list'
 import { CHAIN_ID, EXTRACTOR_CONFIG } from './config'
-
 const extractor = new Extractor({
   ...EXTRACTOR_CONFIG[CHAIN_ID],
   warningMessageHandler: (

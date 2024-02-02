@@ -232,5 +232,10 @@ export const STABLES = {
     USDT[ChainId.KOVAN],
     DAI[ChainId.KOVAN],
   ],
+  [ChainId.U2U_NEBULAS]: [
+    USDC[ChainId.U2U_NEBULAS],
+    USDT[ChainId.U2U_NEBULAS],
+    DAI[ChainId.U2U_NEBULAS],
+  ],
   [ChainId.POLYGON_TESTNET]: [USDC[ChainId.POLYGON_TESTNET]],
 } as const
