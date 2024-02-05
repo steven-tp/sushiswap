@@ -8,7 +8,6 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   console.log(searchParams)
   const result = PoolsApiSchema.safeParse(Object.fromEntries(searchParams))
-  console.log("🚀 ~ GET ~ result:", result)
   
   if (!result.success) {
     return NextResponse.json(result.error.format(), { status: 400 })
