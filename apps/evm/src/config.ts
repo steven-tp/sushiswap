@@ -31,25 +31,26 @@ export const isSwapApiEnabledChainId = (
 export const DISABLED_CHAIN_IDS = [ChainId.BOBA_AVAX] as const
 
 const PREFERRED_CHAINID_ORDER = [
-  ChainId.ETHEREUM,
-  ChainId.ARBITRUM,
-  ChainId.BASE,
-  ChainId.POLYGON,
-  ChainId.OPTIMISM,
-  ChainId.BSC,
-  ChainId.THUNDERCORE,
-  ChainId.GNOSIS,
-  ChainId.AVALANCHE,
-  ChainId.FANTOM,
-  ChainId.ARBITRUM_NOVA,
-  ChainId.HARMONY,
+  // ChainId.ETHEREUM,
+  // ChainId.ARBITRUM,
+  // ChainId.BASE,
+  // ChainId.POLYGON,
+  // ChainId.OPTIMISM,
+  // ChainId.BSC,
+  // ChainId.THUNDERCORE,
+  // ChainId.GNOSIS,
+  // ChainId.AVALANCHE,
+  // ChainId.FANTOM,
+  // ChainId.ARBITRUM_NOVA,
+  // ChainId.HARMONY,
   ChainId.U2U_NEBULAS
 ] as const
 
 export const CHAIN_IDS = [
-  ...TridentChainIds,
-  ...SushiSwapV2ChainIds,
-  ...SushiSwapV3ChainIds,
+  // ...TridentChainIds,
+  // ...SushiSwapV2ChainIds,
+  // ...SushiSwapV3ChainIds,
+  ChainId.U2U_NEBULAS
 ] as const
 
 

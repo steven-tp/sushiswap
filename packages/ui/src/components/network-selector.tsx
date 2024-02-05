@@ -79,7 +79,7 @@ const NetworkSelector = <T extends number>({
           />
           <CommandEmpty>No network found.</CommandEmpty>
           <CommandGroup>
-            {showAptos ? (
+            {/* {showAptos ? (
               <Link
                 href="https://aptos.sushi.com"
                 rel="noopener noreferrer"
@@ -95,7 +95,7 @@ const NetworkSelector = <T extends number>({
                   </div>
                 </CommandItem>
               </Link>
-            ) : null}
+            ) : null} */}
             {_networks.map((el) => (
               <CommandItem
                 className="cursor-pointer"

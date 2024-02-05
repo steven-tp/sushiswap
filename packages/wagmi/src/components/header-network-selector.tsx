@@ -45,8 +45,8 @@ export const HeaderNetworkSelector: FC<{
   )
 
   const selected = isMounted
-    ? selectedNetwork || (chain?.id as ChainId) || ChainId.ETHEREUM
-    : ChainId.ETHEREUM
+    ? selectedNetwork || (chain?.id as ChainId) || ChainId.U2U_NEBULAS
+    : ChainId.U2U_NEBULAS
 
   return (
     <NetworkSelector

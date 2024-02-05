@@ -240,7 +240,7 @@ const Navigation: React.FC<NavProps> = ({
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
-          <NavigationMenuItem className="hidden md:block">
+          {/* <NavigationMenuItem className="hidden md:block">
             {legacyBehavior ? (
               <NavigationMenuLink
                 asChild
@@ -297,7 +297,7 @@ const Navigation: React.FC<NavProps> = ({
                 Buy Crypto
               </NavigationMenuLink>
             </OnramperButton>
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex items-center gap-2">
