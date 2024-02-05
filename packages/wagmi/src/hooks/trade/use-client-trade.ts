@@ -112,6 +112,7 @@ export const useClientTrade = (variables: UseTradeParams) => {
 Pools found ${poolsCodeMap.size}: 
 ${logPools}
 `)
+console.debug(route)
 
       // const route = Router.findSushiRoute(
       //   poolsCodeMap,

@@ -155,6 +155,7 @@ export class Router {
         LiquidityProviders.Trident,
       ],
     )
+    console.log("🚀 ~ Router ~ preferrableRoute:", preferrableRoute)
     // If the route is successful and the price impact is less than maxPriceImpact, then return the route
     if (
       preferrableRoute.status === RouteStatus.Success &&
@@ -206,6 +207,7 @@ export class Router {
 
     let poolCodesList =
       poolCodes instanceof Map ? Array.from(poolCodes.values()) : poolCodes
+
     if (providers) {
       poolCodesList = poolCodesList.filter((pc) =>
         [...providers, LiquidityProviders.NativeWrap].includes(
@@ -213,6 +215,7 @@ export class Router {
         ),
       )
     }
+
     let pools = Array.from(poolCodesList).map((pc) => pc.pool)
 
     if (poolFilter) pools = pools.filter(poolFilter)
