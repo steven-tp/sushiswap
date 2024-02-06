@@ -9,6 +9,9 @@ const FURO_URL = process.env.FURO_URL || 'https://furo.sushi.com'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   ...defaultNextConfig,
+  experimental: {
+    esmExternals: false,
+  },
   logging: {
     fetches: {
       fullUrl: true,
@@ -101,7 +104,7 @@ const sentryWebpackPluginOptions = {
   // recommended:
   //   release, url, configFile, stripPrefix, urlPrefix, include, ignore
 
-  org: 'sushi-j9',
+  org: 'u2u-s4',
   project: 'evm',
 
   // An auth token is required for uploading source maps.
