@@ -919,7 +919,7 @@ export default [
     "explorers": [
       {
         "name": "U2U Nebulas",
-        "url": "https://rpc-nebulas-testnet.uniultra.xyz",
+        "url": "https://testnet.u2uscan.xyz",
         "standard": "EIP3091"
       },
     ],
