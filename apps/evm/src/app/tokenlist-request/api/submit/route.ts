@@ -48,7 +48,7 @@ try {
   console.warn('Rate limit not enabled')
 }
 
-export const maxDuration = 5 // in seconds
+export const maxDuration = 15 // in seconds
 
 export async function POST(request: NextRequest) {
   if (ratelimit) {
