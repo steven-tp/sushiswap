@@ -172,7 +172,7 @@ model SushiPool {
   hadEnabledSteerVault  Boolean @default(false)
   steerVaults           SteerVault[]
 
-  createdAtBlockNumber Float  
+  createdAtBlockNumber BigInt   @db.BigInt  
   isBlacklisted        Boolean  @default(false)
   generatedAt          DateTime @default(now())
   updatedAt            DateTime @updatedAt

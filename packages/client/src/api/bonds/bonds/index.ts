@@ -96,8 +96,9 @@ export async function getBondsFromSubgraph(
         }),
       )
 
+      const _client:any = createPublicClient(config[chainId])
       const marketPrices = await getBondMarketsPrices({
-        client: createPublicClient(config[chainId]),
+        client: _client,
         marketIds,
       })
 
