@@ -30,7 +30,7 @@ export class SushiSwapV3Provider extends UniswapV3BaseProvider {
       [ChainId.BTTC]: '0xBBDe1d67297329148Fe1ED5e6B00114842728e65',
       [ChainId.FILECOIN]: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
       [ChainId.HAQQ]: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
-      [ChainId.U2U_NEBULAS]: '0x50CEb5C9d10E35c591e9f709a0a8599C5cc1619b',
+      [ChainId.U2U_NEBULAS]: '0x9f8f7af185C2B6018EE30d8664C51d68Bf682191',
 
     } as const
     const initCodeHash = {
