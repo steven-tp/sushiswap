@@ -603,7 +603,13 @@ export const WNATIVE = {
     symbol: 'WFIL',
     name: 'Wrapped FIL',
   }),
-  [ChainId.U2U_NEBULAS]: WETH9[ChainId.U2U_NEBULAS],
+  [ChainId.U2U_NEBULAS]:  new Token({
+    chainId: ChainId.U2U_NEBULAS,
+    address: WNATIVE_ADDRESS[ChainId.U2U_NEBULAS],
+    decimals: 18,
+    symbol: 'WU2U',
+    name: 'Wrapped U2U',
+  }), //WETH9[ChainId.U2U_NEBULAS],
 } as const
 
 export const SUSHI = addressMapToTokenMap(

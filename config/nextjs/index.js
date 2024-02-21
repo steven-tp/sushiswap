@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const defaultNextConfig = {
   reactStrictMode: true,
-  productionBrowserSourceMaps: true,
+  productionBrowserSourceMaps: false,
   swcMinify: true,
   poweredByHeader: false,
   staticPageGenerationTimeout: 180,

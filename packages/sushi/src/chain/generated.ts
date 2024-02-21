@@ -928,17 +928,17 @@ export default [
       "symbol": "U2U",
       "decimals": 18
     },
-    "name": "U2U",
-    "shortName": "scr",
-    "parent": {
-      "type": "L2",
-      "chain": "eip155-1",
-      // "bridges": [
-      //   {
-      //     "url": "https://scroll.io/bridge"
-      //   }
-      // ]
-    }
+    "name": "U2U Network",
+    "shortName": "U2U",
+    // "parent": {
+    //   "type": "L1",
+    //   "chain": "eip155-1",
+    //   // "bridges": [
+    //   //   {
+    //   //     "url": "https://scroll.io/bridge"
+    //   //   }
+    //   // ]
+    // }
   }
 ] as const;
 

@@ -76,7 +76,7 @@ const COLUMNS = [
             <DropdownMenuLabel>
               {row.original.token0.symbol} / {row.original.token1.symbol}
               <Chip variant="blue" className="ml-2">
-                SushiSwap V3
+                U2USwap
               </Chip>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -321,7 +321,6 @@ export const PoolsTable: FC<PositionsTableProps> = ({ onRowClick }) => {
     setSize,
   } = usePoolsInfinite({ args, shouldFetch: true, swrConfig: useSWRConfig() })
 
-  console.log(error)
   const { data: poolCount } = usePoolCount({
     args,
     shouldFetch: true,

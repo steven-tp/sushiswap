@@ -123,7 +123,9 @@ export default withSentryConfig(
     hideSourceMaps: true,
     widenClientFileUpload: true,
     automaticVercelMonitors: true,
+    disableLogger: true
   },
+
   // {
   //   // For all available options, see:
   //   // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/

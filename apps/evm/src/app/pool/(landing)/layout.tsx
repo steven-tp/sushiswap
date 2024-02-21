@@ -27,7 +27,7 @@ export default function TabsLayout({
               All Pools
             </PathnameButton>
           </LinkInternal>
-          <LinkInternal
+          {/* <LinkInternal
             shallow={true}
             scroll={false}
             href={`/pool/smart-pool?${searchParams.toString()}`}
@@ -43,7 +43,7 @@ export default function TabsLayout({
                 NEW
               </div>
             </PathnameButton>
-          </LinkInternal>
+          </LinkInternal> */}
           <LinkInternal
             shallow={true}
             scroll={false}

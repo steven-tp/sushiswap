@@ -34,7 +34,6 @@ export function useUserPositions(args: GetUserArgs, shouldFetch = true) {
     shouldFetch && args.id ? getUserPositionsUrl(args) : null,
     async (url) => fetch(url).then((data) => data.json()),
   )
-
   const _positions = useMemo(
     () => positions?.map((position) => position.pool) || [],
     [positions],

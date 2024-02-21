@@ -6,7 +6,7 @@ import { Inter, Roboto_Mono } from 'next/font/google'
 import React from 'react'
 
 import { Providers } from './providers'
-import { Trackers } from './trackers'
+// import { Trackers } from './trackers'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,8 +22,8 @@ const roboto_mono = Roboto_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Sushi 🍣',
-    template: '%s | Sushi 🍣',
+    default: 'U2U 🍣',
+    template: '%s | U2U 🍣',
   },
   description:
     'A Decentralised Finance (DeFi) app with features such as swap, cross chain swap, streaming, vesting, and permissionless market making for liquidity providers.',
@@ -65,7 +65,7 @@ export default function RootLayout({
             <SanctionedAddressDialog />
             {children}
           </Providers>
-          <Trackers />
+          {/* <Trackers /> */}
         </div>
       </body>
     </html>

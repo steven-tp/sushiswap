@@ -23,14 +23,14 @@ Sentry.init({
   // debug: process.env.NODE_ENV !== 'production',
   debug:
     !process.env.NEXT_PUBLIC_VERCEL_ENV &&
-    process.env.NEXT_PUBLIC_APP_ENV !== 'test',
+    process.env.NEXT_PUBLIC_APP_ENV !== 'dev',
 
   // Capture Replay for 10% of all sessions,
   // plus for 100% of sessions with an error
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
 
-  enabled: process.env.NEXT_PUBLIC_APP_ENV !== 'test',
+  enabled: false, //process.env.NEXT_PUBLIC_APP_ENV !== 'test',
   environment: process.env.NEXT_PUBLIC_VERCEL_ENV
     ? process.env.NEXT_PUBLIC_VERCEL_ENV
     : 'local',
