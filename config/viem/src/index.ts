@@ -221,7 +221,7 @@ export const u2uNebulas =   {
   contracts: {
     multicall3: {
       address: '0x1689ec416daE726e4fb162b132b8250c153f6a5B',
-      blockCreated: 15921452,
+      blockCreated: 17646032,
     },
   },
 } as const

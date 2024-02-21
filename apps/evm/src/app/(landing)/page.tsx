@@ -11,7 +11,7 @@ import {
   Hero,
   NeedHelp,
   Partners,
-  Stats,
+  // Stats,
   Story,
 } from './components'
 
@@ -21,7 +21,7 @@ export default function LandingPage() {
     <MotionConfig reducedMotion={isSmallScreen ? 'always' : 'user'}>
       <article className="w-full my-20">
         <Hero />
-        <Stats />
+        {/* <Stats /> */}
         <Separator />
         <div className="overflow-x-hidden">
           <Partners />

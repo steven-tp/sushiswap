@@ -1,11 +1,24 @@
+// {
+//   "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/esm/tsconfig", "@tsconfig/node18/tsconfig"],
+//   // "include": ["src"],
+//   "exclude": ["node_modules", "dist"],
+//   "compilerOptions": {
+//     "allowSyntheticDefaultImports": true,
+//     "resolveJsonModule": true,
+//     "noEmit": true,
+//     "outDir": "./dist",
+//     "rootDir": "./src"
+//     // "module": "es2022",
+//     // "moduleResolution": "bundler"
+//   }
+// }
 {
-  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/esm/tsconfig"],
-  "include": ["api", "lib"],
-  "exclude": ["node_modules", ".vercel"],
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node18/tsconfig"],
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "noEmit": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "module": "es2022",
     "moduleResolution": "bundler"
   }

@@ -39,13 +39,13 @@ const RPC_MAX_CALLS_IN_ONE_BATCH = 1000
 //   } as const
 // }
 
-function u2uswapV3Factory(chainId: SushiSwapV3ChainId) {
-  return {
-    address: SUSHISWAP_V3_FACTORY_ADDRESS[chainId],
-    provider: LiquidityProviders.U2UNebulas,
-    initCodeHash: SUSHISWAP_V3_INIT_CODE_HASH[chainId],
-  } as const
-}
+// function u2uswapV3Factory(chainId: SushiSwapV3ChainId) {
+//   return {
+//     address: SUSHISWAP_V3_FACTORY_ADDRESS[chainId],
+//     provider: LiquidityProviders.U2UNebulas,
+//     initCodeHash: SUSHISWAP_V3_INIT_CODE_HASH[chainId],
+//   } as const
+// }
 
 function sushiswapV2Factory(chainId: SushiSwapV2ChainId) {
   return {

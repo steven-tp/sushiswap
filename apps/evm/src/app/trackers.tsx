@@ -6,7 +6,7 @@ import { GoogleAnalytics } from '@sushiswap/ui/components/scripts'
 export function Trackers() {
   return (
     <>
-      <VercelAnalytics />
+      {/* <VercelAnalytics /> */}
       <GoogleAnalytics />
     </>
   )
