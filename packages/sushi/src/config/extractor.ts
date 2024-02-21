@@ -33,6 +33,7 @@ export const EXTRACTOR_SUPPORTED_CHAIN_IDS = [
   // ChainId.TELOS,
   // ChainId.THUNDERCORE,
   // ChainId.ZKSYNC_ERA,
+  ChainId.U2U_NEBULAS
 ] as const
 
 export type ExtractorSupportedChainId =
