@@ -68,7 +68,7 @@ export const Header: FC = () => {
                 </NavigationMenuLink>
               </LinkInternal>
             </NavigationMenuItem>
-            <NavigationMenuItem className="hidden md:block">
+            {/* <NavigationMenuItem className="hidden md:block">
               <LinkInternal href="/furo">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Pay
@@ -106,7 +106,7 @@ export const Header: FC = () => {
                   ))}
                 </ul>
               </NavigationMenuContent>
-            </NavigationMenuItem>
+            </NavigationMenuItem> */}
           </NavigationMenuList>
         </NavigationMenu>
         <LinkInternal href="/swap">

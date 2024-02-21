@@ -98,7 +98,7 @@ const DerivedstateSimpleSwapProvider: FC<DerivedStateSimpleSwapProviderProps> =
           'chainId',
           (chain?.id && isSupportedChainId(chain.id)
             ? chain.id
-            : ChainId.ETHEREUM
+            : ChainId.U2U_NEBULAS
           ).toString(),
         )
       if (!params.has('token0')) {

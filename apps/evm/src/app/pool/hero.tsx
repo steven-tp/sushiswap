@@ -22,7 +22,7 @@ import { ChainId } from 'sushi/chain'
 
 export const Hero: FC = () => {
   const { chain } = useNetwork()
-  const chainId = chain?.id || ChainId.ETHEREUM
+  const chainId = chain?.id || ChainId.U2U_NEBULAS
   return (
     <section className="flex flex-col justify-between gap-12 lg:flex-row lg:items-start mb-12">
       <div className="flex flex-col items-center flex-grow gap-6 lg:items-start">

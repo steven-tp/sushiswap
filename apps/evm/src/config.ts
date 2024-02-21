@@ -1,25 +1,25 @@
-import { TridentChainIds } from '@sushiswap/trident-sdk'
-import { SushiSwapV2ChainIds } from '@sushiswap/v2-sdk'
-import { SushiSwapV3ChainIds } from '@sushiswap/v3-sdk'
+// import { TridentChainIds } from '@sushiswap/trident-sdk'
+// import { SushiSwapV2ChainIds } from '@sushiswap/v2-sdk'
+// import { SushiSwapV3ChainIds } from '@sushiswap/v3-sdk'
 import { ChainId, TESTNET_CHAIN_IDS } from 'sushi/chain'
 import { Currency } from 'sushi/currency'
 
 export const SWAP_API_ENABLED_NETWORKS = [
-  ChainId.ARBITRUM,
-  ChainId.ARBITRUM_NOVA,
-  ChainId.AVALANCHE,
-  ChainId.BASE,
-  ChainId.BSC,
-  ChainId.CELO,
-  ChainId.ETHEREUM,
-  ChainId.FANTOM,
-  ChainId.GNOSIS,
-  ChainId.OPTIMISM,
-  ChainId.POLYGON,
-  ChainId.POLYGON_ZKEVM,
-  ChainId.SCROLL,
-  ChainId.LINEA,
-  ChainId.HAQQ,
+  // ChainId.ARBITRUM,
+  // ChainId.ARBITRUM_NOVA,
+  // ChainId.AVALANCHE,
+  // ChainId.BASE,
+  // ChainId.BSC,
+  // ChainId.CELO,
+  // ChainId.ETHEREUM,
+  // ChainId.FANTOM,
+  // ChainId.GNOSIS,
+  // ChainId.OPTIMISM,
+  // ChainId.POLYGON,
+  // ChainId.POLYGON_ZKEVM,
+  // ChainId.SCROLL,
+  // ChainId.LINEA,
+  // ChainId.HAQQ,
   ChainId.U2U_NEBULAS
 ]
 export type SwapApiEnabledChainId = typeof SWAP_API_ENABLED_NETWORKS[number]
@@ -101,5 +101,5 @@ export type Config = {
 }
 
 export const config = {
-  [ChainId.ETHEREUM]: {},
+  [ChainId.U2U_NEBULAS]: {},
 }

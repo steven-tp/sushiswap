@@ -30,7 +30,7 @@ import { usePoolFilters, useSetPoolFilters } from './PoolsFiltersProvider'
 
 export const POOL_TYPES = [
   Protocol.SUSHISWAP_V3,
-  Protocol.SUSHISWAP_V2,
+  // Protocol.SUSHISWAP_V2,
   Protocol.BENTOBOX_STABLE,
   Protocol.BENTOBOX_CLASSIC,
 ]

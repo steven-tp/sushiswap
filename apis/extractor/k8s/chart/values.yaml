@@ -13,3 +13,4 @@ chainIds:
   - 137 # POLYGON
   - 1101 # POLYGON_ZKEVM
   - 534352 # SCROLL
+  - 2484 #U2U

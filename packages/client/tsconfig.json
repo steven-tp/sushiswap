@@ -2,6 +2,7 @@
   "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/esm/tsconfig"],
   "include": ["src"],
   "exclude": ["node_modules"],
+  "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",

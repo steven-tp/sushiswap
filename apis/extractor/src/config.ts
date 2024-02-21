@@ -449,7 +449,7 @@ export const EXTRACTOR_CONFIG = {
   [ChainId.U2U_NEBULAS]: {
     client: createPublicClient(config[ChainId.U2U_NEBULAS]),
     // factoriesV2: [u2uswapV2Factory(ChainId.U2U_NEBULAS)],
-    factoriesV3: [u2uswapV3Factory(ChainId.U2U_NEBULAS)],
+    factoriesV3: [sushiswapV3Factory(ChainId.U2U_NEBULAS)],
     tickHelperContract: SUSHISWAP_V3_TICK_LENS[ChainId.U2U_NEBULAS],
     cacheDir: './cache',
     logDepth: 50,
