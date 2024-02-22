@@ -106,3 +106,5 @@ storybook-static
 
 # tines snapshots
 test/snapshots/
+
+default-token-list
