@@ -7,7 +7,7 @@ export { Hero } from './Hero'
 export { NeedHelp } from './NeedHelp'
 export { Partners } from './Partners'
 export { Search } from './Search'
-export { Stats } from './Stats'
+// export { Stats } from './Stats'
 export { Story } from './Story/Story'
 
 // svgs

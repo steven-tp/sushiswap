@@ -124,10 +124,29 @@ export const revalidate = 3600
 
 export async function GET() {
   const [sushiPrice, bentoTVL, v2Data, v3Data] = await Promise.all([
-    getSushiPriceUSD(),
-    getBentoTvl(),
-    getV2Data(),
-    getV3Data(),
+    // getSushiPriceUSD(),
+    // getBentoTvl(),
+    // getV2Data(),
+    // getV3Data(),
+    0, 0, {
+      v2: {
+        tvlUSD: 0,
+        volumeUSD: 0,
+        pairCount: 0
+      },
+      trident: {
+        tvlUSD: 0,
+        volumeUSD: 0,
+        pairCount: 0
+      },
+      v3: {
+        volumeUSD: 0
+      }
+    }, {
+      tvlUSD: 0,
+      volumeUSD: 0,
+      pairCount: 0
+    }
   ])
 
   let totalTVL =
