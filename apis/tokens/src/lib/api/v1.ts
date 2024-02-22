@@ -1,6 +1,6 @@
 import {
   DEFAULT_LIST_OF_LISTS,
-  SUSHI_DEFAULT_TOKEN_LIST,
+  U2U_DEFAULT_TOKEN_LIST,
   type TokenInfo,
   type TokenList,
 } from 'sushi/token-list'
@@ -33,8 +33,8 @@ function merge(tokenLists: Map<string, TokenList>, chainId: number) {
 
   // Set sushi default tokens first, they will take precedence
   tokenLists
-    .get(SUSHI_DEFAULT_TOKEN_LIST)
-    ?.tokens.filter((token) => token.chainId === chainId)
+    .get(U2U_DEFAULT_TOKEN_LIST)
+    ?.tokens.filter((token) => token.chainId == chainId)
     .forEach((token) => {
       try {
         tokens.set(token.address.toLowerCase(), {
@@ -45,9 +45,9 @@ function merge(tokenLists: Map<string, TokenList>, chainId: number) {
     })
 
   tokenLists.forEach((tokenList, url) => {
-    if (url === SUSHI_DEFAULT_TOKEN_LIST) return // skip because we already ran this
+    if (url === U2U_DEFAULT_TOKEN_LIST) return // skip because we already ran this
     tokenList?.tokens
-      .filter((token) => token.chainId === chainId)
+      .filter((token) => token.chainId == chainId)
       .forEach((token) => {
         if (!tokens.has(token.address.toLowerCase())) {
           try {
