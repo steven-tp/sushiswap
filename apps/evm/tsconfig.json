@@ -23,7 +23,7 @@
       {
         "name": "next"
       }
-    ]
+    ],
   },
   "compileOnSave": true,
   "include": [
@@ -34,5 +34,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

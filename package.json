@@ -9,7 +9,7 @@
     "changeset:version": "changeset version && pnpm install --lockfile-only",
     "check": "turbo run check --no-cache",
     "clean": "turbo run clean && rm -rf node_modules",
-    "dev": "dotenv -- turbo run dev --no-cache --parallel --continue",
+    "dev": "dotenv -- turbo run dev --no-cache --parallel --continue --filter=evm",
     "disable-remote-caching": "turbo unlink && rm -rf ./node_modules/.cache/turbo",
     "enable-remote-caching": "turbo link",
     "format": "pnpm sort && biome format . --write",

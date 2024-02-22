@@ -21,6 +21,7 @@ export async function getPrice(
   currency: Currency = Currency.USD,
 ) {
   const client = await createClient()
+
   const price = await client.token.findFirst({
     select: { address: true, derivedUSD: true, derivedNative: true },
     where:

@@ -201,6 +201,8 @@ export function DataTable<TData, TValue>({
                 </TableRow>
               )
 
+
+
               if (rowRenderer) return rowRenderer(row, _row)
               return _row
             })

@@ -15,8 +15,8 @@ type Data = {
   decimals: number
 }
 
-export const fetchTokensQueryFn = async () => {
-  const resp = await fetch('http://localhost:3002/v0')
+export const fetchTokensQueryFn = async (chainId: number) => {
+  const resp = await fetch(`https://tokens.u2w.io/v0?chainId=${chainId}`)
   if (resp.status === 200) {
     const data: Data[] = await resp.json() 
     
@@ -66,7 +66,7 @@ export const fetchTokensQueryFn = async () => {
 export const useTokens = ({ chainId }: UseTokensParams) => {
   return useQuery({
     queryKey: ['tokens'],
-    queryFn: fetchTokensQueryFn,
+    queryFn: () => fetchTokensQueryFn(chainId),
     select: (data) => data[chainId],
     keepPreviousData: true,
     staleTime: 900000, // 15 mins
