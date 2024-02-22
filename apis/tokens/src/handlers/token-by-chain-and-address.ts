@@ -1,14 +1,4 @@
 import type { TokenInfo } from 'sushi'
-import { z } from 'zod'
-
-const schema = z.object({
-  chainId: z.coerce
-    .number()
-    .int()
-    .gte(0)
-    .lte(2 ** 256),
-  address: z.coerce.string(),
-})
 
 const handler = async (request: any, response: any) => {
   response.setHeader(
@@ -16,7 +6,7 @@ const handler = async (request: any, response: any) => {
     's-maxage=1800, stale-while-revalidate=3600',
   )
 
-  const { chainId, address } = schema.parse(request.query)
+  const { chainId, address } = request.params
 
   const result = await fetch(`https://tokens.u2w.io/v1/${chainId}/`)
   const tokenList = (await result.json()) as TokenInfo[]
