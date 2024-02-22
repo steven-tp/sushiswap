@@ -5,3 +5,4 @@ packages:
   - 'packages/**'
   - 'protocols/*'
   - 'jobs/*'
+  - 'default-token-list'
