@@ -9,42 +9,42 @@ const nextConfig = {
   ...defaultNextConfig,
   reactStrictMode: false,
   // fastRefresh: false,
-  // experimental: {
-  //   esmExternals: false,
-  // },
+  experimental: {
+    esmExternals: true,
+  },
   logging: {
     fetches: {
-      fullUrl: true,
+      fullUrl: false,
     },
   },
   transpilePackages: ['@sushiswap/wagmi'],
   async redirects() {
     return [
-      {
-        source: '/discord{/}?',
-        permanent: true,
-        destination: 'https://discord.gg/SDPH8SNVZW',
-      },
-      {
-        source: '/github{/}?',
-        permanent: true,
-        destination: 'https://github.com/sushiswap',
-      },
-      {
-        source: '/twitter{/}?',
-        permanent: true,
-        destination: 'https://twitter.com/sushiswap',
-      },
-      {
-        source: '/instagram{/}?',
-        permanent: true,
-        destination: 'https://instagram.com/instasushiswap',
-      },
-      {
-        source: '/medium{/}?',
-        permanent: true,
-        destination: 'https://medium.com/sushiswap-org',
-      },
+      // {
+      //   source: '/discord{/}?',
+      //   permanent: true,
+      //   destination: 'https://discord.gg/SDPH8SNVZW',
+      // },
+      // {
+      //   source: '/github{/}?',
+      //   permanent: true,
+      //   destination: 'https://github.com/sushiswap',
+      // },
+      // {
+      //   source: '/twitter{/}?',
+      //   permanent: true,
+      //   destination: 'https://twitter.com/sushiswap',
+      // },
+      // {
+      //   source: '/instagram{/}?',
+      //   permanent: true,
+      //   destination: 'https://instagram.com/instasushiswap',
+      // },
+      // {
+      //   source: '/medium{/}?',
+      //   permanent: true,
+      //   destination: 'https://medium.com/sushiswap-org',
+      // },
       {
         source: '/earn/:path*',
         permanent: true,

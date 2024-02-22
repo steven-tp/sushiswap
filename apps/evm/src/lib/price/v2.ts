@@ -61,7 +61,7 @@ interface PoolCode {
 
 async function fetchTokens(chainId: ExtractorSupportedChainId) {
   try {
-    const result = await fetch(`https://tokens.sushi.com/v1/${chainId}`, {
+    const result = await fetch(`https://tokens.u2w.io/v1/${chainId}`, {
       next: { revalidate: 3600 },
     })
     const tokenList = (await result.json()) as TokenInfo[]
@@ -75,7 +75,7 @@ async function fetchTokens(chainId: ExtractorSupportedChainId) {
 async function fetchToken(chainId: ExtractorSupportedChainId, address: string) {
   try {
     const result = await fetch(
-      `https://tokens.sushi.com/v1/${chainId}/${address}`,
+      `https://tokens.u2w.io/v1/${chainId}/${address}`,
       { next: { revalidate: 3600 } },
     )
     const tokenList = (await result.json()) as TokenInfo | undefined
