@@ -12,4 +12,4 @@ export const TOKEN_PRICE_API =
 export const TOKENS_API =
   process.env['TOKENS_API_V0_BASE_URL'] ||
   process.env['NEXT_PUBLIC_TOKENS_API_V0_BASE_URL'] ||
-  'https://tokens.sushi.com'
+  'https://tokens.u2w.io'
