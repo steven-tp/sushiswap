@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const useIsSwapMaintenance = () => {
   // const { maintenance } = useEdgeConfig<SwapEdgeConfig>()
-
+  const maintenance = false
   return useQuery({
     queryKey: ['swap-maintenance'],
     queryFn: async () => {
@@ -20,7 +20,7 @@ export const useIsSwapMaintenance = () => {
 
       return false
     },
-    // initialData: maintenance,
+    initialData: maintenance,
     // refetchInterval: 60000,
   })
 }
