@@ -9,7 +9,7 @@ export const TRIDENT_ENABLED_NETWORKS = [
   // ChainId.ARBITRUM,
   // ChainId.AVALANCHE,
   // ChainId.BSC,
-  ChainId.U2U_NEBULAS
+  ChainId.U2U_NEBULAS,
 ] as const
 
 export type TridentChainId = typeof TRIDENT_ENABLED_NETWORKS[number]
@@ -37,7 +37,7 @@ export const SUSHISWAP_ENABLED_NETWORKS = [
   // ChainId.METIS,
   // ChainId.BTTC,
   // ChainId.FILECOIN,
-  ChainId.U2U_NEBULAS
+  ChainId.U2U_NEBULAS,
   // ChainId.PALM,
   // ChainId.HECO,
   // ChainId.OKEX
@@ -69,7 +69,7 @@ export const SUSHISWAP_V3_ENABLED_NETWORKS = [
   // ChainId.BTTC,
   // ChainId.FILECOIN,
   // ChainId.HAQQ,
-  ChainId.U2U_NEBULAS
+  ChainId.U2U_NEBULAS,
 ]
 export type SushiSwapV3ChainId = typeof SUSHISWAP_V3_ENABLED_NETWORKS[number]
 
@@ -137,7 +137,7 @@ export const CHAIN_NAME: Record<number, string> = {
   // [ChainId.SCROLL]: 'Scroll',
   // [ChainId.FILECOIN]: 'Filecoin',
   // [ChainId.HAQQ]: 'HAQQ',
-  [ChainId.U2U_NEBULAS]: 'U2U Nebulas Testnet'
+  [ChainId.U2U_NEBULAS]: 'U2U Nebulas Testnet',
 } as const
 
 export const SUBGRAPH_HOST: Record<number, string> = {
@@ -173,7 +173,7 @@ export const SUBGRAPH_HOST: Record<number, string> = {
   // [ChainId.SCROLL]: STUDIO_HOST,
   // [ChainId.FILECOIN]: FILECOIN_HOST,
   // [ChainId.HAQQ]: HAQQ_HOST,
-  [ChainId.U2U_NEBULAS]: U2U_NEBULAS_HOST
+  [ChainId.U2U_NEBULAS]: U2U_NEBULAS_HOST,
 } as const
 
 export const BENTOBOX_SUBGRAPH_NAME = {
@@ -231,6 +231,7 @@ export const BLOCKS_SUBGRAPH_NAME: Record<number, string> = {
   // [ChainId.SCROLL]: 'blocks-scroll/v0.0.1',
   // [ChainId.FILECOIN]: 'sushiswap/blocks',
   // [ChainId.HAQQ]: 'sushi/blocks-haqq',
+  [ChainId.U2U_NEBULAS]: 'u2u-amm/blocks',
 } as const
 
 export const SECONDS_BETWEEN_BLOCKS: Record<number, number> = {
@@ -260,6 +261,7 @@ export const SECONDS_BETWEEN_BLOCKS: Record<number, number> = {
   // [ChainId.BTTC]: 2,
   // [ChainId.THUNDERCORE]: 1,
   // [ChainId.SCROLL]: 3,
+  [ChainId.U2U_NEBULAS]: 1.5,
 } as const
 
 export const EXCHANGE_SUBGRAPH_NAME: Record<number, string> = {
@@ -280,6 +282,7 @@ export const EXCHANGE_SUBGRAPH_NAME: Record<number, string> = {
   [ChainId.BOBA]: 'sushi-0m/sushiswap-boba',
   [ChainId.BOBA_AVAX]: 'sushi-0m/sushiswap-boba-avax',
   [ChainId.BOBA_BNB]: 'sushi-0m/sushiswap-boba-bnb',
+  [ChainId.U2U_NEBULAS]: 'u2u-amm/exchange',
 } as const
 
 export const SUSHISWAP_SUBGRAPH_NAME: Record<number, string> = {
@@ -331,7 +334,7 @@ export const SUSHISWAP_V3_SUBGRAPH_NAME: Record<number, string> = {
   // [ChainId.BTTC]: 'sushi-v3/v3-bttc',
   // [ChainId.FILECOIN]: 'sushiswap/v3-filecoin',
   // [ChainId.HAQQ]: 'sushi/v3-haqq',
-  [ChainId.U2U_NEBULAS]: 'sushi-v3/v3-u2u'
+  [ChainId.U2U_NEBULAS]: 'sushi-v3/v3-u2u',
 }
 
 export const TRIDENT_SUBGRAPH_NAME: Record<number, string> = {
@@ -343,6 +346,7 @@ export const TRIDENT_SUBGRAPH_NAME: Record<number, string> = {
   // [ChainId.ARBITRUM]: 'sushi-v2/trident-arbitrum',
   // [ChainId.BSC]: 'sushi-v2/trident-bsc',
   // [ChainId.AVALANCHE]: 'sushi-v2/trident-avalanche',
+  [ChainId.U2U_NEBULAS]: 'u2u-amm/trident',
 } as const
 
 export const TRIDENT_SUBGRAPH_START_BLOCK: Record<
@@ -377,6 +381,7 @@ export const MINICHEF_SUBGRAPH_NAME = {
   // [ChainId.OPTIMISM]: 'sushiswap/minichef-optimism',
   // [ChainId.AVALANCHE]: 'sushiswap/minichef-avalanche',
   // [ChainId.BSC]: 'sushiswap/minichef-bsc',
+  [ChainId.U2U_NEBULAS]: 'u2u-amm/minichef',
 } as const
 
 export const MASTERCHEF_V1_SUBGRAPH_NAME =
