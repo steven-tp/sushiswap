@@ -261,7 +261,7 @@ export const SECONDS_BETWEEN_BLOCKS: Record<number, number> = {
   // [ChainId.BTTC]: 2,
   // [ChainId.THUNDERCORE]: 1,
   // [ChainId.SCROLL]: 3,
-  [ChainId.U2U_NEBULAS]: 1.5,
+  [ChainId.U2U_NEBULAS]: 4,
 } as const
 
 export const EXCHANGE_SUBGRAPH_NAME: Record<number, string> = {
