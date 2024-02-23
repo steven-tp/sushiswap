@@ -122,13 +122,13 @@ export const SettingsOverlay: FC<SettingsOverlayProps> = ({
               </List.Control>
             </List>
           )}
-          {modules.includes(SettingsModule.SwapApi) && (
+          {/* {modules.includes(SettingsModule.SwapApi) && (
             <List className="!pt-0">
               <List.Control>
                 <SwapApi />
               </List.Control>
             </List>
-          )}
+          )} */}
         </div>
       </DialogContent>
     </Dialog>
