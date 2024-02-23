@@ -223,7 +223,7 @@ const Navigation: React.FC<NavProps> = ({
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
-          <NavigationMenuItem className="hidden md:block">
+          {/* <NavigationMenuItem className="hidden md:block">
             {legacyBehavior ? (
               <NavigationMenuLink
                 asChild
@@ -239,7 +239,7 @@ const Navigation: React.FC<NavProps> = ({
                 Stake
               </NavigationMenuLink>
             )}
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
           {/* <NavigationMenuItem className="hidden md:block">
             {legacyBehavior ? (
               <NavigationMenuLink
