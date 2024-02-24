@@ -2,7 +2,7 @@ import { useIsMounted } from '@sushiswap/hooks'
 import { Button } from '@sushiswap/ui/components/button'
 import { NetworkIcon } from '@sushiswap/ui/components/icons'
 import {
-  NetworkSelector,
+  // NetworkSelector,
   NetworkSelectorOnSelectCallback,
 } from '@sushiswap/ui/components/network-selector'
 import { createErrorToast } from '@sushiswap/ui/components/toast'
@@ -49,18 +49,18 @@ export const HeaderNetworkSelector: FC<{
     : ChainId.U2U_NEBULAS
 
   return (
-    <NetworkSelector
-      showAptos
-      selected={selected}
-      onSelect={onSwitchNetwork}
-      networks={networks}
-    >
+    // <NetworkSelector
+    //   showAptos
+    //   selected={selected}
+    //   onSelect={onSwitchNetwork}
+    //   networks={networks}
+    // >
       <Button variant="secondary" testId="network-selector">
         <Suspense fallback={null}>
           <NetworkIcon chainId={selected} width={20} height={20} />
-          <div className="hidden xl:block">{Chain.from(selected)?.name}</div>
+          <div className="xl:block">{Chain.from(selected)?.name}</div>
         </Suspense>
       </Button>
-    </NetworkSelector>
+    // </NetworkSelector>
   )
 }
