@@ -1,23 +1,23 @@
 'use client'
 
-import { useLocalStorage } from '@sushiswap/hooks'
-import {
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-  ShuffleIcon,
-} from '@sushiswap/ui'
+// import { useLocalStorage } from '@sushiswap/hooks'
+// import {
+//   CardContent,
+//   CardDescription,
+//   CardHeader,
+//   CardTitle,
+//   HoverCard,
+//   HoverCardContent,
+//   HoverCardTrigger,
+//   ShuffleIcon,
+// } from '@sushiswap/ui'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
 import { PathnameButton } from '../pathname-button'
 
 export const SwapModeButtons = () => {
-  const [bannerMinimized] = useLocalStorage('xswap-banner-minimized', false)
+  // const [bannerMinimized] = useLocalStorage('xswap-banner-minimized', false)
 
   return (
     <div className="flex gap-2">
@@ -26,7 +26,7 @@ export const SwapModeButtons = () => {
           Swap
         </PathnameButton>
       </Link>
-      {bannerMinimized ? (
+      {/* {bannerMinimized ? (
         <HoverCard>
           <motion.div layoutId="container">
             <motion.div layout layoutId="title">
@@ -66,7 +66,7 @@ export const SwapModeButtons = () => {
             </CardContent>
           </HoverCardContent>
         </HoverCard>
-      ) : null}
+      ) : null} */}
     </div>
   )
 }

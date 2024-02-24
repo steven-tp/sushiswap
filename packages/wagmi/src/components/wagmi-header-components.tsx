@@ -2,7 +2,7 @@
 
 import { ChainId } from 'sushi/chain'
 
-// import { HeaderNetworkSelector } from './header-network-selector'
+import { HeaderNetworkSelector } from './header-network-selector'
 import { UserProfile } from './user-profile'
 
 interface WagmiHeaderComponentsProps {
@@ -18,11 +18,11 @@ export const WagmiHeaderComponents: React.FC<WagmiHeaderComponentsProps> = ({
 }) => {
   return (
     <>
-      {/* <HeaderNetworkSelector
+      <HeaderNetworkSelector
         networks={chainIds}
         selectedNetwork={selectedNetwork}
         onChange={onChange}
-      /> */}
+      />
       <UserProfile networks={chainIds} />
     </>
   )

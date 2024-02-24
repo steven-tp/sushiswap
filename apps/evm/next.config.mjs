@@ -7,11 +7,6 @@ const FURO_URL = process.env.FURO_URL || 'https://furo.sushi.com'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   ...defaultNextConfig,
-  reactStrictMode: false,
-  // fastRefresh: false,
-  experimental: {
-    esmExternals: true,
-  },
   logging: {
     fetches: {
       fullUrl: false,
