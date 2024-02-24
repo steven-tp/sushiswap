@@ -24,12 +24,17 @@
         "name": "next"
       }
     ],
+    "paths": {
+      "@sushiswap/ui/components/icons/*": ["../../packages/ui/components/icons/*"]
+    }
   },
   "compileOnSave": true,
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "**/**/*.ts",
+    "**/**/*.tsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [

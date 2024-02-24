@@ -28,6 +28,36 @@
     "./future/*": [
       "./dist/future/*.js",
       "./dist/future/*/index.js"
+    ],
+    "./components/*": [
+      "./src/components/*.tsx"
+    ],
+    "./components/icons": [
+      "./src/components/icons/index.ts",
+      "./src/components/icons/*.tsx"
+    ],
+    "./components/toast": [
+      "./src/components/toast/index.ts",
+      "./src/components/toast/*.tsx"
+    ],
+    "./components/list": [
+      "./src/components/list/index.ts",
+      "./src/components/list/*.tsx"
+    ],
+    "./components/animation": [
+      "./src/components/animation/index.ts",
+      "./src/components/animation/*.tsx"
+    ],
+    "./components/animation/Collapsible": [
+      "./src/components/animation/index.ts",
+      "./src/components/animation/*.tsx"
+    ],
+    "./components/currency": [
+      "./src/components/currency/index.ts",
+      "./src/components/currency/*.tsx"
+    ],
+    "./components/settings": [
+      "./src/components/settings/index.tsx"
     ]
   },
   "typesVersions": {
@@ -36,7 +66,9 @@
         "dist/*",
         "dist/*/index",
         "dist/future/*",
-        "dist/future/*/index"
+        "dist/future/*/index",
+        "dist/components/*",
+        "dist/components/*/index"
       ]
     }
   },

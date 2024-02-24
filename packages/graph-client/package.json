@@ -29,7 +29,6 @@
     ".graphclient"
   ],
   "scripts": {
-    "build": "graphclient build --fileType js --throwOnInvalidConfig && rm -f .graphclient/package.json && tsc",
     "check": "tsc --pretty --noEmit",
     "clean": "rm -rf .turbo .graphclient node_modules",
     "dev": "graphclient serve-dev",
@@ -58,7 +57,7 @@
     "@graphql-mesh/transform-type-merging": "0.94.1",
     "@graphql-mesh/types": "0.94.1",
     "@graphql-mesh/utils": "0.94.1",
-    "@graphql-tools/merge": "9.0.0",
+    "@graphql-tools/merge": "9.0.3",
     "@sushiswap/graph-config": "workspace:*",
     "@sushiswap/wagmi-config": "workspace:*",
     "@whatwg-node/fetch": "0.8.4",

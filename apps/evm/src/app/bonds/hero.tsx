@@ -36,7 +36,7 @@ export const Hero: FC = () => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-4 lg:items-end">
-        <div className="flex flex-col items-center gap-1 lg:items-end">
+        {/* <div className="flex flex-col items-center gap-1 lg:items-end">
           <span className="font-semibold lg:text-sm">
             Looking for a partnership with Sushi?
           </span>
@@ -48,11 +48,11 @@ export const Hero: FC = () => {
           >
             <LinkInternal href="/partner">Apply here</LinkInternal>
           </Button>
-        </div>
+        </div> */}
         <div className="flex flex-col items-center gap-1 lg:items-end">
           <span className="font-semibold lg:text-sm">Need Help?</span>
           <Button icon={DiscordIcon} variant="link" size="sm" asChild>
-            <LinkExternal href="https://discord.gg/NVPXN4e">
+            <LinkExternal href="https://discord.com/invite/6bPaDU8pk3">
               Join our discord
             </LinkExternal>
           </Button>

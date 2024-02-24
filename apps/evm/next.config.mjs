@@ -8,7 +8,7 @@ const FURO_URL = process.env.FURO_URL || 'https://furo.sushi.com'
 const nextConfig = {
   ...defaultNextConfig,
   reactStrictMode: false,
-  // fastRefresh: false,
+  fastRefresh: true,
   experimental: {
     esmExternals: true,
   },

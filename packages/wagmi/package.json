@@ -13,17 +13,44 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./*": [
-      "./src/*.ts",
-      "./src/*.tsx",
-      "./src/*/index.ts",
-      "./src/*/index.tsx"
-    ],
     "./future/*": [
       "./src/future/*.ts",
       "./src/future/*.tsx",
       "./src/future/*/index.ts",
       "./src/future/*/index.tsx"
+    ],
+    "./components": [
+      "./src/components/index.ts"
+    ],
+    "./components/*": [
+      "./src/components/*.tsx"
+    ],
+    "./components/web3-input": [
+      "./src/components/web3-input/index.ts"
+    ],
+    "./components/web3-input/Currency": [
+      "./src/components/web3-input/Currency/*.tsx"
+    ],
+    "./components/account/*": [
+      "./src/components/account/*.tsx"
+    ],
+    "./hooks/*": [
+      "./src/hooks/*.ts",
+      "./src/hooks/*.tsx",
+      "./src/hooks/*/index.ts",
+      "./src/hooks/*/index.tsx"
+    ],
+    "./systems": [
+      "./src/systems/index.ts"
+    ],
+    "./systems/Checker/*": [
+      "./src/systems/Checker/*.tsx"
+    ],
+    "./systems/Checker": [
+      "./src/systems/Checker/index.ts"
+    ],
+    "./actions": [
+      "./src/actions/index.ts"
     ],
     "./configure": [
       "./src/configure.ts"
@@ -44,6 +71,7 @@
   ],
   "scripts": {
     "check": "tsc --pretty --noEmit",
+    "build": "tsc",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {

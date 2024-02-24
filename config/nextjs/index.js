@@ -1,28 +1,38 @@
 /** @type {import('next').NextConfig} */
 const defaultNextConfig = {
   reactStrictMode: true,
-  productionBrowserSourceMaps: true,
+  productionBrowserSourceMaps: false,
   swcMinify: true,
   poweredByHeader: false,
   staticPageGenerationTimeout: 180,
   experimental: {
     webpackBuildWorker: true,
     // Prepare for Next.js 14
-    optimizePackageImports: [
-      '@heroicons/react-v1/solid',
-      '@heroicons/react-v1/outline',
-      '@sushiswap/client',
-      '@sushiswap/database',
-      '@sushiswap/dexie',
-      '@sushiswap/graph-client',
-      '@sushiswap/hooks',
-      '@sushiswap/react-query',
-      '@sushiswap/router',
-      '@sushiswap/tines',
-      '@sushiswap/ui',
-      '@sushiswap/wagmi',
-      'sushi',
-    ],
+    // optimizePackageImports: [
+    //   '@heroicons/react-v1/solid',
+    //   '@heroicons/react-v1/outline',
+    //   '@sushiswap/client',
+    //   '@sushiswap/database',
+    //   '@sushiswap/dexie',
+      // '@sushiswap/graph-client',
+    //   '@sushiswap/hooks',
+    //   '@sushiswap/react-query',
+    //   '@sushiswap/router',
+    //   '@sushiswap/tines',
+    //   '@sushiswap/ui',
+    //   '@sushiswap/wagmi',
+    //   'sushi',
+    // ],
+    ignoreWarnings: [
+      // {
+      //   module: /node_modules\/@graphql-mesh\/utils\/esm\/defaultImportFn\.js/,
+      // },
+      // { file: /node_modules\/@graphql-mesh\/utils\/esm\/defaultImportFn\.js/ },
+      // {
+      //   module: /node_modules\/@graphql-tools\/url-loader\/esm\/index\.js/,
+      // },
+      // { file: /node_modules\/@graphql-tools\/url-loader\/esm\/index\.js/ },
+    ]
   },
   images: {
     loader: 'cloudinary',
@@ -56,6 +66,10 @@ const defaultNextConfig = {
         module: /node_modules\/@graphql-mesh\/utils\/esm\/defaultImportFn\.js/,
       },
       { file: /node_modules\/@graphql-mesh\/utils\/esm\/defaultImportFn\.js/ },
+      // {
+      //   module: /node_modules\/@graphql-tools\/url-loader\/esm\/index\.js/,
+      // },
+      // { file: /node_modules\/@graphql-tools\/url-loader\/esm\/index\.js/ },
       {
         module: /node_modules\/@sentry\/utils\/esm\/index\.js/,
       },
