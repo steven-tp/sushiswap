@@ -696,6 +696,13 @@ export const USDC: Record<keyof typeof USDC_ADDRESS, Token> = {
     symbol: 'USDC',
     name: 'USD Coin',
   }),
+  [ChainId.U2U_NEBULAS]: new Token({
+    chainId: ChainId.U2U_NEBULAS,
+    address: USDC_ADDRESS[ChainId.U2U_NEBULAS],
+    decimals: 18,
+    symbol: 'USDC',
+    name: 'USD Coin',
+  }),
 } as const
 
 export const USDT: Record<keyof typeof USDT_ADDRESS, Token> = {
