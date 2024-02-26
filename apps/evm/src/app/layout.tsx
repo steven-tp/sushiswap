@@ -22,8 +22,8 @@ const roboto_mono = Roboto_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'U2U 🍣',
-    template: '%s | U2U 🍣',
+    default: 'U2U',
+    template: '%s | U2U',
   },
   description:
     'A Decentralised Finance (DeFi) app with features such as swap, cross chain swap, streaming, vesting, and permissionless market making for liquidity providers.',

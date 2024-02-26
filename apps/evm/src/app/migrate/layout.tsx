@@ -2,7 +2,7 @@ import { Container, typographyVariants } from '@sushiswap/ui'
 import { BackButton } from 'src/ui/pool/BackButton'
 
 export const metadata = {
-  title: 'SushiMigrate 🍣',
+  title: 'SushiMigrate',
 }
 
 export default function MigrateLayout({

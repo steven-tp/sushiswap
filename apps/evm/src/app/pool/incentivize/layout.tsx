@@ -3,7 +3,7 @@ import { Container, typographyVariants } from '@sushiswap/ui'
 import { BackButton } from '../../../ui/pool/BackButton'
 
 export const metadata = {
-  title: 'Pool 💦',
+  title: 'Pool',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
