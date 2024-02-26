@@ -7,8 +7,8 @@ export function cloudinaryFetchLoader({
   width,
   quality,
 }: ImageLoaderProps) {
-  const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
-  return `https://cdn.sushi.com/image/fetch/${params.join(',')}/${normalizeSrc(
+  // const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
+  return `https://u2u-images.s3.ap-southeast-1.amazonaws.com/amm/${normalizeSrc(
     src,
   )}`
 }
@@ -18,8 +18,8 @@ export function cloudinaryImageLoader({
   width,
   quality,
 }: ImageLoaderProps) {
-  const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
-  return `https://cdn.sushi.com/image/upload/${params.join(',')}/${normalizeSrc(
+  // const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
+  return `https://u2u-images.s3.ap-southeast-1.amazonaws.com/amm/${normalizeSrc(
     src,
   )}`
 }
