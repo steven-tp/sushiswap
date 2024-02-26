@@ -9,7 +9,7 @@ export const TRIDENT_ENABLED_NETWORKS = [
   // ChainId.ARBITRUM,
   // ChainId.AVALANCHE,
   // ChainId.BSC,
-  ChainId.U2U_NEBULAS,
+  // ChainId.U2U_NEBULAS,
 ] as const
 
 export type TridentChainId = typeof TRIDENT_ENABLED_NETWORKS[number]
@@ -37,7 +37,7 @@ export const SUSHISWAP_ENABLED_NETWORKS = [
   // ChainId.METIS,
   // ChainId.BTTC,
   // ChainId.FILECOIN,
-  ChainId.U2U_NEBULAS,
+  // ChainId.U2U_NEBULAS,
   // ChainId.PALM,
   // ChainId.HECO,
   // ChainId.OKEX

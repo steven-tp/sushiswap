@@ -25,7 +25,6 @@ export default async function PoolPage({
   if (!pool) {
     notFound()
   }
-
   if (pool.protocol === 'SUSHISWAP_V3') {
     return <PoolPageV3 pool={pool} />
   }
