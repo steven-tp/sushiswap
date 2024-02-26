@@ -9,30 +9,30 @@ import { cloudinaryImageLoader } from '../../cloudinary'
 import { Avatar, AvatarFallback, AvatarImage } from '../avatar'
 import { LinkExternal } from '../link'
 
-const AvaxLogo = 'avax.svg'
-const BnbLogo = 'bnb.svg'
-const EthereumLogo = 'ethereum.svg'
-const FtmLogo = 'ftm.svg'
-const OneLogo = 'one.svg'
-const HtLogo = 'ht.svg'
-const MaticLogo = 'matic.svg'
-const GlmrLogo = 'glmr.svg'
-const OktLogo = 'okt.svg'
-const xDaiLogo = 'xdai.svg'
-const CeloLogo = 'celo.svg'
-const PalmLogo = 'plam.svg'
-const MovrLogo = 'movr.svg'
-const FuseLogo = 'fuse.svg'
-const TelosLogo = 'telos.svg'
-const KavaLogo = 'kava.svg'
-const MetisLogo = 'metis.svg'
-const BobaLogo = 'boba.svg'
-const BttcLogo = 'bttc.svg'
-const ThundercoreLogo = 'thundercore.svg'
-const CoreLogo = 'core.svg'
-const IslmLogo = 'islm.svg'
-const FilecoinLogo = 'filecoin.svg'
-const U2ULogo = 'u2u.svg'
+const AvaxLogo = 'avax.png'
+const BnbLogo = 'bnb.png'
+const EthereumLogo = 'ethereum.png'
+const FtmLogo = 'ftm.png'
+const OneLogo = 'one.png'
+const HtLogo = 'ht.png'
+const MaticLogo = 'matic.png'
+const GlmrLogo = 'glmr.png'
+const OktLogo = 'okt.png'
+const xDaiLogo = 'xdai.png'
+const CeloLogo = 'celo.png'
+const PalmLogo = 'plam.png'
+const MovrLogo = 'movr.png'
+const FuseLogo = 'fuse.png'
+const TelosLogo = 'telos.png'
+const KavaLogo = 'kava.png'
+const MetisLogo = 'metis.png'
+const BobaLogo = 'boba.png'
+const BttcLogo = 'bttc.png'
+const ThundercoreLogo = 'thundercore.png'
+const CoreLogo = 'core.png'
+const IslmLogo = 'islm.png'
+const FilecoinLogo = 'filecoin.png'
+const U2ULogo = 'u2u.png'
 const LOGO: Record<number, string> = {
   [ChainId.ETHEREUM]: EthereumLogo,
   [ChainId.KOVAN]: EthereumLogo,
@@ -112,7 +112,7 @@ export const Icon: FC<IconProps> = ({
 }) => {
   const src = currency.isNative
     ? `native-currency/${LOGO[currency.chainId]}`
-    : `tokens/${currency.chainId}/${currency.wrapped.address}.jpg`
+    : `${currency.chainId}/${currency.wrapped.address.toLocaleLowerCase()}.png`
   const avatar = (
     <Avatar style={{ width: rest.width, height: rest.height }}>
       <AvatarImage
