@@ -7,7 +7,7 @@ import { PoolHeader } from '../../../../ui/pool/PoolHeader'
 import notFound from '../../not-found'
 
 export const metadata = {
-  title: 'Pool 💦',
+  title: 'Pool',
 }
 
 export default async function Layout({

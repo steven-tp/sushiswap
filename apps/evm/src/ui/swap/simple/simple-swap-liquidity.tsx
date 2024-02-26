@@ -1,29 +1,24 @@
-import { Card, Loader, DataTable } from "@sushiswap/ui";
 import { FC } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Card, DataTable, Loader } from "@sushiswap/ui";
 import {
-  DATE_COLUMN,
-  TYPE_COLUMN,
-  AMOUNT_IN_COLUMN,
-  AMOUNT_OUT_COLUMN,
-  PRICE_COLUMN,
-  MAKER_COLUMN,
-  TXN_COLUMN
+  ADDRESS_COLUMN,
+  PERCENT_COLUMN,
+  AMOUNT_COLUMN,
+  TNXS_COLUMN
 } from "./columns";
 
-export const  SimpleSwapTransaction: FC = () => {
+export const SimpleSwapLiquidity: FC = () => {
   const isValidating = false
   const data: any = [
-    { date: 'Feb 21 12:49:32 PM', type: 'Swap', amountIn: 0.1, amountOut: 202.31, price: 2021.34, maker: '0xc7Ef468b19760F93EE38AbF50B05b4e6aB154f65', txn: '0xc7Ef468b19760F93EE38AbF50B05b4e6aB154f65' },
+    { address: '0xc7Ef468b19760F93EE38AbF50B05b4e6aB154f65', percent: 69, minAmount: 63.24, maxAmount: 101 },
+    { address: '0xc7Ef468b19760F93EE38AbF50B05b4e6aB154f65', percent: 42, minAmount: 41, maxAmount: 101 },
   ]
   const COLUMNS = [
-    DATE_COLUMN,
-    TYPE_COLUMN,
-    AMOUNT_IN_COLUMN,
-    AMOUNT_OUT_COLUMN,
-    PRICE_COLUMN,
-    MAKER_COLUMN,
-    TXN_COLUMN
+    ADDRESS_COLUMN,
+    PERCENT_COLUMN,
+    AMOUNT_COLUMN,
+    TNXS_COLUMN
   ]
   return (
     <InfiniteScroll
