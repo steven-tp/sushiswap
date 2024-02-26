@@ -1,15 +1,16 @@
 import { ChainId } from '../chain'
 
 export const ANGLE_ENABLED_NETWORKS = [
-  ChainId.ARBITRUM,
-  ChainId.ETHEREUM,
-  ChainId.OPTIMISM,
-  ChainId.POLYGON,
+  // ChainId.ARBITRUM,
+  // ChainId.ETHEREUM,
+  // ChainId.OPTIMISM,
+  // ChainId.POLYGON,
   // ChainId.POLYGON_ZKEVM,
-  ChainId.BASE,
+  // ChainId.BASE,
   // ChainId.THUNDERCORE,
   // ChainId.CORE,
-  // ChainId.GNOSIS
+  // ChainId.GNOSIS,
+  ChainId.U2U_NEBULAS
 ]
 export type AngleEnabledChainId = typeof ANGLE_ENABLED_NETWORKS[number]
 export const isAngleEnabledChainId = (
