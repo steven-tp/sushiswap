@@ -1,8 +1,9 @@
 // import CONFIG from '@/config/config'
 import { RESOLUTION } from './constants'
+import { subscribeOnStream, unsubscribeFromStream } from './streaming'
 // import { subscribeOnStream, unsubscribeFromStream } from './streaming'
 // Makes requests to CryptoCompare API
-const BASE_URL = ''
+const BASE_URL = 'https://broker.bankofbit.io/api/v1'
 export async function makeApiRequest(path: string) {
   try {
     const response = await fetch(`${BASE_URL}/${path}`)
@@ -108,9 +109,9 @@ export const datafeed = {
   },
 
   subscribeBars: (symbolInfo: any, resolution: any, onRealtimeCallback: any, subscriberUID: any, onResetCacheNeededCallback: any) => {
-    // subscribeOnStream(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback, lastBarsCache.get(symbolInfo.full_name))
+    subscribeOnStream(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback, lastBarsCache.get(symbolInfo.full_name))
   },
   unsubscribeBars: (subscriberUID: any) => {
-    // unsubscribeFromStream(subscriberUID)
+    unsubscribeFromStream(subscriberUID)
   }
 }
