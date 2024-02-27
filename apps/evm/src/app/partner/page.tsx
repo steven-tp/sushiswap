@@ -51,7 +51,7 @@ export default async function PartnerPage() {
         <div className="flex flex-col justify-center pt-20">
           <div className="flex flex-col">
             <h1 className={typographyVariants({ variant: 'h1' })}>
-              Partner <br /> with Sushi
+              Partner <br /> with U2U
             </h1>
             <p className={typographyVariants({ variant: 'lead' })}>
               Unlock new possibilities by partnering with us! We are excited to

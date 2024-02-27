@@ -108,9 +108,9 @@ const PARTNER_NAVIGATION_LINKS: {
   description: string
 }[] = [
   {
-    title: 'Partner with Sushi',
+    title: 'Partner with U2U',
     href: '/partner',
-    description: 'Incentivize your token with Sushi rewards.',
+    description: 'Incentivize your token with U2U rewards.',
   },
   {
     title: 'List enquiry',
@@ -223,6 +223,29 @@ const Navigation: React.FC<NavProps> = ({
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
+          <NavigationMenuItem className="hidden md:block">
+            <NavigationMenuTrigger>Partners</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="w-[400px] gap-3 p-4">
+                {PARTNER_NAVIGATION_LINKS.map((component) => (
+                  <NavigationListItem
+                    key={component.title}
+                    title={component.title}
+                    href={component.href}
+                    legacyBehavior={legacyBehavior}
+                  >
+                    {component.description}
+                  </NavigationListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
+              >
+                <a href="https://faucet.uniultra.xyz/" target='_blank'>Faucet</a>
+              </NavigationMenuLink>
           {/* <NavigationMenuItem className="hidden md:block">
             {legacyBehavior ? (
               <NavigationMenuLink
