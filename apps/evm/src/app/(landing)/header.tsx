@@ -61,6 +61,22 @@ export const Header: FC = () => {
                 </NavigationMenuLink>
               </LinkInternal>
             </NavigationMenuItem>
+            <NavigationMenuItem className="hidden md:block">
+              <NavigationMenuTrigger>Partners</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="w-[400px] gap-3 p-4">
+                  {PARTNER_NAVIGATION_LINKS.map((component) => (
+                    <NavigationListItem
+                      key={component.title}
+                      title={component.title}
+                      href={component.href}
+                    >
+                      {component.description}
+                    </NavigationListItem>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem> 
             {/* <NavigationMenuItem className="hidden md:block">
               <LinkInternal href="/stake">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>

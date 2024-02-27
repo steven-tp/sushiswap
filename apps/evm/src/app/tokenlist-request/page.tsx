@@ -39,7 +39,7 @@ export default function Partner() {
     mode: 'all',
     resolver: zodResolver(ApplyForTokenListTokenSchema),
     defaultValues: {
-      chainId: ChainId.ETHEREUM,
+      chainId: ChainId.U2U_NEBULAS,
       listType: ApplyForTokenListListType.DEFAULT,
       logoFile: '',
       tokenAddress: '',
