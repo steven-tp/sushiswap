@@ -30,42 +30,42 @@ const EXPLORE_NAVIGATION_LINKS: {
     href: '/pools',
     description: 'Earn fees by providing liquidity.',
   },
-  {
-    title: 'Stake',
-    href: '/stake',
-    description: 'Earn protocol fees by staking SUSHI.',
-  },
-  {
-    title: 'Pay',
-    href: '/furo',
-    description: 'Automate salaries and vesting schedules.',
-  },
-  {
-    title: 'Analytics',
-    href: '/analytics',
-    description: 'Find the best opportunities',
-  },
-  {
-    title: 'Blog',
-    href: '/blog',
-    description:
-      'Stay up to date with the latest product developments at Sushi.',
-  },
-  {
-    title: 'Academy',
-    href: '/academy',
-    description: 'Everything you need to get up to speed with DeFi.',
-  },
-  {
-    title: 'Partner with Sushi',
-    href: '/partner',
-    description: 'Incentivize your token with Sushi rewards.',
-  },
-  {
-    title: 'List enquiry',
-    href: '/tokenlist-request',
-    description: 'Get your token on our default token list.',
-  },
+  // {
+  //   title: 'Stake',
+  //   href: '/stake',
+  //   description: 'Earn protocol fees by staking SUSHI.',
+  // },
+  // {
+  //   title: 'Pay',
+  //   href: '/furo',
+  //   description: 'Automate salaries and vesting schedules.',
+  // },
+  // {
+  //   title: 'Analytics',
+  //   href: '/analytics',
+  //   description: 'Find the best opportunities',
+  // },
+  // {
+  //   title: 'Blog',
+  //   href: '/blog',
+  //   description:
+  //     'Stay up to date with the latest product developments at Sushi.',
+  // },
+  // {
+  //   title: 'Academy',
+  //   href: '/academy',
+  //   description: 'Everything you need to get up to speed with DeFi.',
+  // },
+  // {
+  //   title: 'Partner with Sushi',
+  //   href: '/partner',
+  //   description: 'Incentivize your token with Sushi rewards.',
+  // },
+  // {
+  //   title: 'List enquiry',
+  //   href: '/tokenlist-request',
+  //   description: 'Get your token on our default token list.',
+  // },
 ]
 
 const TOOLS_NAVIGATION_LINKS: {

@@ -11,17 +11,21 @@ export const metadata = {
 export default function SwapSimplePage() {
   return (
     <Providers>
-        <div className='grid p-2 lg:grid-cols-3 lg:grid-rows-1 sm:grid-rows-2 sm:grid-cols-1'>
-          <div className="lg:col-span-2 sm:col-span-1">
-            <SimpleSwapChartContainer/>
-          </div>
-          <div>
+      <Container maxWidth="screen-3xl" className='px-4 lg:px-0'>
+        <div className='block lg:grid lg:grid-cols-3 lg:grid-rows-1 sm:grid-rows-2 sm:grid-cols-1 gap-10'>
+        <div className='lg:order-2 mb-10 lg:mb-0'>
             <SimpleSwapWidget/>
           </div>
+          <div className="lg:col-span-2 sm:col-span-1 lg:order-1">
+            <div className='h-[420px] lg:h-[600px]'>
+              <SimpleSwapChartContainer/>
+            </div>
+            <div className='pt-10 lg:pt-14'>
+              <SimpleSwapInfomation/>
+            </div>
+          </div>
         </div>
-        <div>
-          <SimpleSwapInfomation/>
-        </div>
+      </Container>
     </Providers>
   )
 }
