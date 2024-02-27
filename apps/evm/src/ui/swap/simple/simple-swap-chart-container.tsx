@@ -109,11 +109,10 @@ export const SimpleSwapChartContainer: FC = ()=> {
   
 
   return (
-    <div className='h-full  p-2'>
+    <div className='h-full'>
       <div className='h-full flex flex-col'>
         <div>
-          <div>Chart ContainerC</div>
-          <div>ETH/U2U</div>
+          <div className='font-medium'>ETH/U2U</div>
         </div>
         <div id="tranding-chart" className='h-full'></div>
       </div>

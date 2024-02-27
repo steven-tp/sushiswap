@@ -19,6 +19,7 @@ import { DefaultView } from './DefaultView'
 import { ProfileView } from './ProfileView'
 import { SettingsView } from './SettingsView'
 import { TransactionsView } from './TransactionsView'
+import { WalletIcon } from '@heroicons/react/20/solid'
 
 interface ProfileProps {
   networks: ChainId[]
@@ -58,7 +59,7 @@ export const UserProfile: FC<ProfileProps> = () => {
                 height={20}
                 className="rounded-full"
               />
-            ) : null
+            ) : <WalletIcon className='w-4 h-4'/>
             // <JazzIcon diameter={20} address={address} />
           }
           <span className="hidden sm:block">
@@ -67,7 +68,7 @@ export const UserProfile: FC<ProfileProps> = () => {
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-80"
+        className="w-72 sm:w-80 rounded-md sm:rounded-xl"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         {!isConnected && <ConnectView onSelect={close} />}

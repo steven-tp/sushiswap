@@ -57,7 +57,7 @@ export const DefaultView: FC<DefaultProps> = ({
 
   return (
     <>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6 sm:gap:8">
         <div className="flex flex-col gap-2">
           <div className="flex gap-2">
             <IconButton
@@ -96,8 +96,8 @@ export const DefaultView: FC<DefaultProps> = ({
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2 justify-center items-center">
-          <p className="text-3xl font-medium whitespace-nowrap">
+        <div className="flex flex-col gap-1.5 sm:gap-2 justify-center items-center">
+          <p className="text-2xl sm:text-3xl font-medium whitespace-nowrap">
             {balance.toSignificant(3)} {Native.onChain(chainId).symbol}
           </p>
           <p className="font-medium text-slate-400">
