@@ -102,4 +102,5 @@ export type Config = {
 
 export const config = {
   [ChainId.U2U_NEBULAS]: {},
+  RESOLUTION_STOGRATE: 'u2w-resolution-stograte'
 }
