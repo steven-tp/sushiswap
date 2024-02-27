@@ -14,10 +14,8 @@ export const SimpleSwapInfomation = () => {
       children: (
         <div className='flex items-center gap-2'>
           <span></span>{' '}
-          <span className='flex items-center gap-2'>Transactions 
-            <sup>
-              <InformationCircleIcon className="w-5 h-5"/>
-            </sup>
+          <span className='flex items-center gap-1.5'>
+            Transactions <InformationCircleIcon className="w-4 h-4"/>
           </span>
         </div>
       ),
@@ -28,10 +26,8 @@ export const SimpleSwapInfomation = () => {
       children: (
         <div className='flex items-center gap-2'>
           <span></span>{' '}
-          <span className='flex items-center gap-2'>Liquidity Providers 
-            <sup>
-              <InformationCircleIcon className="w-5 h-5"/>
-            </sup>
+          <span className='flex items-center gap-1.5'>
+            Liquidity Providers <InformationCircleIcon className="w-4 h-4"/>
           </span>
         </div>
       ),
@@ -39,7 +35,7 @@ export const SimpleSwapInfomation = () => {
   ]
   const [tab, setTab] = useState('transactions')
   return (
-    <div className='pt-10'>
+    <div>
       <Tabs value={tab} onValueChange={setTab} defaultValue='transactions'>
         <div className="flex justify-between mb-4">
           <div className="block sm:hidden">
