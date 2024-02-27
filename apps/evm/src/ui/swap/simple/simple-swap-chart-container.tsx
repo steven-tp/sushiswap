@@ -5,6 +5,7 @@ import {
 import { config } from 'src/config'
 import { widget } from 'public/charting_library/charting_library.min'
 import { datafeed } from 'src/lib/datafeed'
+import { createWebsocket } from 'src/lib/socket'
 export const SimpleSwapChartContainer: FC = ()=> {
   let chartWidget: any
   const chartConfig = {
@@ -103,6 +104,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
 
     useEffect(() => {
      initChart()
+     createWebsocket()
     }, [])
   
 

@@ -23,7 +23,7 @@ import {
   WBTC,
   tryParseAmount,
 } from 'sushi/currency'
-
+import numeral from 'numeral'
 import { Bound } from './constants'
 import { useTicks } from './hooks'
 import { TickProcessed } from './pool/v3/use-concentrated-active-liquidity'
@@ -294,4 +294,35 @@ export const rewardPerDay = ({
 }) => {
   const days = (end - start) / 3600 / 24
   return tryParseAmount((amount / days).toFixed(8), token)
+}
+
+export const formatNumeral = (value: any, format: any) => {
+  if (!value) return '0'
+  const _format = `0.${'0'.repeat(format)}`
+  return numeral(value).format(_format)
+}
+
+export const convertResolutionToSeconds = (resolution: string) => {
+  switch (resolution) {
+    case '1':
+      return 60
+    case '5':
+      return 300
+    case '15':
+      return 900
+    case '30':
+      return 1800
+    case '60':
+      return 3600
+    case '240':
+      return 14400
+    case '1D':
+      return 86400
+    case 'D':
+      return 432000
+    case '1W':
+      return 604800
+    case '1M':
+      return 0
+  }
 }

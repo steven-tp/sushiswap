@@ -312,6 +312,9 @@ importers:
       '@layerzerolabs/scan-client':
         specifier: 0.0.6
         version: 0.0.6(axios@1.6.7)
+      '@msgpack/msgpack':
+        specifier: 3.0.0-beta2
+        version: 3.0.0-beta2
       '@octokit/auth-app':
         specifier: 4.0.7
         version: 4.0.7
@@ -8571,6 +8574,11 @@ packages:
     dependencies:
       '@motionone/dom': 10.17.0
       tslib: 2.6.2
+
+  /@msgpack/msgpack@3.0.0-beta2:
+    resolution: {integrity: sha512-y+l1PNV0XDyY8sM3YtuMLK5vE3/hkfId+Do8pLo/OPxfxuFAUwcGz3oiiUuV46/aBpwTzZ+mRWVMtlSKbradhw==}
+    engines: {node: '>= 14'}
+    dev: false
 
   /@next/env@13.4.19:
     resolution: {integrity: sha512-FsAT5x0jF2kkhNkKkukhsyYOrRqtSxrEhfliniIq0bwWbuXLgyt3Gv0Ml+b91XwjwArmuP7NxCiGd++GGKdNMQ==}
