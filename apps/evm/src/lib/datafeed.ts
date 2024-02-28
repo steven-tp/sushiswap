@@ -3,7 +3,7 @@ import { RESOLUTION } from './constants'
 import { subscribeOnStream, unsubscribeFromStream } from './streaming'
 // import { subscribeOnStream, unsubscribeFromStream } from './streaming'
 // Makes requests to CryptoCompare API
-const BASE_URL = 'https://broker.bankofbit.io/api/v1'
+const BASE_URL = 'http://192.168.1.182:3333/api/v1'
 export async function makeApiRequest(path: string) {
   try {
     const response = await fetch(`${BASE_URL}/${path}`)
@@ -26,14 +26,19 @@ export const datafeed = {
   onReady: (callback: any) => {
     setTimeout(() => callback(configurationData))
   },
-  resolveSymbol: async (symbolName: any, onSymbolResolvedCallback: any, onResolveErrorCallback: any) => {
-    if (!symbolName) {
+  resolveSymbol: async (symbolFull: any, onSymbolResolvedCallback: any, onResolveErrorCallback: any) => {
+    if (!symbolFull) {
       onResolveErrorCallback('Cannot resolve symbol')
       return ''
     }
     // Symbol information object
+    const splitSymbol = symbolFull.split('-')
+    const symbolName = splitSymbol[0]
     const symbolInfo = {
-      name: symbolName,
+      name: symbolFull,
+      // full_name: splitSymbol[1],
+      key: splitSymbol[1],
+      tokens: splitSymbol[1]?.split('_'),
       description: symbolName.toUpperCase(),
       // type: symbolItem.type,
       session: '24x7',
@@ -64,8 +69,11 @@ export const datafeed = {
     const resolutions: any = RESOLUTION
     const from = rangeStartDate * 1000
     const to = rangeEndDate * 1000
+
     const urlParameters: any = {
-      pair: symbolInfo.full_name?.toLowerCase(),
+      // pair: symbolInfo.full_name?.toLowerCase(),
+      token0: symbolInfo.tokens[0].trim(),
+      token1: symbolInfo.tokens[1].trim(),
       from: from,
       to: to,
       type: resolutions[resolution] || 'H1'
@@ -76,10 +84,10 @@ export const datafeed = {
     try {
       let url = `market/history-candle?${query}`
       const res = await makeApiRequest(url)
-      if ((res.data && !res.status) || res.data.length === 0) {
+      if ((res.data.length === 0 && res.status === 'error') || res.data.length === 0) {
         // "noData" should be set if there is no data in the requested period
         onResult([], { noData: true })
-        return
+        if(isFirstCall) return
       }
       let bars: any = []
       res.data.forEach((bar: any) => {
@@ -102,7 +110,7 @@ export const datafeed = {
           ...bars[bars.length - 1]
         })
       }
-      onResult(bars, { noData: false })
+      onResult(bars, { noData: bars?.length === 0 ? true : false })
     } catch (error) {
       onError(error)
     }
