@@ -17,6 +17,12 @@ export async function GET(
     return NextResponse.json(result.error.format(), { status: 400 })
   }
 
-  const pool = await getPoolFromDB(result.data)
-  return NextResponse.json(pool, { headers: CORS })
+  try {
+    const pool = await getPoolFromDB(result.data)
+    return NextResponse.json(pool, { headers: CORS })
+  } catch (e) {
+    console.log(e)
+    return NextResponse.json({}, { headers: CORS })
+  }
+  
 }
