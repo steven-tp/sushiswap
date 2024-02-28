@@ -100,7 +100,8 @@ export function subscribeOnStream(
   const symbol = symbolInfo.name.toLowerCase()
   // const systemStore = useSystemStore()
   // pairInfo = systemStore.pairsBySymbol[symbol]
-  const channelString = `0~${symbol}`
+  const channelString = symbol
+
   const handler = {
     id: subscriberUID,
     callback: onRealtimeCallback

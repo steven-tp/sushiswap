@@ -33,9 +33,6 @@ function ping() {
 
 export function createWebsocket() {
   clearInterval(intervalWs)
-  if(isConnected) {
-    _socket?.close()
-  }
   return new Promise((resolve) => {
     _socket = new WebSocket('wss://w-api.bankofbit.io/m')
     _socket.onopen = () => {
@@ -68,7 +65,7 @@ export function createWebsocket() {
           const type = unpacker.next().value
           switch (type) {
             case SOCKET_TYPES.CANDLE:
-              handleCandle(unpacker)
+              // handleCandle(unpacker)
               break
             default:
           }
@@ -107,7 +104,6 @@ function unsubcribeCandle() {
 }
 
 export function getCandle(resolution: string, symbol: string) {
-  console.log("🚀 ~ getCandle ~ resolution:", resolution, symbol)
   const topic = `cloud.candle.${resolution}.${symbol}`
   unsubcribeCandle()
   currentCandleMessage = {

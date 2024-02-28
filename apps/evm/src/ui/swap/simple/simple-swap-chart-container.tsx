@@ -6,10 +6,16 @@ import { config } from 'src/config'
 import { widget } from 'public/charting_library/charting_library.min'
 import { datafeed } from 'src/lib/datafeed'
 import { createWebsocket } from 'src/lib/socket'
+import { useIsMounted } from '@sushiswap/hooks'
+import { useDerivedStateSimpleSwap } from './derivedstate-simple-swap-provider'
 export const SimpleSwapChartContainer: FC = ()=> {
+  const isMounted =  useIsMounted()
+  const {
+    state: { token0, token1 },
+  } = useDerivedStateSimpleSwap()
   let chartWidget: any
   const chartConfig = {
-    interval: '60',
+    interval: '1D',
     libraryPath: '/charting_library/',
     chartsStorageApiVersion: '1.1',
     theme: 'Dark',
@@ -85,14 +91,14 @@ export const SimpleSwapChartContainer: FC = ()=> {
     custom_css_url: 'css/custom.css'
   }
 
-    const initChart = (symbol?: string) => {
+    const initChart = () => {
     const resolution = localStorage.getItem(config.RESOLUTION_STOGRATE)
     if (resolution) {
       widgetOptions.interval = resolution
     }
-    if (!symbol) {
-      symbol = 'btcusdt'
-    }
+    const token = `${token0?.wrapped.address}_${token1?.wrapped.address}`
+    const symbol = `${token0?.symbol}/${token1?.symbol}-${token}`
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     chartWidget = new widget({ ...widgetOptions, symbol })
     chartWidget.onChartReady(() => {
@@ -103,16 +109,21 @@ export const SimpleSwapChartContainer: FC = ()=> {
     }
 
     useEffect(() => {
-     initChart()
-     createWebsocket()
-    }, [])
+      if(token0?.symbol && token1?.symbol) {
+        initChart()
+        if(isMounted) {
+          createWebsocket()
+        }
+      }
+    }, [isMounted, token0, token1])
+
   
 
   return (
     <div className='h-full'>
       <div className='h-full flex flex-col'>
         <div>
-          <div className='font-medium'>ETH/U2U</div>
+          <div>{token0?.symbol}/{token1?.symbol}</div>
         </div>
         <div id="tranding-chart" className='h-full'></div>
       </div>
