@@ -16,62 +16,63 @@ import { ConcentratedPositionsTable } from './ConcentratedPositionsTable/Concent
 import { PositionsTable } from './PositionsTable'
 import { SmartPositionsTable } from './SmartPositionsTable'
 
-const ITEMS: { id: string; value: string; children: React.ReactNode }[] = [
-  {
-    id: 'sushiswap-v3',
-    value: 'v3',
-    children: (
-      <div className="flex items-center gap-2">
-        <span>🍣</span>{' '}
-        <span>
-          SushiSwap <sup>v3</sup>
-        </span>
-      </div>
-    ),
-  },
-  {
-    id: 'sushiswap-v2',
-    value: 'v2',
-    children: (
-      <div className="flex items-center gap-2">
-        <span>🍣</span>{' '}
-        <span>
-          SushiSwap <sup>v2</sup>
-        </span>
-      </div>
-    ),
-  },
-  {
-    id: 'trident-stable',
-    value: 'stable',
-    children: (
-      <div className="flex items-center gap-2">
-        <span>🍱</span>
-        <span>Trident Stable</span>
-      </div>
-    ),
-  },
-  {
-    id: 'trident-classic',
-    value: 'classic',
-    children: (
-      <div className="flex items-center gap-2">
-        <span>🍱</span>
-        <span>Trident Classic</span>
-      </div>
-    ),
-  },
-  {
-    id: 'sushiswap-smart',
-    value: 'smart',
-    children: (
-      <div className="flex items-center gap-2">
-        <span>💡</span>
-        <span>Smart Pool</span>
-      </div>
-    ),
-  },
-]
+const ITEMS: { id: string; value: string; children: React.ReactNode }[] = []
+// [
+//   {
+//     id: 'sushiswap-v3',
+//     value: 'v3',
+//     children: (
+//       <div className="flex items-center gap-2">
+//         <span>🍣</span>{' '}
+//         <span>
+//           SushiSwap <sup>v3</sup>
+//         </span>
+//       </div>
+//     ),
+//   },
+//   {
+//     id: 'sushiswap-v2',
+//     value: 'v2',
+//     children: (
+//       <div className="flex items-center gap-2">
+//         <span>🍣</span>{' '}
+//         <span>
+//           SushiSwap <sup>v2</sup>
+//         </span>
+//       </div>
+//     ),
+//   },
+//   {
+//     id: 'trident-stable',
+//     value: 'stable',
+//     children: (
+//       <div className="flex items-center gap-2">
+//         <span>🍱</span>
+//         <span>Trident Stable</span>
+//       </div>
+//     ),
+//   },
+//   {
+//     id: 'trident-classic',
+//     value: 'classic',
+//     children: (
+//       <div className="flex items-center gap-2">
+//         <span>🍱</span>
+//         <span>Trident Classic</span>
+//       </div>
+//     ),
+//   },
+//   {
+//     id: 'sushiswap-smart',
+//     value: 'smart',
+//     children: (
+//       <div className="flex items-center gap-2">
+//         <span>💡</span>
+//         <span>Smart Pool</span>
+//       </div>
+//     ),
+//   },
+// ]
 
 export const PositionsTab = () => {
   const [tab, setTab] = useState('v3')
@@ -85,13 +86,13 @@ export const PositionsTab = () => {
               <SelectTrigger>
                 <SelectValue placeholder="Pool type" />
               </SelectTrigger>
-              <SelectContent>
+              {/* <SelectContent>
                 {ITEMS.map((item) => (
                   <SelectItem key={item.value} value={item.value}>
                     {item.children}
                   </SelectItem>
                 ))}
-              </SelectContent>
+              </SelectContent> */}
             </Select>
           </div>
           <TabsList className="hidden sm:inline-flex">
