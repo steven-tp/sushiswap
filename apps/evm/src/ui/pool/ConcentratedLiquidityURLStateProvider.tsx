@@ -97,7 +97,7 @@ const getChainIdFromUrl = (
   urlChainId: ChainId | undefined,
   connectedChainId: ChainId | undefined,
 ): SushiSwapV3ChainId => {
-  let chainId: SushiSwapV3ChainId = ChainId.ETHEREUM
+  let chainId: SushiSwapV3ChainId = ChainId.U2U_NEBULAS
   if (urlChainId && isSushiSwapV3ChainId(urlChainId)) {
     chainId = urlChainId
   } else if (connectedChainId && isSushiSwapV3ChainId(connectedChainId)) {
