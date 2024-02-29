@@ -148,7 +148,7 @@ export class Chain implements Chain {
         explorer.standard === Standard.Eip3091 ||
         EIP3091_OVERRIDE.includes(this.chainId)
       ) {
-        return `${explorer.url}/token/${tokenAddress}`
+        return `${explorer.url}/address/${tokenAddress}`
       }
     }
     return ''
