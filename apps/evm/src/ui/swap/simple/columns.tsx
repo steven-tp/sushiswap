@@ -1,16 +1,19 @@
 import { Button, LinkExternal, SkeletonText } from "@sushiswap/ui";
 import { ColumnDef } from "@tanstack/react-table";
-import { shortenAddress } from "sushi/format";
+import { shortenAddress, shortenHash } from "sushi/format";
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
 import { formatDistance } from "date-fns";
 
 export const DATE_COLUMN = {
   id: 'date',
   header: 'DATE',
-  cell: (props: any) => 
-  formatDistance(props.row.original.timestamp * 1000, new Date(), {
-    addSuffix: true,
-  }),
+  cell: (props: any) => (
+    <div className="whitespace-nowrap">
+      {formatDistance(props.row.original.timestamp * 1000, new Date(), {
+        addSuffix: true,
+      })}
+    </div>
+  ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   },
@@ -29,7 +32,11 @@ export const TYPE_COLUMN = {
 export const AMOUNT_IN_COLUMN = {
   id: 'amountIn',
   header: 'Amount In',
-  cell: (props: any) => `${props.row.original.amountIn} ETH`,
+  cell: (props: any) => (
+    <div className="whitespace-nowrap">
+      {props.row.original.amountIn} ETH
+    </div>
+  ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
@@ -38,7 +45,11 @@ export const AMOUNT_IN_COLUMN = {
 export const AMOUNT_OUT_COLUMN = {
   id: 'amountOut',
   header: 'Amount Out',
-  cell: (props: any) => `${props.row.original.amountOut} U2U`,
+  cell: (props: any) => (
+    <div className="whitespace-nowrap">
+      {props.row.original.amountOut} U2U
+    </div>
+  ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
@@ -78,7 +89,7 @@ export const TXN_COLUMN = {
       className="!font-medium !text-secondary-foreground"
       title={`${props.row.original.hash}`}
     >
-      {props.row.original.hash}
+      {shortenHash(props.row.original.hash)}
       <ArrowTopRightOnSquareIcon className="w-4 h-4" />
     </Button>
   </LinkExternal>
