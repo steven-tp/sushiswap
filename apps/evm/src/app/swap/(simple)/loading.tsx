@@ -3,8 +3,11 @@ import React from 'react'
 
 export default function SimpleSwapLoading() {
   return (
-    <Container maxWidth="lg" className="px-4">
-      <div className="flex flex-col gap-4">
+    <Container maxWidth="screen-3xl" className="grid px-4 lg:grid-cols-3 lg:grid-rows-1 sm:grid-rows-2 sm:grid-cols-1 gap-10">
+      <div className='lg:col-span-2 sm:col-span-1 order-2 lg:order-1'>
+        <SkeletonBox className='w-full h-full' />
+      </div>
+      <div className="flex flex-col gap-4 order-1 lg:order-2">
         <div className="flex flex-col gap-2 mb-4 sm:mt-10 mt-2">
           <SkeletonBox className="w-[140px] h-[53px]" />
           <SkeletonBox className="h-[20px] w-[280px]" />

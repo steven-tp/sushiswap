@@ -1,0 +1,152 @@
+html .customButton--jqJTfH5- {
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+html .scrollBot-2HHpZNuf- {
+  cursor: pointer;
+}
+html.theme-dark {
+  /*.button-2ioYhFEY-g.isInteractive-20uLObIc-,*/
+}
+html.theme-dark .chart-page {
+  --exchange_col_background: #162442;
+  background-color: var(--exchange_col_background);
+}
+html.theme-dark .chart-page .chart-container-border {
+  background-color: transparent;
+}
+html.theme-dark .button-263WXsg-- {
+  background-color: var(--exchange_col_background);
+}
+html.theme-dark .drawingToolbar-U3_QXRof-,
+html.theme-dark .group-2JyOhh7Z-,
+html.theme-dark .inner-1xuW-gY4- {
+  background-color: transparent;
+}
+html.theme-dark .scrollBot-2HHpZNuf-,
+html.theme-dark .scrollTop-1eXi8ltS- {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+html.theme-dark .button-263WXsg-- .icon-1Y-3MM9F-.hovered--MYZioUu-,
+html.theme-dark .feature-no-touch .button-263WXsg-- .icon-1Y-3MM9F-:hover,
+html.theme-dark .feature-no-touch .button-263WXsg-- .icon-1Y-3MM9F-:active,
+html.theme-dark .feature-touch .button-263WXsg-- .icon-1Y-3MM9F-:active {
+  color: #ffffff;
+  fill: #ffffff;
+}
+html.theme-dark .dropdown-3_ASLzSj-:hover .arrow-1cFKS5Ok- .arrowIcon-2wA7q8om- svg {
+  color: #ffffff;
+  fill: #ffffff;
+}
+html.theme-dark .icon-1Y-3MM9F:hover {
+  color: #758696 !important;
+}
+html.theme-dark .menuWrap-1gEtmoET- {
+  background-color: #1d253c;
+  box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+html.theme-dark .group-wWM3zP_M- {
+  background-color: transparent;
+  cursor: pointer;
+}
+html.theme-dark .button-2ioYhFEY-.isInteractive-20uLObIc-.isOpened-p-Ume5l9-,
+html.theme-dark .customButton--jqJTfH5-.active {
+  background-color: #23314c !important;
+  color: #357CE1 !important;
+}
+html.theme-dark .item-2xPVYue0- {
+  background-color: transparent;
+  color: #bbbbbb;
+}
+html.theme-dark .separator-25lkUpN--,
+html.theme-dark .scrollRight-UDsPWprP- {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+html.theme-dark .wrap-2I6DAtXG-:empty + .separator-25lkUpN-- {
+  display: none;
+}
+html.theme-dark .button-263WXsg--.isActive-2mI1-NUL- .bg-1kRv1Pf2- {
+  background-color: transparent !important;
+}
+html.theme-dark .scrollWrap-1B5MfTJt-::-webkit-scrollbar-thumb {
+  border: none;
+  width: 3px;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+html.theme-dark .scrollWrap-1B5MfTJt-::-webkit-scrollbar-track {
+  background-color: transparent;
+  width: 3px;
+  height: 3px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+html.theme-dark .item-31XunD5q-:hover {
+  color: #ffffff !important;
+}
+html.theme-dark .feature-no-touch .item-2xPVYue0-:hover {
+  background-color: #262b3e;
+  color: #ffffff;
+}
+html.theme-dark .toolbox-3ulPxfe-- {
+  color: #ffffff;
+}
+html.theme-dark .loading-indicator {
+  background-color: transparent;
+}
+html.theme-dark .button-2ioYhFEY-.isInteractive-20uLObIc-.isOpened-p-Ume5l9- {
+  background-color: #23314c;
+}
+html.theme-dark .feature-no-touch {
+  color: #a5bdea;
+}
+html.theme-dark .button-2ioYhFEY-.isInteractive-20uLObIc-,
+html.theme-dark .button-263WXsg-- .icon-1Y-3MM9F-,
+html.theme-dark .customButton--jqJTfH5- {
+  color: #758696;
+}
+html.theme-dark .feature-no-touch .button-2ioYhFEY-.isInteractive-20uLObIc-:hover,
+html.theme-dark .feature-no-touch .button-2ioYhFEY-.isInteractive-20uLObIc-:active,
+html.theme-dark .button-2ioYhFEY-.isInteractive-20uLObIc-:hover,
+html.theme-dark .feature-no-touch .customButton--jqJTfH5-:hover,
+html.theme-dark .feature-no-touch .customButton--jqJTfH5-:active {
+  color: #9db2bd;
+}
+html.theme-dark .pane-legend-item-value-wrap .pane-legend-item-value__main,
+html.theme-dark .pane-legend-item-value-wrap .pane-legend-item-value-title__main {
+  font-size: 10pt;
+}
+html.theme-dark .pane-legend-title__description,
+html.theme-dark .pane-legend-title__interval {
+  font-size: 14px;
+}
+html.theme-dark .pane-legend .pane-legend-minbtn .expand,
+html.theme-dark .pane-legend .pane-legend-icon .expand {
+  width: 11px;
+  height: 11px;
+  line-height: 11px;
+}
+html.theme-dark .subGroup-1JpgB9zD- {
+  cursor: pointer;
+}
+html.theme-dark .button-2ioYhFEY-.isInteractive-20uLObIc- {
+  cursor: pointer;
+}
+.group-wWM3zP_M- {
+  margin-left: 0;
+}
+html.theme-light .chart-page {
+  background-color: #ffffff;
+}
+html.theme-light .button-2ioYhFEY-.isInteractive-20uLObIc-.isOpened-p-Ume5l9-,
+html.theme-light .customButton--jqJTfH5-.active {
+  background-color: #f4f5f7 !important;
+  color: #357CE1 !important;
+}
+/*# sourceMappingURL=custom-tradingview.css.map */

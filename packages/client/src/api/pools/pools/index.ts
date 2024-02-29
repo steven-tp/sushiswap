@@ -25,7 +25,6 @@ export async function getPoolsFromDB(args: typeof PoolsApiSchema._output) {
   }
 
   const client = await createClient()
-  // console.log("🚀 ~ getPoolsFromDB ~ client:", client)
   const pools = await client.sushiPool.findMany({
     take,
     skip,
@@ -34,7 +33,6 @@ export async function getPoolsFromDB(args: typeof PoolsApiSchema._output) {
     orderBy,
     select: SushiPoolSelect,
   })
-  // console.log("🚀 ~ getPoolsFromDB ~ pools:", pools)
 
   const poolsRetyped = pools as unknown as DecimalToString<typeof pools>
 

@@ -73,3 +73,15 @@ export const APPROVE_TAG_MIGRATE = 'APPROVE_TAG_MIGRATE'
 export const APPROVE_TAG_XSWAP = 'APPROVE_TAG_XSWAP'
 export const APPROVE_TAG_SWAP = 'APPROVE_TAG_SWAP'
 export const APPROVE_TAG_STEER = 'APPROVE_TAG_STEER'
+export const RESOLUTION = {
+  '1': 'M1',
+  '5': 'M5',
+  '15': 'M15',
+  '30': 'M30',
+  '60': 'H1',
+  '240': 'H4',
+  '1D': 'D1',
+  D: 'D5',
+  '1W': 'W1',
+  '1M': 'MT1'
+}

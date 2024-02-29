@@ -13,3 +13,7 @@ export const TOKENS_API =
   process.env['TOKENS_API_V0_BASE_URL'] ||
   process.env['NEXT_PUBLIC_TOKENS_API_V0_BASE_URL'] ||
   'https://tokens.u2w.io'
+
+export const SWAP_TRANSACTION_API =
+  process.env['NEXT_PUBLIC_SWAP_TRANSACTION'] ||
+  'http://192.168.1.182:3333/api/v1'
