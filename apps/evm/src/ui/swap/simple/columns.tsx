@@ -6,7 +6,7 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
 export const DATE_COLUMN = {
   id: 'date',
   header: 'DATE',
-  cell: (props: any) => props.row.original.date,
+  cell: (props: any) => props.row.original.timestamp,
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
@@ -71,9 +71,9 @@ export const TXN_COLUMN = {
       variant="link"
       size="sm"
       className="!font-medium !text-secondary-foreground"
-      title={`${props.row.original.txn}`}
+      title={`${props.row.original.hash}`}
     >
-      {shortenAddress(props.row.original.txn)}
+      {props.row.original.hash}
       <ArrowTopRightOnSquareIcon className="w-4 h-4" />
     </Button>
   </LinkExternal>
@@ -87,38 +87,38 @@ export const ADDRESS_COLUMN = {
   id: 'address',
   header: 'Address',
   cell: (props: any) => (
-    <div title={`${props.row.original.address}`}>{shortenAddress(props.row.original.address)}</div>
+    <div title={`${props.row.original.maker}`}>{shortenAddress(props.row.original.maker)}</div>
   ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
 }
 
-export const PERCENT_COLUMN = {
-  id: 'percent',
-  header: '%',
-  cell: (props: any) => `${props.row.original.percent}%`,
-  meta: {
-    skeleton: <SkeletonText fontSize="lg" />
-  }
-}
+// export const PERCENT_COLUMN = {
+//   id: 'percent',
+//   header: '%',
+//   cell: (props: any) => `${props.row.original.percent}%`,
+//   meta: {
+//     skeleton: <SkeletonText fontSize="lg" />
+//   }
+// }
 
-export const AMOUNT_COLUMN = {
-  id: 'percent',
-  header: 'AMOUNT',
-  cell: (props: any) => (
-    <div className="flex items-center gap-4">
-      <span className="inline-block min-w-[60px]">{props.row.original.minAmount}M</span>
-      <div className="relative h-4 w-[240px] bg-gray-500 rounded-2xl">
-        <span className={`absolute left-0 top-0 h-full bg-green-400 rounded-2xl w-[${props.row.original.percent}%]`}></span>
-      </div>
-      <span className="inline-block min-w-[60px]">{props.row.original.maxAmount}M</span>
-    </div>
-  ),
-  meta: {
-    skeleton: <SkeletonText fontSize="lg" />
-  }
-}
+// export const AMOUNT_COLUMN = {
+//   id: 'percent',
+//   header: 'AMOUNT',
+//   cell: (props: any) => (
+//     <div className="flex items-center gap-4">
+//       <span className="inline-block min-w-[60px]">{props.row.original.minAmount}M</span>
+//       <div className="relative h-4 w-[240px] bg-gray-500 rounded-2xl">
+//         <span className={`absolute left-0 top-0 h-full bg-green-400 rounded-2xl w-[${props.row.original.percent}%]`}></span>
+//       </div>
+//       <span className="inline-block min-w-[60px]">{props.row.original.maxAmount}M</span>
+//     </div>
+//   ),
+//   meta: {
+//     skeleton: <SkeletonText fontSize="lg" />
+//   }
+// }
 
 export const TNXS_COLUMN = {
   id: 'txn',

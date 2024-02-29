@@ -44,16 +44,16 @@ export function handleCandle(unpacker: any) {
   //   ...barData,
   //   timestamp: barData.time
   // })
-  const channelString = `0~${barData.symbol.toLowerCase()}`
+  const channelString = `${barData.symbol.toLowerCase()}`
   if (!subscriptionItemCandle) {
     subscriptionItemCandle = channelToSubscription.get(channelString)
   }
   // const subscriptionItem = channelToSubscription.get(channelString)
-
   if (!subscriptionItemCandle) {
     return
   }
-  if (subscriptionItemCandle.symbol !== barData.symbol) return
+
+  if (subscriptionItemCandle.symbol.toLowerCase() !== barData.symbol.toLowerCase()) return
 
   const lastDailyBar = subscriptionItemCandle.lastDailyBar
   const nextDailyBarTime = getNextDailyBarTime(lastDailyBar.time, subscriptionItemCandle.resolution)
@@ -97,10 +97,7 @@ export function subscribeOnStream(
   lastDailyBar: any
 ) {
   localStorage.setItem(config.RESOLUTION_STOGRATE, resolution)
-  const symbol = symbolInfo.name.toLowerCase()
-  // const systemStore = useSystemStore()
-  // pairInfo = systemStore.pairsBySymbol[symbol]
-  const channelString = symbol
+  const channelString = symbolInfo.ticker.toLowerCase()
 
   const handler = {
     id: subscriberUID,
@@ -117,13 +114,14 @@ export function subscribeOnStream(
     subscriberUID,
     resolution,
     lastDailyBar,
-    symbol: symbol,
+    symbol: symbolInfo.key,
     handlers: [handler]
   }
 
+
   channelToSubscription.set(channelString, subscriptionItem)
   const resolutions: any = RESOLUTION
-  getCandle(resolutions[resolution], symbol)
+  getCandle(resolutions[resolution], symbolInfo.key)
   // SocketVue.getCandle(resolutions[resolution], symbol)
   // socket.emit('SubAdd', { subs: [channelString] })
 }

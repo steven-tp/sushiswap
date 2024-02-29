@@ -4,7 +4,8 @@ import { handleCandle } from './streaming'
 interface TOPIC_MESSAGE {
   topic?: string | null
   type?: string
-  email?: string
+  email?: string,
+  symbol?: string
 }
 const SOCKET_TYPES = {
   CANDLE: 0,
@@ -34,7 +35,7 @@ function ping() {
 export function createWebsocket() {
   clearInterval(intervalWs)
   return new Promise((resolve) => {
-    _socket = new WebSocket('wss://w-api.bankofbit.io/m')
+    _socket = new WebSocket('wss://ws.u2w.io/m')
     _socket.onopen = () => {
       isConnected = true
       socketClosed = false
@@ -63,9 +64,10 @@ export function createWebsocket() {
           const buffer = new Uint8Array(e)
           const unpacker = decodeMulti(buffer)
           const type = unpacker.next().value
+          console.log("🚀 ~ event.data?.arrayBuffer ~ type:", type)
           switch (type) {
             case SOCKET_TYPES.CANDLE:
-              // handleCandle(unpacker)
+              handleCandle(unpacker)
               break
             default:
           }
@@ -75,6 +77,7 @@ export function createWebsocket() {
     }
   })
 }
+
 function unsubcribe(message: TOPIC_MESSAGE) {
   if (!message) return
   if (_socket && _socket.readyState === WebSocket.OPEN) {
@@ -86,6 +89,7 @@ function unsubcribe(message: TOPIC_MESSAGE) {
     )
   }
 }
+
 function subcribe(message: TOPIC_MESSAGE) {
   if (_socket && _socket.readyState === WebSocket.OPEN) {
     _socket.send(
@@ -104,14 +108,12 @@ function unsubcribeCandle() {
 }
 
 export function getCandle(resolution: string, symbol: string) {
-  const topic = `cloud.candle.${resolution}.${symbol}`
+  // const topic = `cloud.candle.${resolution}.${symbol}`
   unsubcribeCandle()
   currentCandleMessage = {
-    topic,
-    type: 'candle'
+    topic: resolution,
+    type: 'candle',
+    symbol,
   }
-  subcribe({
-    topic,
-    type: 'candle'
-  })
+  subcribe(currentCandleMessage)
 }
