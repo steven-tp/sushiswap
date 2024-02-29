@@ -40,8 +40,7 @@ export const  SimpleSwapTransaction: FC = () => {
   const data = useMemo(() => {
     let list: any = []
     transactions && transactions.forEach(item => {
-      list = list.concat(...item.data)
-
+      list = item?.data ? list.concat(...item?.data) : list
     })
     return list
   }, [transactions])

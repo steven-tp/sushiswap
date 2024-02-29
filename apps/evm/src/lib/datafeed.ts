@@ -3,7 +3,7 @@ import { RESOLUTION } from './constants'
 import { subscribeOnStream, unsubscribeFromStream } from './streaming'
 // import { subscribeOnStream, unsubscribeFromStream } from './streaming'
 // Makes requests to CryptoCompare API
-const BASE_URL = 'http://192.168.1.182:3333/api/v1'
+const BASE_URL = 'https://ws.u2w.io/api/v1'
 export async function makeApiRequest(path: string) {
   try {
     const response = await fetch(`${BASE_URL}/${path}`)

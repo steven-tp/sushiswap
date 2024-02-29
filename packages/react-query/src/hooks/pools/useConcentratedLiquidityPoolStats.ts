@@ -23,7 +23,7 @@ export const useConcentratedLiquidityPoolStats = ({
       if (!chainId || !address) return undefined
 
       const data = await getPool({ chainId, address })
-      if (data) {
+      if (data && data.token0 && data.token1) {
         return {
           ...data,
           token0: new Token({
