@@ -32,7 +32,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
     symbol: 'btcusdt',
     datafeed: datafeed,
     interval: chartConfig.interval,
-    timezone: 'Asia/Singapore',
+    timezone: 'Asia/Ho_Chi_Minh',
     container_id: 'tranding-chart',
     library_path: chartConfig.libraryPath,
     locale: 'en',
@@ -88,7 +88,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
       'header_saveload',
       'header_saveload_to_the_right'
     ],
-    custom_css_url: 'css/custom.css'
+    // custom_css_url: 'css/custom.css'
   }
 
     const initChart = () => {
@@ -123,7 +123,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
     <div className='h-full'>
       <div className='h-full flex flex-col'>
         <div>
-          <div>{token0?.symbol}/{token1?.symbol}</div>
+          <div className="text-3xl font-bold">{token0?.symbol}/{token1?.symbol}</div>
         </div>
         <div id="tranding-chart" className='h-full'></div>
       </div>

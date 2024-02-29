@@ -38,6 +38,7 @@ export const datafeed = {
       name: symbolFull,
       // full_name: splitSymbol[1],
       key: splitSymbol[1],
+      ticker: splitSymbol[1],
       tokens: splitSymbol[1]?.split('_'),
       description: symbolName.toUpperCase(),
       // type: symbolItem.type,
@@ -106,18 +107,19 @@ export const datafeed = {
         }
       })
       if (isFirstCall) {
-        lastBarsCache.set(symbolInfo.full_name, {
+        lastBarsCache.set(symbolInfo.key, {
           ...bars[bars.length - 1]
         })
+        console.log("🚀 ~ lastBarsCache:", lastBarsCache)
       }
-      onResult(bars, { noData: bars?.length === 0 ? true : false })
+      onResult(bars, { noData: false })
     } catch (error) {
       onError(error)
     }
   },
 
   subscribeBars: (symbolInfo: any, resolution: any, onRealtimeCallback: any, subscriberUID: any, onResetCacheNeededCallback: any) => {
-    subscribeOnStream(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback, lastBarsCache.get(symbolInfo.full_name))
+    subscribeOnStream(symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback, lastBarsCache.get(symbolInfo.key))
   },
   unsubscribeBars: (subscriberUID: any) => {
     unsubscribeFromStream(subscriberUID)
