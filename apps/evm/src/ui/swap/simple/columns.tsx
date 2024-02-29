@@ -110,31 +110,31 @@ export const ADDRESS_COLUMN = {
   }
 }
 
-// export const PERCENT_COLUMN = {
-//   id: 'percent',
-//   header: '%',
-//   cell: (props: any) => `${props.row.original.percent}%`,
-//   meta: {
-//     skeleton: <SkeletonText fontSize="lg" />
-//   }
-// }
+export const PERCENT_COLUMN = {
+  id: 'percent',
+  header: '%',
+  cell: (props: any) => `${props.row.original.percent}%`,
+  meta: {
+    skeleton: <SkeletonText fontSize="lg" />
+  }
+}
 
-// export const AMOUNT_COLUMN = {
-//   id: 'percent',
-//   header: 'AMOUNT',
-//   cell: (props: any) => (
-//     <div className="flex items-center gap-4">
-//       <span className="inline-block min-w-[60px]">{props.row.original.minAmount}M</span>
-//       <div className="relative h-4 w-[240px] bg-gray-500 rounded-2xl">
-//         <span className={`absolute left-0 top-0 h-full bg-green-400 rounded-2xl w-[${props.row.original.percent}%]`}></span>
-//       </div>
-//       <span className="inline-block min-w-[60px]">{props.row.original.maxAmount}M</span>
-//     </div>
-//   ),
-//   meta: {
-//     skeleton: <SkeletonText fontSize="lg" />
-//   }
-// }
+export const AMOUNT_COLUMN = {
+  id: 'percent',
+  header: 'AMOUNT',
+  cell: (props: any) => (
+    <div className="flex items-center gap-4">
+      <span className="inline-block min-w-[60px]">{props.row.original.minAmount}M</span>
+      <div className="relative h-4 w-[240px] bg-gray-500 rounded-2xl">
+        <span className={`absolute left-0 top-0 h-full bg-green-400 rounded-2xl w-[${props.row.original.percent}%]`}></span>
+      </div>
+      <span className="inline-block min-w-[60px]">{props.row.original.maxAmount}M</span>
+    </div>
+  ),
+  meta: {
+    skeleton: <SkeletonText fontSize="lg" />
+  }
+}
 
 export const TNXS_COLUMN = {
   id: 'txn',
