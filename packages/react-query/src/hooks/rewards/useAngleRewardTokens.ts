@@ -16,7 +16,7 @@ export const useAngleRewardTokens = ({
     queryFn: async () => {
       const res = await (
         await fetch(
-          `https://api.angle.money/v1/merkl?chainId=${chainId}&user=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`,
+          'https://gist.githubusercontent.com/frankie060392/9dbf323164ce303aef67f7cf5074b4e7/raw/884e74c898caf683a3795593055f2eb2ca75d513/rewardTokens.json',
         )
       ).json()
       const parsed = angleRewardTokensValidator.parse(res[chainId])

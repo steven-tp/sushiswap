@@ -38,7 +38,7 @@ export const useIncentivizePoolWithRewards = ({
   const prepare = usePrepareContractWrite({
     chainId,
     abi: DistributionCreator,
-    address: '0x8BB4C975Ff3c250e0ceEA271728547f3802B36Fd',
+    address: '0xC07a828EcdC3cb31cEF05e4348eBd843920203e7',
     functionName: 'signAndCreateDistribution',
     args: args ? args : undefined,
     enabled: Boolean(enabled && args && chainId === chain?.id),

@@ -127,7 +127,7 @@ const Incentivize = withCheckerRoot(() => {
   }, [startDate, endDate])
 
   const { data: signature, signMessage } = useSignMessage()
-
+  console.log(signature, '*****')
   const { data: angleRewardTokens, isLoading: angleRewardTokensLoading } =
     useAngleRewardTokens({ chainId })
 
@@ -179,10 +179,10 @@ const Incentivize = withCheckerRoot(() => {
   const sign = useCallback(async () => {
     const message = await readContract({
       abi: DistributionCreator,
-      address: '0x8BB4C975Ff3c250e0ceEA271728547f3802B36Fd',
+      address: '0xC07a828EcdC3cb31cEF05e4348eBd843920203e7',
       functionName: 'message',
     })
-
+    console.log(message)
     signMessage({ message })
   }, [signMessage])
 
@@ -519,7 +519,7 @@ const Incentivize = withCheckerRoot(() => {
                         <Checker.ApproveERC20
                           id="approve-erc20"
                           amount={amount[0]}
-                          contract="0x8BB4C975Ff3c250e0ceEA271728547f3802B36Fd"
+                          contract="0xC07a828EcdC3cb31cEF05e4348eBd843920203e7"
                         >
                           <Checker.Custom
                             showChildren={Boolean(signature)}
