@@ -2,14 +2,19 @@ import { Button, LinkExternal, SkeletonText } from "@sushiswap/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { shortenAddress } from "sushi/format";
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
+import { formatDistance } from "date-fns";
 
 export const DATE_COLUMN = {
   id: 'date',
   header: 'DATE',
-  cell: (props: any) => props.row.original.timestamp,
+  cell: (props: any) => 
+  formatDistance(props.row.original.timestamp * 1000, new Date(), {
+    addSuffix: true,
+  }),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
-  }
+  },
+  size: 300,
 }
 
 export const TYPE_COLUMN = {
@@ -154,5 +159,6 @@ export const TNXS_COLUMN = {
   ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
-  }
+  },
+  size: 300,
 }
