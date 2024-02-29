@@ -50,7 +50,7 @@ export const  SimpleSwapTransaction: FC = () => {
 
 
   const data = useMemo(() => 
-  transactions && transactions.length > 0 ?   [].concat(...transactions.map(page => page?.data)) : []
+  transactions ?   [].concat(...transactions.map(page => page?.data)) : []
   , [transactions])
 
   const state: Partial<TableState> = useMemo(() => {
