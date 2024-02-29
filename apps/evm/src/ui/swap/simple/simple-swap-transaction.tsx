@@ -1,5 +1,5 @@
 import { Card, Loader, DataTable } from "@sushiswap/ui";
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { GetTransactionsArgs } from '@sushiswap/client'
 import {
@@ -37,23 +37,27 @@ export const  SimpleSwapTransaction: FC = () => {
     size,
     setSize,
   } = useTransactionsInfinite({ args, shouldFetch: true, swrConfig: useSWRConfig() })
-  const data = useMemo(() => {
-    let list: any = []
-    transactions && transactions.forEach(item => {
-      list = list.concat(...item.data)
+  // const data = useMemo(() => {
+  //   let list: any = []
+  //   transactions && transactions.forEach(item => {
+  //     list = list.concat(...item.data)
 
-    })
-    return list
-  }, [transactions])
+  //   })
+  //   return list
+  // }, [transactions])
+
+  const data = useMemo(() => 
+  transactions ?   [].concat(...transactions.map(page => page.data)) : []
+  , [transactions])
 
   const state: Partial<TableState> = useMemo(() => {
     return {
       pagination: {
         pageIndex: 0,
-        pageSize: data?.length,
+        pageSize: 1000,
       },
     }
-  }, [data?.length])
+  }, [])
   
   const isLoadmore = useMemo(() => {
     if(args.size && data.length < (size - 1) * args.size) {
@@ -86,7 +90,7 @@ export const  SimpleSwapTransaction: FC = () => {
       <Card>
         <DataTable
           state={state}
-          loading={isValidating}
+          loading={!data && isValidating}
           columns={COLUMNS}
           data={data}
         />
