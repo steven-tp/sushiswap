@@ -12,11 +12,9 @@ export function shortenAddress(address: string, characters = 4): string {
   }
 }
 
-export function shortenHash(hash: string, characters = 4): string {
+export function shortenHash(hash: string, characters = 10): string {
   try {
-    return `${hash.substring(0, characters + 2)}...${hash.substring(
-      42 - characters,
-    )}`
+    return `${hash.substring(0, characters + 2)}...`
   } catch {
     throw `Invalid 'address' parameter '${hash}'.`
   }
