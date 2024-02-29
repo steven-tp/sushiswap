@@ -12,6 +12,5 @@ export const revalidate = 60
 
 export async function GET() {
   const data = await get('swap')
-  console.log(data)
   return NextResponse.json(schema.safeParse(data))
 }
