@@ -1,5 +1,5 @@
 import { Card, Loader, DataTable } from "@sushiswap/ui";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { GetTransactionsArgs } from '@sushiswap/client'
 import {
@@ -33,13 +33,6 @@ export const  SimpleSwapTransaction: FC = () => {
     }
   }, [token0, token1])
 
-  useEffect(() => {
-    if(token0?.wrapped.address && token1?.wrapped?.address) {
-      setTimeout(() => {
-        subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
-      }, 1000)
-    }
-  }, [subcribeTransaction, token0, token1])
 
   const {
     data: transactions,
