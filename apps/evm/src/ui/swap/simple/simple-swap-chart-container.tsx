@@ -95,7 +95,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
     // custom_css_url: 'css/custom.css'
   }
 
-    const { createWebsocket } = useSocket()
+    const { createWebsocket, subcribeTransaction } = useSocket()
 
     const initChart = () => {
       const resolution = localStorage.getItem(config.RESOLUTION_STOGRATE)
@@ -111,6 +111,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
         const _resolution = resolution ? resolution : '60'
         const _RESOLUTION: any = RESOLUTION
         getCandle(_RESOLUTION[_resolution], token)
+        subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
         const _format = `1${'0'.repeat(6)}`
         chartWidget.applyOverrides({ 'mainSeriesProperties.minTick': _format })
         //ready
