@@ -50,7 +50,7 @@ export const  SimpleSwapTransaction: FC = () => {
 
 
   const data = useMemo(() => 
-  transactions ?   [].concat(...transactions.map(page => page?.data)) : []
+  transactions && transactions.length > 0 ?   [].concat(...transactions.map(page => page?.data)) : []
   , [transactions])
 
   const state: Partial<TableState> = useMemo(() => {
@@ -91,12 +91,13 @@ export const  SimpleSwapTransaction: FC = () => {
       }
     >
       <Card>
-        <DataTable
+        {data && (<DataTable
           state={state}
           loading={!data && isValidating}
           columns={COLUMNS}
           data={data}
-        />
+        />)
+        }
       </Card>
     </InfiniteScroll>
   )

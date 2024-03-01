@@ -8,7 +8,7 @@ import { useIsMounted } from '@sushiswap/hooks'
 import { useDerivedStateSimpleSwap } from './derivedstate-simple-swap-provider'
 import { useSocket } from 'src/lib/hooks/useSocket'
 import { useDataFeed } from 'src/lib/hooks/useDataFeed'
-import { getCandle } from 'src/lib/socket'
+// import { getCandle } from 'src/lib/socket'
 import { RESOLUTION } from 'src/lib/constants'
 export const SimpleSwapChartContainer: FC = ()=> {
   const isMounted =  useIsMounted()

@@ -74,13 +74,13 @@ export const MAKER_COLUMN = {
     skeleton: <SkeletonText fontSize="lg" />
   }
 }
-
+const scanUrl = process.env.NEXT_PUBLIC_U2U_EXPLORER_URL
 export const TXN_COLUMN = {
   id: 'txn',
   header: 'TXN',
   cell: (props: any) => (
     <LinkExternal
-    href={'javscript:;'}
+    target="_blank" href={`${scanUrl}/tx/${props.row.original.hash}`}
   >
     <Button
       asChild
