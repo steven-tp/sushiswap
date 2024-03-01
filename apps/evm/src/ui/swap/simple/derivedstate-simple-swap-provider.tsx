@@ -20,6 +20,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useReducer,
   useState,
 } from 'react'
 import { ChainId, TestnetChainId } from 'sushi/chain'
@@ -55,6 +56,7 @@ interface State {
     setTokens(token0: Type | string, token1: Type | string): void
     setSwapAmount(swapAmount: string): void
     switchTokens(): void
+    addNewTransaction(transaction?: any): void
   }
   state: {
     token0: Type | undefined
@@ -62,11 +64,36 @@ interface State {
     chainId: ChainId
     swapAmountString: string
     swapAmount: Amount<Type> | undefined
-    recipient: string | undefined
+    recipient: string | undefined,
+    transactions: Array<any>
   }
   isLoading: boolean
   isToken0Loading: boolean
   isToken1Loading: boolean
+}
+
+
+interface StateTransaction {
+  newTransactions: []
+}
+
+const initialState: StateTransaction = {
+  newTransactions: []
+}
+
+type Actions =
+  | { type: 'addNewTransaction'; transactions: any }
+
+
+const reducer = (state: StateTransaction, action: Actions): StateTransaction => {
+  switch (action.type) {
+    case 'addNewTransaction': {
+      return {
+        ...state,
+        newTransactions: action.transactions,
+      }
+    }
+  }
 }
 
 const DerivedStateSimpleSwapContext = createContext<State>({} as State)
@@ -88,7 +115,12 @@ const DerivedstateSimpleSwapProvider: FC<DerivedStateSimpleSwapProviderProps> =
     const { chain } = useNetwork()
     const pathname = usePathname()
     const searchParams = useSearchParams()
+    const [state, dispatch] = useReducer(reducer, initialState)
 
+    const addNewTransaction = useCallback((transactions?: any) => {
+      let listTransaction = transactions ? [transactions, ...state.newTransactions] : []
+      dispatch({ type: 'addNewTransaction', transactions: listTransaction })
+    }, [state.newTransactions])
     // Get the searchParams and complete with defaults.
     // This handles the case where some params might not be provided by the user
     const defaultedParams = useMemo(() => {
@@ -312,6 +344,7 @@ const DerivedstateSimpleSwapProvider: FC<DerivedStateSimpleSwapProviderProps> =
               setTokens,
               switchTokens,
               setSwapAmount,
+              addNewTransaction
             },
             state: {
               recipient: address ?? '',
@@ -320,6 +353,7 @@ const DerivedstateSimpleSwapProvider: FC<DerivedStateSimpleSwapProviderProps> =
               swapAmount: tryParseAmount(swapAmountString, _token0),
               token0: _token0,
               token1: _token1,
+              transactions: state.newTransactions
             },
             isLoading: token0Loading || token1Loading,
             isToken0Loading: token0Loading,
@@ -335,10 +369,12 @@ const DerivedstateSimpleSwapProvider: FC<DerivedStateSimpleSwapProviderProps> =
           setToken1,
           setTokens,
           switchTokens,
+          addNewTransaction,
           token0,
           token0Loading,
           token1,
           token1Loading,
+          state.newTransactions
         ])}
       >
         {children}

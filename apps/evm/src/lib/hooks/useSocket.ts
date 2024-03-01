@@ -42,7 +42,7 @@ export const useSocket = () => {
     }, 5000)
   }
   
-  function createWebsocket() {
+  function createWebsocket() {''
     clearInterval(intervalWs)
     if(!_socket) {
       return new Promise((resolve) => {
