@@ -1,6 +1,6 @@
 'use client'
 import {
-  FC, useEffect
+  FC, useCallback, useEffect
 } from 'react'
 import { config } from 'src/config'
 import { widget } from 'public/charting_library/charting_library.min'
@@ -10,6 +10,7 @@ import { useSocket } from 'src/lib/hooks/useSocket'
 import { useDataFeed } from 'src/lib/hooks/useDataFeed'
 // import { getCandle } from 'src/lib/socket'
 import { RESOLUTION } from 'src/lib/constants'
+import { usePriceConnfig } from 'src/lib/hooks/api/usePriceConfig'
 export const SimpleSwapChartContainer: FC = ()=> {
   const isMounted =  useIsMounted()
   const { datafeed } = useDataFeed()
@@ -17,6 +18,9 @@ export const SimpleSwapChartContainer: FC = ()=> {
   const {
     state: { token0, token1 },
   } = useDerivedStateSimpleSwap()
+
+  const precision = usePriceConnfig(token0?.wrapped.address, token1?.wrapped.address)
+
   let chartWidget: any
   const chartConfig = {
     interval: '1D',
@@ -96,8 +100,15 @@ export const SimpleSwapChartContainer: FC = ()=> {
   }
 
     const { createWebsocket, subcribeTransaction } = useSocket()
+    const updatePrecision = ()  => {
 
-    const initChart = () => {
+      if(chartWidget) {
+
+        const _format = `1${'0'.repeat(precision)}`
+        chartWidget.applyOverrides({ 'mainSeriesProperties.minTick': _format })
+      }
+    }
+    const initChart = useCallback(() => {
       const resolution = localStorage.getItem(config.RESOLUTION_STOGRATE)
       if (resolution) {
         widgetOptions.interval = resolution
@@ -112,11 +123,16 @@ export const SimpleSwapChartContainer: FC = ()=> {
         const _RESOLUTION: any = RESOLUTION
         getCandle(_RESOLUTION[_resolution], token)
         subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
-        const _format = `1${'0'.repeat(6)}`
-        chartWidget.applyOverrides({ 'mainSeriesProperties.minTick': _format })
         //ready
+        updatePrecision()
       })
-    }
+    }, [precision])
+
+    useEffect(() => {
+      if(precision) {
+        initChart()
+      }
+    }, [precision, initChart])
 
     useEffect(() => {
       if(token0?.symbol && token1?.symbol) {
@@ -125,7 +141,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
           createWebsocket()
         }
       }
-    }, [isMounted, token0, token1])
+    }, [isMounted, token0, token1, initChart])
 
   
 
