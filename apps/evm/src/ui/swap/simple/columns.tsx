@@ -29,40 +29,40 @@ export const TYPE_COLUMN = {
   }
 }
 
-export const AMOUNT_IN_COLUMN = {
+export const AMOUNT_IN_COLUMN = (symbol: string | undefined) => ({
   id: 'amountIn',
   header: 'Amount In',
   cell: (props: any) => (
     <div className="whitespace-nowrap">
-      {props.row.original.amountIn} ETH
+      {props.row.original.amountIn} {symbol}
     </div>
   ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
-}
+})
 
-export const AMOUNT_OUT_COLUMN = {
+export const AMOUNT_OUT_COLUMN =  (symbol: string | undefined) =>({
   id: 'amountOut',
   header: 'Amount Out',
   cell: (props: any) => (
     <div className="whitespace-nowrap">
-      {props.row.original.amountOut} U2U
+      {props.row.original.amountOut} {symbol}
     </div>
   ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
-}
+})
 
-export const PRICE_COLUMN = {
+export const PRICE_COLUMN = (pair: string) => ({
   id: 'price',
-  header: 'PRICE (ETH/U2U)',
+  header: `PRICE ${pair ? `(${pair})` : null}`,
   cell: (props: any) => props.row.original.price,
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
-}
+})
 
 export const MAKER_COLUMN = {
   id: 'maker',
