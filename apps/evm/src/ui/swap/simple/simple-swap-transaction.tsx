@@ -1,5 +1,5 @@
 import { Card, Loader, DataTable } from "@sushiswap/ui";
-import { FC, useEffect, useMemo } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { GetTransactionsArgs } from '@sushiswap/client'
 import {
@@ -16,19 +16,20 @@ import { useTransactionsInfinite } from "@sushiswap/client/hooks";
 import { useSWRConfig } from "swr";
 import { TableState } from "@tanstack/react-table";
 import { useSocket } from "src/lib/hooks/useSocket";
+import keyBy from 'lodash.keyby'
 
 export const  SimpleSwapTransaction: FC = () => {
-
   const {
-    state: { token0, token1 },
+    state: { token0, token1, transactions: newTransactions },
   } = useDerivedStateSimpleSwap()
+
   const { subcribeTransaction } = useSocket()
   const args = useMemo<GetTransactionsArgs>(() => {
     return {
       token0: token0?.wrapped.address || '',
       token1: token1?.wrapped.address || '',
       page: 1,
-      size: 40
+      size: 30
     }
   }, [token0, token1])
 
@@ -47,20 +48,31 @@ export const  SimpleSwapTransaction: FC = () => {
     size,
     setSize,
   } = useTransactionsInfinite({ args, shouldFetch: args.token0 && args.token1 ? true : false, swrConfig: useSWRConfig() })
+  
 
 
-  const data = useMemo(() => 
-  transactions ?   [].concat(...transactions.map(page => page?.data)) : []
-  , [transactions])
+  const data = useMemo(() => {
+    let _newTransaction = newTransactions
+    if(transactions && _newTransaction.length > 0 && transactions[0].data.length > 0) {
+      const keyOfTransaction = keyBy(transactions?.[0].data, 'hash')
+      _newTransaction = newTransactions.filter((item) => {
+        return !keyOfTransaction[item.hash]
+      })
+
+    }
+    return transactions ?  _newTransaction.concat(...transactions.map(page => page?.data)) : []
+  }
+  , [transactions, newTransactions])
+
 
   const state: Partial<TableState> = useMemo(() => {
     return {
       pagination: {
         pageIndex: 0,
-        pageSize: 1000,
+        pageSize: data.length,
       },
     }
-  }, [])
+  }, [data])
   
   const isLoadmore = useMemo(() => {
     if(args.size && data.length < (size - 1) * args.size) {
@@ -79,7 +91,7 @@ export const  SimpleSwapTransaction: FC = () => {
     TXN_COLUMN
   ]
   return (
-    
+    <div id="scrollableTransaction" className="lg:h-[600px] overflow-auto">
     <InfiniteScroll
       dataLength={data.length}
       next={() => setSize((prev) => prev + 1)}
@@ -89,6 +101,8 @@ export const  SimpleSwapTransaction: FC = () => {
           <Loader size={16} />
         </div>
       }
+      scrollableTarget="scrollableTransaction"
+
     >
       <Card>
         {data && (<DataTable
@@ -100,5 +114,6 @@ export const  SimpleSwapTransaction: FC = () => {
         }
       </Card>
     </InfiniteScroll>
+    </div>
   )
 }

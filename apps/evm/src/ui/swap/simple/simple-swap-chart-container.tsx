@@ -98,23 +98,23 @@ export const SimpleSwapChartContainer: FC = ()=> {
     const { createWebsocket } = useSocket()
 
     const initChart = () => {
-    const resolution = localStorage.getItem(config.RESOLUTION_STOGRATE)
-    if (resolution) {
-      widgetOptions.interval = resolution
-    }
-    const token = `${token0?.wrapped.address}_${token1?.wrapped.address}`
-    const symbol = `${token0?.symbol}/${token1?.symbol}-${token}`
+      const resolution = localStorage.getItem(config.RESOLUTION_STOGRATE)
+      if (resolution) {
+        widgetOptions.interval = resolution
+      }
+      const token = `${token0?.wrapped.address}_${token1?.wrapped.address}`
+      const symbol = `${token0?.symbol}/${token1?.symbol}-${token}`
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    chartWidget = new widget({ ...widgetOptions, symbol })
-    chartWidget.onChartReady(() => {
-      const _resolution = resolution ? resolution : '60'
-      const _RESOLUTION: any = RESOLUTION
-      getCandle(_RESOLUTION[_resolution], token)
-      // const _format = `1${'0'.repeat(props.pair?.quoteUnit)}`
-      // chartWidget.amarket/history-candle?pplyOverrides({ 'mainSeriesProperties.minTick': _format })
-      //ready
-    })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      chartWidget = new widget({ ...widgetOptions, symbol })
+      chartWidget.onChartReady(() => {
+        const _resolution = resolution ? resolution : '60'
+        const _RESOLUTION: any = RESOLUTION
+        getCandle(_RESOLUTION[_resolution], token)
+        const _format = `1${'0'.repeat(6)}`
+        chartWidget.applyOverrides({ 'mainSeriesProperties.minTick': _format })
+        //ready
+      })
     }
 
     useEffect(() => {

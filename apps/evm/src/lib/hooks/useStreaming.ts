@@ -1,6 +1,7 @@
 import { config } from 'src/config'
 import { convertResolutionToSeconds, formatNumeral } from '../functions'
 import { useMemo } from 'react'
+import { useDerivedStateSimpleSwap } from 'src/ui/swap/simple/derivedstate-simple-swap-provider'
 
 export interface PAIR_ITEM {
   display: string
@@ -14,7 +15,7 @@ export interface PAIR_ITEM {
 const channelToSubscription = new Map()
 let pairInfo: PAIR_ITEM
 export const useStreaming = () => {
-
+  const { mutate : { addNewTransaction} } = useDerivedStateSimpleSwap()
   return useMemo(() => {
     function getNextDailyBarTime(barTime: number, resolution: string) {
       const nextSeconds = convertResolutionToSeconds(resolution)
@@ -29,13 +30,14 @@ export const useStreaming = () => {
 
     let subscriptionItemCandle: any = null
     function handleCandle(unpacker: any) {
+      const quoteUnit = 6
       const barData: any = {
         time: unpacker.next().value,
-        open: formatNumeral(unpacker.next().value, pairInfo?.quoteUnit),
-        high: formatNumeral(unpacker.next().value, pairInfo?.quoteUnit),
-        low: formatNumeral(unpacker.next().value, pairInfo?.quoteUnit),
-        close: formatNumeral(unpacker.next().value, pairInfo?.quoteUnit),
-        volume: formatNumeral(unpacker.next().value, pairInfo?.baseUnit),
+        open: formatNumeral(unpacker.next().value, quoteUnit),
+        high: formatNumeral(unpacker.next().value, quoteUnit),
+        low: formatNumeral(unpacker.next().value, quoteUnit),
+        close: formatNumeral(unpacker.next().value, quoteUnit),
+        volume: formatNumeral(unpacker.next().value, quoteUnit),//pairInfo?.baseUnit),
         symbol: unpacker.next().value,
         type: unpacker.next().value
       }
@@ -59,6 +61,7 @@ export const useStreaming = () => {
       const nextDailyBarTime = getNextDailyBarTime(lastDailyBar.time, subscriptionItemCandle.resolution)
 
       let bar: any
+
       if (barData.time >= nextDailyBarTime) {
         bar = {
           time: nextDailyBarTime,
@@ -77,7 +80,6 @@ export const useStreaming = () => {
           volume: barData.volume
         }
       }
-
       subscriptionItemCandle.lastDailyBar = bar
 
       // Send data to every subscriber of that symbol
@@ -96,9 +98,7 @@ export const useStreaming = () => {
         tokenIn: unpacker.next().value,
         tokenOut: unpacker.next().value,
       }
-
-        console.log("🚀 ~ handleTransaction ~ unpacker:", transaction)
-
+      addNewTransaction(transaction)
     }
 
 
