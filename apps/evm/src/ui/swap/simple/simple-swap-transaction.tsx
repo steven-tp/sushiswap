@@ -46,11 +46,11 @@ export const  SimpleSwapTransaction: FC = () => {
     error,
     size,
     setSize,
-  } = useTransactionsInfinite({ args, shouldFetch: true, swrConfig: useSWRConfig() })
+  } = useTransactionsInfinite({ args, shouldFetch: args.token0 && args.token1 ? true : false, swrConfig: useSWRConfig() })
 
 
   const data = useMemo(() => 
-  transactions && transactions.length > 0 ?   [].concat(...transactions.map(page => page?.data)) : []
+  transactions ?   [].concat(...transactions.map(page => page?.data)) : []
   , [transactions])
 
   const state: Partial<TableState> = useMemo(() => {
@@ -72,9 +72,9 @@ export const  SimpleSwapTransaction: FC = () => {
   const COLUMNS = [
     DATE_COLUMN,
     TYPE_COLUMN,
-    AMOUNT_IN_COLUMN,
-    AMOUNT_OUT_COLUMN,
-    PRICE_COLUMN,
+    AMOUNT_IN_COLUMN(token0?.symbol),
+    AMOUNT_OUT_COLUMN(token1?.symbol),
+    PRICE_COLUMN(`${token0?.symbol} / ${token1?.symbol}`),
     MAKER_COLUMN,
     TXN_COLUMN
   ]

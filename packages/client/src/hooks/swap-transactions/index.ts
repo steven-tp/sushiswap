@@ -5,9 +5,11 @@ import { getTransactionsUrl, type GetTransactionsArgs } from '../../pure/swap-tr
 
 export const useTransactionsInfinite = ({
   args,
+  shouldFetch
 }: InfiniteSWRHookConfig<GetTransactionsArgs>) => {
   return useSWRInfinite(
     (pageIndex) => {
+      if (shouldFetch === false) return null
       // add the cursor to the API endpoint
       return getTransactionsUrl({...args, page: pageIndex +  1})
     },
