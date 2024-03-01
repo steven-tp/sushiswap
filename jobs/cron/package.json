@@ -1,0 +1,20 @@
+{
+  "name": "cron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsx fetch-new-pools.ts"
+  },
+  "compilerOptions": {
+    "esModuleInterop": true
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "tsx": "^4.6.2"
+  }
+}
