@@ -101,9 +101,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
 
     const { createWebsocket, subcribeTransaction } = useSocket()
     const updatePrecision = ()  => {
-
       if(chartWidget) {
-
         const _format = `1${'0'.repeat(precision)}`
         chartWidget.applyOverrides({ 'mainSeriesProperties.minTick': _format })
       }
@@ -119,6 +117,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       chartWidget = new widget({ ...widgetOptions, symbol })
       chartWidget.onChartReady(() => {
+        chartWidget?.activeChart().setChartType(3)
         const _resolution = resolution ? resolution : '60'
         const _RESOLUTION: any = RESOLUTION
         getCandle(_RESOLUTION[_resolution], token)
@@ -126,6 +125,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
         //ready
         updatePrecision()
       })
+
     }, [precision])
 
     useEffect(() => {
