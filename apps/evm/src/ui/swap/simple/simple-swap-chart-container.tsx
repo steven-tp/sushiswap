@@ -117,7 +117,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       chartWidget = new widget({ ...widgetOptions, symbol })
       chartWidget.onChartReady(() => {
-        chartWidget?.activeChart().setChartType(3)
+        // chartWidget?.activeChart().setChartType(3)
         const _resolution = resolution ? resolution : '60'
         const _RESOLUTION: any = RESOLUTION
         getCandle(_RESOLUTION[_resolution], token)
