@@ -13,7 +13,8 @@ export interface PAIR_ITEM {
 }
 
 const channelToSubscription = new Map()
-let pairInfo: PAIR_ITEM
+const precision = localStorage.getItem(config.PRECISION_STOGRATE) || 6
+
 export const useStreaming = () => {
   const { mutate : { addNewTransaction} } = useDerivedStateSimpleSwap()
   return useMemo(() => {
@@ -30,14 +31,13 @@ export const useStreaming = () => {
 
     let subscriptionItemCandle: any = null
     function handleCandle(unpacker: any) {
-      const quoteUnit = 6
       const barData: any = {
         time: unpacker.next().value,
-        open: formatNumeral(unpacker.next().value, quoteUnit),
-        high: formatNumeral(unpacker.next().value, quoteUnit),
-        low: formatNumeral(unpacker.next().value, quoteUnit),
-        close: formatNumeral(unpacker.next().value, quoteUnit),
-        volume: formatNumeral(unpacker.next().value, quoteUnit),//pairInfo?.baseUnit),
+        open: formatNumeral(unpacker.next().value, precision),
+        high: formatNumeral(unpacker.next().value, precision),
+        low: formatNumeral(unpacker.next().value, precision),
+        close: formatNumeral(unpacker.next().value, precision),
+        volume: formatNumeral(unpacker.next().value, precision),//pairInfo?.baseUnit),
         symbol: unpacker.next().value,
         type: unpacker.next().value
       }
