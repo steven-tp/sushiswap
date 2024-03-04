@@ -55,10 +55,10 @@ export const AMOUNT_OUT_COLUMN =  (symbol: string | undefined) =>({
   }
 })
 
-export const PRICE_COLUMN = (pair: string) => ({
+export const PRICE_COLUMN = (pair: string, precision: number) => ({
   id: 'price',
   header: `PRICE ${pair ? `(${pair})` : null}`,
-  cell: (props: any) => props.row.original.price,
+  cell: (props: any) =>  props.row.original.price.toFixed(precision),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
