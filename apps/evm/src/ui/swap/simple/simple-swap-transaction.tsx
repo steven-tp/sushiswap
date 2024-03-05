@@ -100,13 +100,14 @@ export const  SimpleSwapTransaction: FC = () => {
       scrollableTarget="scrollableTransaction"
 
     >
-      <Card>
-        {data && (<DataTable
-          state={state}
-          loading={!data && isValidating}
-          columns={COLUMNS}
-          data={data}
-        />)
+      <Card className="border-neubrutal mb-1 mr-1">
+        {
+          data && <DataTable
+            state={state}
+            loading={!data && isValidating}
+            columns={COLUMNS}
+            data={data}
+          />
         }
       </Card>
     </InfiniteScroll>
