@@ -103,7 +103,7 @@ export const SimpleSwapInfomation = () => {
           <TabsList className='hidden sm:inline-flex border-0'>
             {FILTERS.map((item) => (
               <TabsTrigger
-                className='border-0 border-b rounded-none text-neutral-600 dark:text-[#98a2b3] data-[state=active]:shadow-none data-[state=active]:border-primary data-[state=active]:!bg-transparent data-[state=active]:text-primary'
+                className='border-0 border-b rounded-none text-neutral-600 dark:text-[#98a2b3] data-[state=active]:shadow-none data-[state=active]:border-primary data-[state=active]:!bg-transparent data-[state=active]:!text-primary'
                 key={item.value}
                 value={item.value}
                 testdata-id={item.id}
