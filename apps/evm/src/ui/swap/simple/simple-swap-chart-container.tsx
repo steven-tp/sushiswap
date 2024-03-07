@@ -168,7 +168,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
             </div>
             <div className="text-2xl font-bold dark:text-white">{token0?.symbol}/{token1?.symbol}</div>
             <div className='cursor-pointer'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 25 25" fill="none">
                 <path d="M12.1992 22.7368C6.67622 22.7368 2.19922 18.2598 2.19922 12.7368C2.19922 7.21376 6.67622 2.73676 12.1992 2.73676C17.7222 2.73676 22.1992 7.21376 22.1992 12.7368C22.1992 18.2598 17.7222 22.7368 12.1992 22.7368ZM7.19922 9.73676H9.19922V13.7368H11.1992V9.73676H13.1992L10.1992 6.23676L7.19922 9.73676ZM17.1992 15.7368H15.1992V11.7368H13.1992V15.7368H11.1992L14.1992 19.2368L17.1992 15.7368Z" fill="#6BFFFF"/>
               </svg>
             </div>

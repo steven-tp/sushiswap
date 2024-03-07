@@ -117,7 +117,7 @@ export const SettingsOverlay: FC<SettingsOverlayProps> = ({
         <div className="flex flex-col gap-4">
           {modules.includes(SettingsModule.SlippageTolerance) && (
             <List className="!pt-0">
-              <List.Control>
+              <List.Control className='border-neubrutal'>
                 <SlippageTolerance options={options?.slippageTolerance} />
               </List.Control>
             </List>

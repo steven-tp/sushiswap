@@ -68,7 +68,7 @@ const COLUMNS = [
       row.original.protocol === 'SUSHISWAP_V3' ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button icon={EllipsisHorizontalIcon} variant="ghost" size="sm">
+            <Button icon={EllipsisHorizontalIcon} variant="border" className='!px-2 hover:bg-muted data-[state=open]:bg-accent data-[state=open]:shadow-[0_4px_0_0_rgba(0,0,0,1)]' size="sm">
               <span className="sr-only">Open menu</span>
             </Button>
           </DropdownMenuTrigger>
@@ -190,7 +190,7 @@ const COLUMNS = [
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button icon={EllipsisHorizontalIcon} variant="ghost" size="sm">
+            <Button icon={EllipsisHorizontalIcon} variant="border" className='!px-2' size="sm">
               <span className="sr-only">Open menu</span>
             </Button>
           </DropdownMenuTrigger>
@@ -365,7 +365,7 @@ export const PoolsTable: FC<PositionsTableProps> = ({ onRowClick }) => {
         </div>
       }
     >
-      <Card>
+      <Card className='border-neubrutal mb-1 mr-1 dark:!bg-[#1d2939]'>
         <CardHeader>
           <CardTitle>
             Pools{' '}

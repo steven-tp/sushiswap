@@ -73,13 +73,18 @@ export const PoolHeader: FC<PoolHeader> = ({
 
   if (pool && token0 && token1)
     return (
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 border-neubrutal rounded-lg px-10 py-5">
         <div className="flex flex-col gap-4">
           <LinkInternal
             href={backUrl}
-            className="text-blue hover:underline text-sm"
+            className="flex items-center gap-0.5 leading-none text-black dark:text-white hover:underline hover:text-primary dark:hover:text-primary font-black text-base font-display"
           >
-            ← Pools
+            <div className='text-neutral-600 dark:text-[#98a2b3]'>
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <path d="M4.15278 8.53175C4.15603 8.88248 4.29735 9.21781 4.54612 9.46508L7.40612 12.3317C7.53103 12.4559 7.69999 12.5256 7.87612 12.5256C8.05224 12.5256 8.22121 12.4559 8.34612 12.3317C8.4086 12.2698 8.4582 12.196 8.49204 12.1148C8.52589 12.0336 8.54332 11.9464 8.54332 11.8584C8.54332 11.7704 8.52589 11.6833 8.49204 11.602C8.4582 11.5208 8.4086 11.4471 8.34612 11.3851L6.15278 9.19841H12.8195C12.9963 9.19841 13.1658 9.12818 13.2909 9.00315C13.4159 8.87813 13.4861 8.70856 13.4861 8.53175C13.4861 8.35494 13.4159 8.18537 13.2909 8.06034C13.1658 7.93532 12.9963 7.86508 12.8195 7.86508H6.15278L8.34612 5.67175C8.47165 5.5471 8.54253 5.37768 8.54315 5.20077C8.54378 5.02387 8.4741 4.85395 8.34945 4.72842C8.2248 4.60288 8.05538 4.532 7.87847 4.53138C7.70156 4.53075 7.53165 4.60043 7.40612 4.72508L4.54612 7.59175C4.29572 7.84065 4.15427 8.1787 4.15278 8.53175Z" fill="currentColor"/>
+              </svg>
+            </div>
+            Pools
           </LinkInternal>
           <div className="relative flex items-center gap-3 max-w-[100vh]">
             <Currency.IconList iconWidth={36} iconHeight={36}>
@@ -123,7 +128,7 @@ export const PoolHeader: FC<PoolHeader> = ({
             )}
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-y-5 gap-x-[32px] text-secondary-foreground mb-8 mt-1.5">
+        <div className="flex flex-wrap items-center gap-y-5 gap-x-[32px] text-secondary-foreground mt-1.5">
           {apy ? (
             <div className="flex items-center gap-1.5">
               <span className="tracking-tighter font-semibold">APR</span>

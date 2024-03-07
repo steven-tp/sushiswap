@@ -17,7 +17,7 @@ export default function SwapSimplePage() {
             <SimpleSwapWidget/>
           </div>
           <div className="xl:col-span-2 xl:order-1">
-            <div className='h-[420px] lg:h-[600px] xl:h-[660px]'>
+            <div className='h-[500px] lg:h-[660px] xl:h-[720px]'>
               <SimpleSwapChartContainer/>
             </div>
             <div className='pt-10 xl:pt-14'>

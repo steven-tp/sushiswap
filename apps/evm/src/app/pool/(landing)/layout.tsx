@@ -13,7 +13,7 @@ export default function TabsLayout({
 
   return (
     <>
-      <Container maxWidth="7xl" className="px-4 pt-20 pb-10">
+      <Container maxWidth="7xl" className="px-4 pt-16 pb-10">
         <Hero />
       </Container>
       <Container maxWidth="7xl" className="px-4">

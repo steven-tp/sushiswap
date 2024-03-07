@@ -87,7 +87,7 @@ export const  SimpleSwapTransaction: FC = () => {
     TXN_COLUMN
   ]
   return (
-    <div id="scrollableTransaction" className="lg:h-[600px] overflow-auto">
+    <div id="scrollableTransaction">
     <InfiniteScroll
       dataLength={data.length}
       next={() => setSize((prev) => prev + 1)}
