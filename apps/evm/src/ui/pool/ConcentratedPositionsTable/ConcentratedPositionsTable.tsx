@@ -146,7 +146,7 @@ export const ConcentratedPositionsTable: FC<ConcentratedPositionsTableProps> =
           loading={isInitialLoading}
           linkFormatter={(row) =>
             `/pool/${row.chainId}:${
-              row.address
+              row.address.toLowerCase()
             }/positions/${row.tokenId.toString()}`
           }
           rowRenderer={rowRenderer}

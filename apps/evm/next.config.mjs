@@ -9,7 +9,7 @@ const nextConfig = {
   ...defaultNextConfig,
   logging: {
     fetches: {
-      fullUrl: false,
+      fullUrl: true,
     },
   },
   transpilePackages: ['@sushiswap/wagmi'],
