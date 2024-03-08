@@ -14,7 +14,7 @@ export const SimpleSwapSwitchTokensButton = () => {
       <button
         onClick={switchTokens}
         type="button"
-        className="hover:shadow-sm transition-border z-10 group bg-background dark:bg-slate-600 flex items-center justify-center border-2 border-black transition-all rounded-[20px] cursor-pointer w-12 h-12"
+        className="hover:shadow-sm transition-border z-10 group background-card flex items-center justify-center border-2 border-black transition-all rounded-[20px] cursor-pointer w-12 h-12"
       >
         <div className="text-primary transition-transform rotate-0 group-hover:rotate-180">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" viewBox="0 0 22 21" fill="none">

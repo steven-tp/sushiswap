@@ -64,9 +64,9 @@ export const BalancePanel: FC<BalancePanel> = memo(function BalancePanel({
       onClick={onClick}
       className={classNames(
         type === 'INPUT'
-          ? 'text-primary hover:opacity-80 active:opacity-80 hover:dark:text-slate-300'
-          : 'text-gray-500 dark:text-slate-500',
-        'font-medium flex gap-1.5 items-center py-1 dark:text-slate-400 px-2 rounded-md',
+          ? 'text-primary hover:text-hover active:text-hover'
+          : 'color-base',
+        'font-medium flex gap-1.5 items-center py-1 px-2 rounded-md',
       )}
       disabled={disableMaxButton}
     >

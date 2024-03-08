@@ -49,7 +49,7 @@ export const UserProfile: FC<ProfileProps> = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="secondary" className='button-neubrutal'>
+        <Button variant="secondary" className='button-neubrutal hover:text-black focus:text-black'>
           {
             avatar ? (
               <img

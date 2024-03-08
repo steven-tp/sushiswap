@@ -14,7 +14,7 @@ const toggleVariants = cva(
         default: 'bg-transparent',
         outline:
           'bg-transparent !border border-accent hover:bg-secondary hover:text-accent-foreground',
-        border: 'text-black bg-primary border-2 border-black transition-shadow hover:shadow-[0_4px_0_0_rgba(0,0,0,1)] hover:text-black data-[state=on]:shadow-[0_4px_0_0_rgba(0,0,0,1)]',
+        border: '!text-black bg-primary border-2 border-black transition-shadow hover:!text-black hover:shadow-[0_4px_0_0_rgba(0,0,0,1)] hover:!bg-hover data-[state=on]:shadow-[0_4px_0_0_rgba(0,0,0,1)] dark:data-[state=on]:bg-hover',
       },
       size: {
         xs: 'h-[26px] px-2 text-xs',

@@ -62,6 +62,7 @@ export const SimpleSwapHeader = () => {
           variant="link"
           size="sm"
           onClick={() => setInvert((invert) => !invert)}
+          className='!color-base hover:!text-hover'
         >
           <ArrowTrendingUpIcon width={16} height={16} />
           <span className="flex items-baseline gap-1 whitespace-nowrap scroll hide-scrollbar">
