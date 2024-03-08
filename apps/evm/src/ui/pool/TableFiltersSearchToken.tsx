@@ -25,7 +25,6 @@ export const TableFiltersSearchToken: FC = () => {
   return (
     <div>
       <ChipInput
-        size="sm"
         icon={MagnifyingGlassIcon}
         delimiters={[',', ' ', ';', ':', 'Enter']}
         variant="outline"

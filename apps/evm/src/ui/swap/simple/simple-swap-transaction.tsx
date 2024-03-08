@@ -15,7 +15,6 @@ import { useDerivedStateSimpleSwap } from "./derivedstate-simple-swap-provider";
 import { useTransactionsInfinite } from "@sushiswap/client/hooks";
 import { useSWRConfig } from "swr";
 import { TableState } from "@tanstack/react-table";
-import { useSocket } from "src/lib/hooks/useSocket";
 import keyBy from 'lodash.keyby'
 import { config } from "src/config";
 
@@ -24,7 +23,6 @@ export const  SimpleSwapTransaction: FC = () => {
     state: { token0, token1, transactions: newTransactions },
   } = useDerivedStateSimpleSwap()
 
-  const { subcribeTransaction } = useSocket()
   const args = useMemo<GetTransactionsArgs>(() => {
     return {
       token0: token0?.wrapped.address || '',
@@ -87,7 +85,7 @@ export const  SimpleSwapTransaction: FC = () => {
     TXN_COLUMN
   ]
   return (
-    <div id="scrollableTransaction" className="lg:h-[600px] overflow-auto">
+    <div id="scrollableTransaction">
     <InfiniteScroll
       dataLength={data.length}
       next={() => setSize((prev) => prev + 1)}
@@ -100,13 +98,14 @@ export const  SimpleSwapTransaction: FC = () => {
       scrollableTarget="scrollableTransaction"
 
     >
-      <Card>
-        {data && (<DataTable
-          state={state}
-          loading={!data && isValidating}
-          columns={COLUMNS}
-          data={data}
-        />)
+      <Card className="border-neubrutal mb-1 mr-1">
+        {
+          data && <DataTable
+            state={state}
+            loading={!data && isValidating}
+            columns={COLUMNS}
+            data={data}
+          />
         }
       </Card>
     </InfiniteScroll>

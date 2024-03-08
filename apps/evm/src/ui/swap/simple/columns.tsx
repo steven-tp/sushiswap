@@ -23,7 +23,11 @@ export const DATE_COLUMN = {
 export const TYPE_COLUMN = {
   id: 'type',
   header: 'TYPE',
-  cell: (props: any) => props.row.original.type,
+  cell: (props: any) => (
+    <div className={(props.row.original.type === 'Swap' ? 'color-yellow' : props.row.original.type === 'Add' ? 'color-green' : props.row.original.type === 'Remove' ? 'color-red' : '')}>
+      {props.row.original.type}
+    </div>
+  ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   }
