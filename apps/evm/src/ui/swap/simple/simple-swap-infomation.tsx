@@ -4,7 +4,7 @@ import React, { FC, useState } from 'react'
 import { SimpleSwapTransaction } from './simple-swap-transaction'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Tabs, TabsContent, TabsList, TabsTrigger } from '@sushiswap/ui';
 import { InformationCircleIcon } from '@heroicons/react/20/solid';
-import { SimpleSwapLiquidity } from './simple-swap-liquidity';
+// import { SimpleSwapLiquidity } from './simple-swap-liquidity';
 
 export const SimpleSwapInfomation = () => {
   const FILTERS: { id: string; value: string; children: React.ReactNode }[] = [
@@ -117,7 +117,7 @@ export const SimpleSwapInfomation = () => {
           <SimpleSwapTransaction/>
         </TabsContent>
         <TabsContent value='liquidity'>
-          <SimpleSwapLiquidity/>
+          {/* <SimpleSwapLiquidity/> */}
         </TabsContent>
       </Tabs>
     </div>

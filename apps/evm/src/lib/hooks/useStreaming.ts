@@ -69,7 +69,7 @@ export const useStreaming = () => {
           high: barData.high,
           low: barData.low,
           close: barData.close,
-          volume: barData.volume
+          volume: Number(barData.volume)
         }
       } else {
         bar = {
@@ -77,7 +77,7 @@ export const useStreaming = () => {
           high: Math.max(lastDailyBar.high, Number(barData.high)),
           low: Math.min(lastDailyBar.low, Number(barData.low)),
           close: barData.close,
-          volume: barData.volume
+          volume: Number(barData.volume)
         }
       }
       subscriptionItemCandle.lastDailyBar = bar

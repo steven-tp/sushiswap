@@ -35,6 +35,22 @@ export const SimpleSwapChartContainer: FC = ()=> {
     resolution: [1, 5, 15, 30, 60, 240, '1D', '5D', '1W', '1M'],
     btn_resolution: ['1m', '5m', '15m', '30m', '1H', '4H', '1D', '5D', '1W', '1M']
   }
+  // Check to see if Media-Queries are supported
+  if (window.matchMedia) {
+    // Check if the dark-mode Media-Query matches
+    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+      // Dark
+      chartConfig.theme = 'Dark'
+      chartConfig.toolbarBg = '#272727'
+
+    } else {
+      // Light
+      chartConfig.theme = 'Light'
+      chartConfig.toolbarBg = '#fff'
+    }
+  } else {
+    // Default (when Media-Queries are not supported)
+  }
 
   const widgetOptions: any = {
     symbol: 'btcusdt',
@@ -70,7 +86,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
     autosize: chartConfig.autosize,
     toolbar_bg: chartConfig.toolbarBg,
     overrides: {
-      'paneProperties.background': '#0f172a',
+      'paneProperties.background': chartConfig.toolbarBg,
       'mainSeriesProperties.candleStyle.upColor': '#229E6C',
       'mainSeriesProperties.candleStyle.downColor': '#E43650',
       'mainSeriesProperties.candleStyle.borderUpColor': '#229E6C',
@@ -99,49 +115,50 @@ export const SimpleSwapChartContainer: FC = ()=> {
     // custom_css_url: 'css/custom.css'
   }
 
-    const { createWebsocket, subcribeTransaction } = useSocket()
-    const updatePrecision = ()  => {
-      if(chartWidget) {
-        const _format = `1${'0'.repeat(precision)}`
-        chartWidget.applyOverrides({ 'mainSeriesProperties.minTick': _format })
+  const { createWebsocket, subcribeTransaction } = useSocket()
+  const updatePrecision = ()  => {
+    if(chartWidget) {
+      const _format = `1${'0'.repeat(precision)}`
+      chartWidget.applyOverrides({ 'mainSeriesProperties.minTick': _format })
+    }
+  }
+  const initChart = useCallback(() => {
+    const resolution = localStorage.getItem(config.RESOLUTION_STOGRATE)
+    if (resolution) {
+      widgetOptions.interval = resolution
+    }
+    const token = `${token0?.wrapped.address}_${token1?.wrapped.address}`
+    const symbol = `${token0?.symbol}/${token1?.symbol}-${token}`
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    chartWidget = new widget({ ...widgetOptions, symbol })
+    chartWidget.onChartReady(() => {
+      // chartWidget?.activeChart().setChartType(3)
+      const _resolution = resolution ? resolution : '60'
+      const _RESOLUTION: any = RESOLUTION
+      getCandle(_RESOLUTION[_resolution], token)
+      subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
+      //ready
+      updatePrecision()
+    })
+
+  }, [precision])
+
+  useEffect(() => {
+    if(precision) {
+      initChart()
+    }
+  }, [precision, initChart])
+
+
+  useEffect(() => {
+    if(token0?.symbol && token1?.symbol) {
+      initChart()
+      if(isMounted) {
+        createWebsocket()
       }
     }
-    const initChart = useCallback(() => {
-      const resolution = localStorage.getItem(config.RESOLUTION_STOGRATE)
-      if (resolution) {
-        widgetOptions.interval = resolution
-      }
-      const token = `${token0?.wrapped.address}_${token1?.wrapped.address}`
-      const symbol = `${token0?.symbol}/${token1?.symbol}-${token}`
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      chartWidget = new widget({ ...widgetOptions, symbol })
-      chartWidget.onChartReady(() => {
-        // chartWidget?.activeChart().setChartType(3)
-        const _resolution = resolution ? resolution : '60'
-        const _RESOLUTION: any = RESOLUTION
-        getCandle(_RESOLUTION[_resolution], token)
-        subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
-        //ready
-        updatePrecision()
-      })
-
-    }, [precision])
-
-    useEffect(() => {
-      if(precision) {
-        initChart()
-      }
-    }, [precision, initChart])
-
-    useEffect(() => {
-      if(token0?.symbol && token1?.symbol) {
-        initChart()
-        if(isMounted) {
-          createWebsocket()
-        }
-      }
-    }, [isMounted, token0, token1, initChart])
+  }, [isMounted, token0, token1, initChart])
 
   
 

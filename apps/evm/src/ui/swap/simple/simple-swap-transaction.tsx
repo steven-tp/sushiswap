@@ -15,7 +15,6 @@ import { useDerivedStateSimpleSwap } from "./derivedstate-simple-swap-provider";
 import { useTransactionsInfinite } from "@sushiswap/client/hooks";
 import { useSWRConfig } from "swr";
 import { TableState } from "@tanstack/react-table";
-import { useSocket } from "src/lib/hooks/useSocket";
 import keyBy from 'lodash.keyby'
 import { config } from "src/config";
 
@@ -24,7 +23,6 @@ export const  SimpleSwapTransaction: FC = () => {
     state: { token0, token1, transactions: newTransactions },
   } = useDerivedStateSimpleSwap()
 
-  const { subcribeTransaction } = useSocket()
   const args = useMemo<GetTransactionsArgs>(() => {
     return {
       token0: token0?.wrapped.address || '',
