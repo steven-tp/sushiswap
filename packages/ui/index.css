@@ -21,7 +21,16 @@
     --accent: #00000014;
     --accent-foreground: #111827;
     --background: #f4f5f6;
-    --primary: #6bffff;
+    --primary: #8ef102;
+    --primary_hover: 195 249 118;
+    --default: 162 179 152;
+    --background-card: #272727;
+    --background-item: #404040;
+    --color-base: #9f9f9f;
+    --color-yellow:#ffa800;
+    --color-green: #00e778;
+    --color-red: #f53309;
+    --color-placeholder: #696969;
   }
 
   .paper {
@@ -34,13 +43,47 @@
     --muted-foreground: #94a3b8;
     --accent: #ffffff14;
     --accent-foreground: #e2e8f0;
-    --background-color: #101828;
+    --background-color: #212121;
     --color: #ffffff;
     --background: #101828;
+    --background-card: #272727;
+    --background-item: #404040;
+    --color-base: #9f9f9f;
+    --color-yellow:#ffe500;
+    --color-green: #00e778;
+    --color-red: #fb8d75;
+    --color-placeholder: #696969;
   }
 
   .dark .paper {
     backdrop-filter: blur(10px) saturate(190%) contrast(70%) brightness(80%);
+  }
+  .background-main {
+    background: var(--background-color);
+  }
+  .background-card {
+    background: var(--background-card);
+  }
+  .background-item {
+    background: var(--background-item);
+  }
+  .border-color-base {
+    border-color: var(--color-base);
+  }
+  .color-main {
+    color: var(--color);
+  }
+  .color-base {
+    color: var(--color-base);
+  }
+  .color-red {
+    color: var(--color-red);
+  }
+  .color-yellow {
+    color: var(--color-yellow);
+  }
+  .color-green {
+    color: var(--color-green);
   }
 }
 
@@ -111,6 +154,10 @@ body {
 }
 .filter-chart-active:hover {
   color: #000 !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--color-placeholder);
 }
 
 *.scroll {

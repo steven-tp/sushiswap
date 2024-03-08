@@ -149,8 +149,8 @@ const CurrencyInput: FC<CurrencyInputProps> = ({
           id={id}
           type="button"
           className={classNames(
-            currency ? 'pl-2 pr-3 text-xl !rounded-lg border border-black dark:bg-slate-600' : '',
-            '!rounded-full data-[state=inactive]:hidden data-[state=active]:flex',
+            currency ? 'pl-2 pr-3 text-xl !rounded-lg border border-black' : '',
+            '!rounded-full data-[state=inactive]:hidden data-[state=active]:flex !background-main hover:!color-main focus:!color-main',
           )}
         >
           {currency ? (

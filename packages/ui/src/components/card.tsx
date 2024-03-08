@@ -10,7 +10,7 @@ import { SkeletonText } from './skeleton'
 const cardVariants = cva('relative rounded-lg overflow-hidden border border-accent', {
   variants: {
     variant: {
-      default: 'shadow-sm bg-white dark:bg-background',
+      default: 'shadow-sm background-card',
       outline: '',
     },
   },

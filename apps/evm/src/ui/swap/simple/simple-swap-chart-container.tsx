@@ -147,7 +147,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
 
   return (
     <div className='h-full'>
-      <div className='h-full flex flex-col border-neubrutal rounded-lg dark:bg-[#1d2939]'>
+      <div className='h-full flex flex-col border-neubrutal rounded-lg background-card'>
         <div className='flex items-center justify-between p-5'>
           <div className='flex items-center gap-5'>
             <div className='relative w-9 h-9'>
@@ -166,15 +166,15 @@ export const SimpleSwapChartContainer: FC = ()=> {
                 </svg>
               </span>
             </div>
-            <div className="text-2xl font-bold dark:text-white">{token0?.symbol}/{token1?.symbol}</div>
+            <div className="text-2xl font-bold">{token0?.symbol}/{token1?.symbol}</div>
             <div className='cursor-pointer'>
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 25 25" fill="none">
-                <path d="M12.1992 22.7368C6.67622 22.7368 2.19922 18.2598 2.19922 12.7368C2.19922 7.21376 6.67622 2.73676 12.1992 2.73676C17.7222 2.73676 22.1992 7.21376 22.1992 12.7368C22.1992 18.2598 17.7222 22.7368 12.1992 22.7368ZM7.19922 9.73676H9.19922V13.7368H11.1992V9.73676H13.1992L10.1992 6.23676L7.19922 9.73676ZM17.1992 15.7368H15.1992V11.7368H13.1992V15.7368H11.1992L14.1992 19.2368L17.1992 15.7368Z" fill="#6BFFFF"/>
+                <path d="M12.1992 22.7368C6.67622 22.7368 2.19922 18.2598 2.19922 12.7368C2.19922 7.21376 6.67622 2.73676 12.1992 2.73676C17.7222 2.73676 22.1992 7.21376 22.1992 12.7368C22.1992 18.2598 17.7222 22.7368 12.1992 22.7368ZM7.19922 9.73676H9.19922V13.7368H11.1992V9.73676H13.1992L10.1992 6.23676L7.19922 9.73676ZM17.1992 15.7368H15.1992V11.7368H13.1992V15.7368H11.1992L14.1992 19.2368L17.1992 15.7368Z" fill="#8ef102"/>
               </svg>
             </div>
           </div>
           <div className='flex items-center gap-3'>
-            <div className='filter-chart-active text-neutral-600 dark:text-[#98a2b3] cursor-pointer p-[8px] rounded border-2 border-transparent hover:text-primary transition-all'>
+            <div className='filter-chart-active color-base cursor-pointer p-[8px] rounded border-2 border-transparent hover:text-hover transition-all'>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" fill="none">
                 <g clip-path="url(#clip0_70_5252)">
                 <path d="M19.2807 19.2492H4.28068C3.61764 19.2492 2.98175 18.9858 2.51291 18.517C2.04407 18.0481 1.78068 17.4122 1.78068 16.7492V1.76919C1.78068 1.54817 1.69288 1.33621 1.5366 1.17993C1.38032 1.02365 1.16836 0.935852 0.947347 0.935852C0.726333 0.935852 0.514372 1.02365 0.358091 1.17993C0.201811 1.33621 0.114014 1.54817 0.114014 1.76919L0.114014 16.7492C0.115337 17.8538 0.554749 18.9129 1.33586 19.694C2.11698 20.4751 3.17602 20.9145 4.28068 20.9159H19.2807C19.5017 20.9159 19.7137 20.8281 19.8699 20.6718C20.0262 20.5155 20.114 20.3035 20.114 20.0825C20.114 19.8615 20.0262 19.6495 19.8699 19.4933C19.7137 19.337 19.5017 19.2492 19.2807 19.2492Z" fill="currentColor"/>
@@ -187,7 +187,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
                 </defs>
               </svg>
             </div>
-            <div className='text-neutral-600 dark:text-[#98a2b3] cursor-pointer p-[8px] rounded border-2 border-transparent hover:text-primary transition-all'>
+            <div className='color-base cursor-pointer p-[8px] rounded border-2 border-transparent hover:text-hover transition-all'>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" fill="none">
                 <g clip-path="url(#clip0_70_5245)">
                 <path d="M19.2807 19.2692H2.61401C2.393 19.2692 2.18104 19.1814 2.02476 19.0251C1.86848 18.8688 1.78068 18.6569 1.78068 18.4359V1.76919C1.78068 1.54817 1.69288 1.33621 1.5366 1.17993C1.38032 1.02365 1.16836 0.935852 0.947347 0.935852C0.726333 0.935852 0.514372 1.02365 0.358091 1.17993C0.201811 1.33621 0.114014 1.54817 0.114014 1.76919L0.114014 18.4359C0.114014 19.0989 0.377406 19.7348 0.846247 20.2036C1.31509 20.6725 1.95097 20.9359 2.61401 20.9359H19.2807C19.5017 20.9359 19.7137 20.8481 19.8699 20.6918C20.0262 20.5355 20.114 20.3235 20.114 20.1025C20.114 19.8815 20.0262 19.6695 19.8699 19.5133C19.7137 19.357 19.5017 19.2692 19.2807 19.2692Z" fill="currentColor"/>

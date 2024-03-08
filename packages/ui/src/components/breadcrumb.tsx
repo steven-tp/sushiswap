@@ -46,7 +46,7 @@ export const Breadcrumb = () => {
 
   return (
     <div className="py-4">
-      <div className='flex gap-x-1.5 items-center text-sm rounded-lg border-neubrutal shadow-[2px_2px_0_0_rgba(0,0,0,1)] w-fit px-2.5 py-2'>
+      <div className='flex gap-x-1.5 items-center text-sm rounded-lg border-neubrutal shadow-[2px_2px_0_0_rgba(0,0,0,1)] w-fit px-2.5 py-2 dark:bg-slate-800'>
         <Button
           variant="link"
           size="sm"

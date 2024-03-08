@@ -4,7 +4,7 @@ import { Transition } from '@headlessui/react'
 import classNames from 'classnames'
 import React, { FC, Fragment } from 'react'
 
-import { SushiIcon } from './icons/SushiIcon'
+import { U2DexIcon } from './icons/U2DexIcon'
 
 interface LoaderProps extends React.ComponentProps<'svg'> {
   size?: number
@@ -78,5 +78,5 @@ export const LoadingOverlay: FC<{ show?: boolean }> = ({ show }) => {
 }
 
 export const LogoLoader: FC<LoaderProps> = (props) => {
-  return <SushiIcon className="animate-heartbeat" {...props} />
+  return <U2DexIcon className="animate-heartbeat" {...props} />
 }

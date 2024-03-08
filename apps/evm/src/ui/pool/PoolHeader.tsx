@@ -73,7 +73,7 @@ export const PoolHeader: FC<PoolHeader> = ({
 
   if (pool && token0 && token1)
     return (
-      <div className="flex flex-col gap-6 border-neubrutal rounded-lg px-10 py-5">
+      <div className="flex flex-col gap-6 border-neubrutal rounded-lg px-10 py-5 dark:bg-slate-800">
         <div className="flex flex-col gap-4">
           <LinkInternal
             href={backUrl}

@@ -24,7 +24,7 @@ export const TYPE_COLUMN = {
   id: 'type',
   header: 'TYPE',
   cell: (props: any) => (
-    <div className={(props.row.original.type === 'Swap' ? 'text-[#ffa800] dark:text-[#ffe500]' : props.row.original.type === 'Add' ? 'text-[#00e778]' : props.row.original.type === 'Remove' ? 'text-[#f53309] dark:text-[#fb8d75]' : '')}>
+    <div className={(props.row.original.type === 'Swap' ? 'color-yellow' : props.row.original.type === 'Add' ? 'color-green' : props.row.original.type === 'Remove' ? 'color-red' : '')}>
       {props.row.original.type}
     </div>
   ),

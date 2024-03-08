@@ -19,10 +19,10 @@ const buttonVariants = cva(
           'bg-amber-400 hover:bg-amber-500 focus:bg-amber-600 active:bg-amber-500 text-amber-900',
         outline:
           '!border border-accent bg-background hover:bg-muted hover:text-accent-foreground',
-        secondary: 'bg-secondary hover:bg-muted focus:bg-accent dark:bg-slate-700',
+        secondary: 'background-item hover:bg-hover focus:bg-hover',
         ghost: 'hover:bg-secondary focus:bg-accent',
         link: 'text-primary hover:underline hover:opacity-80 font-semibold !p-0 !h-[unset] !min-h-[unset]',
-        border: 'text-black bg-primary border-2 border-black transition-shadow hover:shadow-[0_4px_0_0_rgba(0,0,0,1)]',
+        border: 'text-black bg-primary border-2 border-black transition-shadow hover:bg-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,1)]',
       },
       size: {
         xs: 'min-h-[26px] h-[26px] px-2 text-xs',

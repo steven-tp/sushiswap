@@ -93,7 +93,7 @@ export const TableFiltersPoolType: FC = () => {
           variant="border"
           role="combobox"
           aria-expanded={open}
-          className='hover:bg-muted dark:hover:text-white data-[state=open]:bg-accent dark:data-[state=open]:bg-slate-700 data-[state=open]:shadow-[0_4px_0_0_rgba(0,0,0,1)] !text-base'
+          className='data-[state=open]:bg-hover data-[state=open]:shadow-[0_4px_0_0_rgba(0,0,0,1)] !text-base'
         >
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" viewBox="0 0 23 25" fill="none">
