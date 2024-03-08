@@ -1,4 +1,4 @@
-import { HotJar } from '@sushiswap/ui/components/scripts'
+// import { HotJar } from '@sushiswap/ui/components/scripts'
 
 import { Header } from './header'
 import { Providers } from './providers'
@@ -18,7 +18,7 @@ export default function SwapLayout({
         <Header />
         <div className="pt-10 pb-10">{children}</div>
       </Providers>
-      <HotJar />
+      {/* <HotJar /> */}
     </>
   )
 }
