@@ -112,7 +112,7 @@ const ChipInput: FC<ChipInputProps> = ({
       className={textFieldVariants({
         variant,
         size,
-        className: 'relative gap-2 flex-wrap !h-[unset]',
+        className: 'relative gap-2 flex-wrap !border-2 !border-black !shadow-[2px_2px_0_0_rgba(0,0,0,1)] !rounded !py-1',
       })}
     >
       {Icon ? <Icon {...iconProps} className={buttonIconVariants()} /> : null}

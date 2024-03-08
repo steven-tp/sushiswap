@@ -60,7 +60,7 @@ export const TableFiltersResetButton: FC = () => {
         icon={XMarkIcon}
         iconPosition="end"
         variant="outline"
-        size="sm"
+        className='!text-base border-black !border-2 !px-3'
       >
         Reset
       </Button>
