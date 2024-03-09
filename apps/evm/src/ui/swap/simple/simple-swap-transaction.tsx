@@ -67,7 +67,7 @@ export const  SimpleSwapTransaction: FC = () => {
   }, [data])
   
   const isLoadmore = useMemo(() => {
-    if(args.size && data.length < (size - 1) * args.size) {
+    if(args.size && data.length < size  * args.size) {
       return false
     }
     return true
