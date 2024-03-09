@@ -22,7 +22,7 @@ let _socket: any
 let intervalWs: any
 let isConnected = false
 let socketClosed = false
-let isSwitchSocket = false
+// let isSwitchSocket = false
 let currentCandleMessage: TOPIC_MESSAGE
 let currentTransactionMessage: TOPIC_MESSAGE
 
@@ -42,7 +42,7 @@ export const useSocket = () => {
     }, 5000)
   }
   
-  function createWebsocket() {''
+  function createWebsocket() {
     clearInterval(intervalWs)
     if(!_socket) {
       return new Promise((resolve) => {
@@ -52,15 +52,10 @@ export const useSocket = () => {
           socketClosed = false
           resolve(true)
           ping()
-          setTimeout(() => {
-            isSwitchSocket = false
-          })
+
         }
     
         _socket.onclose = (code: any) => {
-          if (isSwitchSocket) {
-            return
-          }
           console.log('Close server', code)
           _socket = null
           isConnected = false
@@ -145,6 +140,6 @@ export const useSocket = () => {
     getCandle,
     createWebsocket
   }
-},[])
+},[handleCandle, handleTransaction])
 
 }
