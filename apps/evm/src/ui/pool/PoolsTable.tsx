@@ -76,7 +76,7 @@ const COLUMNS = [
             <DropdownMenuLabel>
               {row.original.token0.symbol} / {row.original.token1.symbol}
               <Chip variant="blue" className="ml-2">
-                U2USwap
+                U2DEX
               </Chip>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -103,7 +103,7 @@ const COLUMNS = [
                   Create position
                 </Link>
               </DropdownMenuItem>
-              <TooltipProvider>
+              {/* <TooltipProvider>
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild={row.original.hasEnabledSteerVault}>
                     <DropdownMenuItem
@@ -139,9 +139,9 @@ const COLUMNS = [
                     </p>
                   </TooltipContent>
                 </Tooltip>
-              </TooltipProvider>
+              </TooltipProvider> */}
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <TooltipProvider>
                 <Tooltip delayDuration={0}>
@@ -184,7 +184,7 @@ const COLUMNS = [
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-            </DropdownMenuGroup>
+            </DropdownMenuGroup> */}
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
@@ -195,7 +195,7 @@ const COLUMNS = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-fit">
-            <DropdownMenuLabel>
+            {/* <DropdownMenuLabel>
               {row.original.token0.symbol} / {row.original.token1.symbol}
               {row.original.protocol === Protocol.BENTOBOX_STABLE && (
                 <Chip variant="green" className="ml-2">
@@ -213,7 +213,7 @@ const COLUMNS = [
                 </Chip>
               )}
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator /> */}
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
                 <Link

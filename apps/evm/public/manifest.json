@@ -1,7 +1,7 @@
 {
-  "name": "U2U Swap",
+  "name": "U2DEX",
   "description": "Earn, stream and automate your DAO salaries and token vesting with Furo.",
-  "short_name": "U2U Swap",
+  "short_name": "U2DEX",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#0f172a",

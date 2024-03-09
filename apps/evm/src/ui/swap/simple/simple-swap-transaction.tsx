@@ -85,7 +85,7 @@ export const  SimpleSwapTransaction: FC = () => {
     TXN_COLUMN
   ]
   return (
-    <div id="scrollableTransaction">
+    <div id="scrollableTransaction" className="h-[600px] overflow-auto">
     <InfiniteScroll
       dataLength={data.length}
       next={() => setSize((prev) => prev + 1)}
@@ -96,7 +96,6 @@ export const  SimpleSwapTransaction: FC = () => {
         </div>
       }
       scrollableTarget="scrollableTransaction"
-
     >
       <Card className="border-neubrutal mb-1 mr-1">
         {

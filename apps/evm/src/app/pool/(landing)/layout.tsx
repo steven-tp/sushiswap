@@ -58,7 +58,7 @@ export default function TabsLayout({
               My Positions
             </PathnameButton>
           </LinkInternal>
-          <LinkInternal
+          {/* <LinkInternal
             shallow={true}
             scroll={false}
             href={`/pool/my-rewards?${searchParams.toString()}`}
@@ -85,7 +85,7 @@ export default function TabsLayout({
             >
               Migrate
             </PathnameButton>
-          </LinkInternal>
+          </LinkInternal> */}
         </div>
       </Container>
       <section className="flex flex-col flex-1">
