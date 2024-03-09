@@ -5,7 +5,7 @@ import { Providers } from './providers'
 import { SimpleSwapInfomation } from 'src/ui/swap/simple/simple-swap-infomation'
 
 export const metadata = {
-  title: 'U2USwap',
+  title: 'U2DEX',
 }
 
 export default function SwapSimplePage() {

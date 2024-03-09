@@ -1,6 +1,6 @@
 'use client'
 import {
-  FC, useCallback, useEffect
+  FC, useCallback, useEffect, useState
 } from 'react'
 import { config } from 'src/config'
 import { widget } from 'public/charting_library/charting_library.min'
@@ -11,17 +11,19 @@ import { useDataFeed } from 'src/lib/hooks/useDataFeed'
 // import { getCandle } from 'src/lib/socket'
 import { RESOLUTION } from 'src/lib/constants'
 import { usePriceConnfig } from 'src/lib/hooks/api/usePriceConfig'
+import { Currency } from '@sushiswap/ui'
 export const SimpleSwapChartContainer: FC = ()=> {
   const isMounted =  useIsMounted()
   const { datafeed } = useDataFeed()
   const { getCandle } = useSocket()
   const {
     state: { token0, token1 },
+    mutate: { switchTokens },
   } = useDerivedStateSimpleSwap()
 
   const precision = usePriceConnfig(token0?.wrapped.address, token1?.wrapped.address)
 
-  let chartWidget: any
+  // let chartWidget: any
   const chartConfig = {
     interval: '1D',
     libraryPath: '/charting_library/',
@@ -31,26 +33,26 @@ export const SimpleSwapChartContainer: FC = ()=> {
     userId: 'public_user_id',
     fullscreen: false,
     autosize: true,
-    toolbarBg: '#0f172a',
+    toolbarBg: '#272727',
     resolution: [1, 5, 15, 30, 60, 240, '1D', '5D', '1W', '1M'],
     btn_resolution: ['1m', '5m', '15m', '30m', '1H', '4H', '1D', '5D', '1W', '1M']
   }
-  // Check to see if Media-Queries are supported
-  if (window.matchMedia) {
-    // Check if the dark-mode Media-Query matches
-    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-      // Dark
-      chartConfig.theme = 'Dark'
-      chartConfig.toolbarBg = '#272727'
+  // // Check to see if Media-Queries are supported
+  // if (window.matchMedia) {
+  //   // Check if the dark-mode Media-Query matches
+  //   if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+  //     // Dark
+  //     chartConfig.theme = 'Dark'
+  //     chartConfig.toolbarBg = '#272727'
 
-    } else {
-      // Light
-      chartConfig.theme = 'Light'
-      chartConfig.toolbarBg = '#fff'
-    }
-  } else {
-    // Default (when Media-Queries are not supported)
-  }
+  //   } else {
+  //     // Light
+  //     chartConfig.theme = 'Light'
+  //     chartConfig.toolbarBg = '#0f172a'
+  //   }
+  // } else {
+  //   // Default (when Media-Queries are not supported)
+  // }
 
   const widgetOptions: any = {
     symbol: 'btcusdt',
@@ -112,37 +114,63 @@ export const SimpleSwapChartContainer: FC = ()=> {
       'header_saveload',
       'header_saveload_to_the_right'
     ],
-    // custom_css_url: 'css/custom.css'
+    custom_css_url: 'css/custom.css'
   }
-
+  const RESOLUTIONS_FULL = [
+    { label: '1m', value: '1' },
+    // { label: '5m', value: '5' },
+    { label: '15m', value: '15' },
+    // { label: '30m', value: '30' },
+    { label: '1H', value: '60' },
+    { label: '1D', value: '1D' },
+    { label: '1W', value: '1W' },
+    // { label: '1M', value: '1M' }
+  ]
+  const [currentResolution, setCurrentResolution] = useState('60')
+  const [chartWidget, setChartWiget] = useState<any>()
   const { createWebsocket, subcribeTransaction } = useSocket()
-  const updatePrecision = ()  => {
-    if(chartWidget) {
+
+  const updatePrecision = (_chartWidget: any)  => {
+    if(_chartWidget) {
       const _format = `1${'0'.repeat(precision)}`
-      chartWidget.applyOverrides({ 'mainSeriesProperties.minTick': _format })
+      _chartWidget?.applyOverrides({ 'mainSeriesProperties.minTick': _format })
     }
   }
+
   const initChart = useCallback(() => {
     const resolution = localStorage.getItem(config.RESOLUTION_STOGRATE)
     if (resolution) {
       widgetOptions.interval = resolution
     }
-    const token = `${token0?.wrapped.address}_${token1?.wrapped.address}`
-    const symbol = `${token0?.symbol}/${token1?.symbol}-${token}`
+    setCurrentResolution(resolution || widgetOptions.interval)
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    chartWidget = new widget({ ...widgetOptions, symbol })
-    chartWidget.onChartReady(() => {
-      // chartWidget?.activeChart().setChartType(3)
-      const _resolution = resolution ? resolution : '60'
-      const _RESOLUTION: any = RESOLUTION
-      getCandle(_RESOLUTION[_resolution], token)
-      subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
-      //ready
-      updatePrecision()
-    })
+    if(token0?.symbol && token1?.symbol) {
+      const token = `${token0?.wrapped.address}_${token1?.wrapped.address}`
+      const symbol = `${token0?.symbol}/${token1?.symbol}-${token}`
 
-  }, [precision])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      const _chartWidget = new widget({ ...widgetOptions, symbol })
+      setChartWiget(_chartWidget)
+      _chartWidget.onChartReady(() => {
+        // chartWidget?.activeChart().setChartType(3)
+        const _resolution = resolution ? resolution : '60'
+        const _RESOLUTION: any = RESOLUTION
+        getCandle(_RESOLUTION[_resolution], token)
+        subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
+        //ready
+        updatePrecision(_chartWidget)
+      })
+    }
+
+  }, [token0, token1, precision])
+
+  const setResolution = (resolution: string) => {
+    const chart = chartWidget?.chart()
+    if(chart) {
+      chart.setResolution(resolution)
+      setCurrentResolution(resolution)
+    }
+  }
 
   useEffect(() => {
     if(precision) {
@@ -158,7 +186,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
         createWebsocket()
       }
     }
-  }, [isMounted, token0, token1, initChart])
+  }, [isMounted, token0, token1, initChart, createWebsocket])
 
   
 
@@ -168,30 +196,46 @@ export const SimpleSwapChartContainer: FC = ()=> {
         <div className='flex items-center justify-between p-5'>
           <div className='flex items-center gap-5'>
             <div className='relative w-9 h-9'>
-              <span className='absolute top-0 left-0 z-[1] rounded-[50%] shadow-[2px_2px_0_0_rgba(0,0,0,0.25)]'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+              <span className='absolute top-[-4px] left-[-4px] z-[1] rounded-[50%] shadow-[2px_2px_0_0_rgba(0,0,0,0.25)]'>
+                {
+                  token0 && <Currency.Icon
+                    disableLink
+                    currency={token0}
+                    width={28}
+                    height={28}
+                  />
+                }
+                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                   <path d="M12 24.7391C18.6274 24.7391 24 19.3665 24 12.7391C24 6.11166 18.6274 0.739075 12 0.739075C5.37258 0.739075 0 6.11166 0 12.7391C0 19.3665 5.37258 24.7391 12 24.7391Z" fill="#6284F5"/>
                   <path d="M16.8953 13.8425C16.874 13.8411 12.0637 16.6918 12.0007 16.7162C11.9865 16.708 7.13392 13.836 7.11084 13.8389C7.12259 13.8561 11.9974 20.7391 12.0007 20.7391C12.004 20.7391 16.8953 13.8425 16.8953 13.8425Z" fill="white"/>
                   <path d="M12.003 4.73907L7.12671 12.8947L12.003 15.7832L16.8795 12.8947L12.003 4.73907Z" fill="white"/>
-                </svg>
+                </svg> */}
               </span>
               <span className='absolute bottom-0 right-0 rounded-[50%] shadow-[2px_2px_0_0_rgba(0,0,0,0.25)]'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                {token1 && 
+                  <Currency.Icon
+                    disableLink
+                    currency={token1}
+                    width={28}
+                    height={28}
+                  />
+                }
+                {/* <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                   <path d="M12.1943 24.7285C18.8218 24.7285 24.1944 19.3558 24.1944 12.7284C24.1944 6.10105 18.8218 0.728455 12.1943 0.728455C5.56692 0.728455 0.194336 6.10105 0.194336 12.7284C0.194336 19.3558 5.56692 24.7285 12.1943 24.7285Z" fill="#1EAA7F"/>
                   <path d="M11.5857 21.602C9.4288 20.3575 7.33108 19.1472 5.18431 17.9086C5.68474 17.7346 5.76386 17.39 5.7621 16.9593C5.75058 14.1371 5.75313 11.315 5.75999 8.49286C5.76096 8.08542 5.70021 7.73747 5.1626 7.57986C6.14325 7.01429 7.04926 6.49183 8.03773 5.92177C8.03773 6.25705 8.03773 6.49298 8.03773 6.7289C8.04011 10.1058 8.04011 13.4872 8.04011 16.8617C8.03641 17.3768 8.17196 17.6452 8.63398 17.9034C9.00721 18.1122 9.06321 18.1314 9.34872 18.2917C9.34872 18.06 9.3503 17.9188 9.34872 17.755C9.34872 13.7225 9.35663 9.74713 9.34872 5.63912C9.34775 5.29768 9.42546 5.08938 9.73936 4.92685C10.348 4.61181 10.9331 4.25118 11.5857 3.87613V21.602Z" fill="white"/>
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M19.4015 17.9086L13 21.602V3.87613C13.1944 3.98782 13.3828 4.09824 13.5676 4.20655C14.0033 4.46194 14.419 4.70563 14.8464 4.92685C15.1603 5.08938 15.238 5.29768 15.2371 5.63912C15.2318 8.37848 15.2336 11.0588 15.2353 13.7365C15.2362 15.0743 15.2371 16.4115 15.2371 17.755C15.2361 17.8593 15.2363 17.9544 15.2367 18.0695C15.2369 18.1352 15.2371 18.2075 15.2371 18.2917C15.3725 18.2157 15.4563 18.1714 15.5469 18.1235C15.6471 18.0705 15.7557 18.0131 15.9518 17.9034C16.4138 17.6452 16.5494 17.3768 16.5457 16.8617V16.8576C16.5457 13.4844 16.5457 10.1045 16.5481 6.7289V5.92177L19.4232 7.57986C18.8856 7.73747 18.8248 8.08542 18.8258 8.49286C18.8327 11.315 18.8352 14.1371 18.8237 16.9593C18.8219 17.39 18.901 17.7346 19.4015 17.9086ZM14.3683 5.63517L14.1172 5.12574L13.8662 5.63517L13.3046 5.71683L13.7109 6.11336L13.615 6.67321L14.1172 6.40886L14.6195 6.67321L14.5236 6.11336L14.9299 5.71683L14.3683 5.63517Z" fill="white"/>
-                </svg>
+                </svg> */}
               </span>
             </div>
             <div className="text-2xl font-bold">{token0?.symbol}/{token1?.symbol}</div>
-            <div className='cursor-pointer'>
+            <div className='cursor-pointer' onClick={switchTokens}>
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 25 25" fill="none">
                 <path d="M12.1992 22.7368C6.67622 22.7368 2.19922 18.2598 2.19922 12.7368C2.19922 7.21376 6.67622 2.73676 12.1992 2.73676C17.7222 2.73676 22.1992 7.21376 22.1992 12.7368C22.1992 18.2598 17.7222 22.7368 12.1992 22.7368ZM7.19922 9.73676H9.19922V13.7368H11.1992V9.73676H13.1992L10.1992 6.23676L7.19922 9.73676ZM17.1992 15.7368H15.1992V11.7368H13.1992V15.7368H11.1992L14.1992 19.2368L17.1992 15.7368Z" fill="#8ef102"/>
               </svg>
             </div>
           </div>
           <div className='flex items-center gap-3'>
-            <div className='filter-chart-active color-base cursor-pointer p-[8px] rounded border-2 border-transparent hover:text-hover transition-all'>
+            {/* <div className=' color-base cursor-pointer p-[8px] rounded border-2 border-transparent hover:text-hover transition-all'>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" fill="none">
                 <g clip-path="url(#clip0_70_5252)">
                 <path d="M19.2807 19.2492H4.28068C3.61764 19.2492 2.98175 18.9858 2.51291 18.517C2.04407 18.0481 1.78068 17.4122 1.78068 16.7492V1.76919C1.78068 1.54817 1.69288 1.33621 1.5366 1.17993C1.38032 1.02365 1.16836 0.935852 0.947347 0.935852C0.726333 0.935852 0.514372 1.02365 0.358091 1.17993C0.201811 1.33621 0.114014 1.54817 0.114014 1.76919L0.114014 16.7492C0.115337 17.8538 0.554749 18.9129 1.33586 19.694C2.11698 20.4751 3.17602 20.9145 4.28068 20.9159H19.2807C19.5017 20.9159 19.7137 20.8281 19.8699 20.6718C20.0262 20.5155 20.114 20.3035 20.114 20.0825C20.114 19.8615 20.0262 19.6495 19.8699 19.4933C19.7137 19.337 19.5017 19.2492 19.2807 19.2492Z" fill="currentColor"/>
@@ -203,8 +247,8 @@ export const SimpleSwapChartContainer: FC = ()=> {
                 </clipPath>
                 </defs>
               </svg>
-            </div>
-            <div className='color-base cursor-pointer p-[8px] rounded border-2 border-transparent hover:text-hover transition-all'>
+            </div> */}
+            <div className='color-base filter-chart-active cursor-pointer p-[8px] rounded border-2 border-transparent hover:text-hover transition-all'>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" fill="none">
                 <g clip-path="url(#clip0_70_5245)">
                 <path d="M19.2807 19.2692H2.61401C2.393 19.2692 2.18104 19.1814 2.02476 19.0251C1.86848 18.8688 1.78068 18.6569 1.78068 18.4359V1.76919C1.78068 1.54817 1.69288 1.33621 1.5366 1.17993C1.38032 1.02365 1.16836 0.935852 0.947347 0.935852C0.726333 0.935852 0.514372 1.02365 0.358091 1.17993C0.201811 1.33621 0.114014 1.54817 0.114014 1.76919L0.114014 18.4359C0.114014 19.0989 0.377406 19.7348 0.846247 20.2036C1.31509 20.6725 1.95097 20.9359 2.61401 20.9359H19.2807C19.5017 20.9359 19.7137 20.8481 19.8699 20.6918C20.0262 20.5355 20.114 20.3235 20.114 20.1025C20.114 19.8815 20.0262 19.6695 19.8699 19.5133C19.7137 19.357 19.5017 19.2692 19.2807 19.2692Z" fill="currentColor"/>
@@ -221,7 +265,25 @@ export const SimpleSwapChartContainer: FC = ()=> {
               </svg>
             </div>
           </div>
+          
         </div>
+        <div className='flex items-center justify-between mb-2'>
+          <div className='flex items-center gap-5'>
+            {/* <div className='text-5xl font-semibold'>2023.122455</div>
+            <span className='color-green text-xl'>(+82.42%)</span> */}
+          </div>
+          <div className='flex items-center'>
+            {
+              RESOLUTIONS_FULL.map((item, index) => (
+                <div onClick={ () => {setResolution(item.value)} } key={index} className={`color-base font-bold cursor-pointer px-5 py-1 rounded-lg border-2 border-transparent hover:text-hover transition-all ${item.value === currentResolution ? 'filter-chart-active' : ''}`}>{item.label}</div>
+              ))
+            }
+            {/* <div className='color-base font-bold cursor-pointer px-5 py-1 rounded-lg border-2 border-transparent hover:text-hover transition-all'>7D</div>
+            <div className='filter-chart-active color-base font-bold cursor-pointer px-5 py-1 rounded-lg border-2 border-transparent hover:text-hover transition-all'>30D</div>
+            <div className='color-base font-bold cursor-pointer px-5 py-1 rounded-lg border-2 border-transparent hover:text-hover transition-all'>1Y</div> */}
+          </div>
+        </div>
+      
         <div id="tranding-chart" className='h-full'></div>
       </div>
     </div>

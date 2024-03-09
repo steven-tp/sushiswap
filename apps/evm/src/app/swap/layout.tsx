@@ -4,9 +4,9 @@ import { Header } from './header'
 import { Providers } from './providers'
 
 export const metadata = {
-  title: 'U2U Swap',
+  title: 'U2DEX',
   description:
-    'U2U Swap is a community-driven decentralized exchange (DEX) for traders and liquidity providers.',
+    'U2DEX is a community-driven decentralized exchange (DEX) for traders and liquidity providers.',
 }
 
 export default function SwapLayout({
