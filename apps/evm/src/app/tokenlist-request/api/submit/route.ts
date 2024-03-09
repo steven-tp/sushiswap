@@ -181,7 +181,7 @@ export async function POST(request: NextRequest) {
   const newList = [
     ...currentList,
     {
-      address: tokenAddress,
+      address: tokenAddress.toLowerCase(),
       chainId: chainId,
       decimals: Number(tokenDecimals),
       logoURI: `https://u2u-images.s3.ap-southeast-1.amazonaws.com/amm/2484/${tokenAddress.toLowerCase()}.png`,
