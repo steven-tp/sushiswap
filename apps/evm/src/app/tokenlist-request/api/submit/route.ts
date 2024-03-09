@@ -8,9 +8,12 @@ import { ChainKey } from 'sushi/chain'
 import { formatUSD } from 'sushi/format'
 
 import { ApplyForTokenListTokenSchemaType } from '../../schema'
-import S3Service from 'src/lib/aws'
 
-const owner = 'frankie060392'
+const owner: any = process.env.GITHUB_USERNAME
+
+if (!owner) {
+  throw new Error('Please provide owner')
+}
 
 interface ListEntry {
   address: string
@@ -132,10 +135,41 @@ export async function POST(request: NextRequest) {
     sha: latestIconsSha,
   })
 
+  const imagePath = `logos/network/${chainId}/${tokenAddress.toLowerCase()}.png`
+
   try {
     // Figure out if image already exists, overwrite if it does
-    const buf = Buffer.from(logoFile.replace(/^data:image\/\w+;base64,/, ""), 'base64')
-    await S3Service.uploadS3(buf, tokenAddress.toLowerCase() + '.png', 'amm/2484')
+    let previousImageFileSha: string | undefined
+
+    try {
+      const res = await octoKit.request(
+        'GET /repos/{owner}/{repo}/contents/{path}',
+        {
+          owner,
+          repo: 'default-token-list',
+          branch: 'master',
+          path: imagePath,
+        },
+      )
+
+      if (!Array.isArray(res.data)) {
+        previousImageFileSha = res.data.sha
+      }
+    } catch {
+      //
+    }
+
+    // Upload image
+    await octoKit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+      owner,
+      repo: 'default-token-list',
+      branch: branch,
+      path: imagePath,
+      content: logoFile.split(',')[1],
+      message: `Upload ${displayName} icon`,
+      sha: previousImageFileSha,
+    })
+    // Figure out if image already exists, overwrite if it does
   } catch (_e: unknown) {
     return NextResponse.json(
       { error: 'Failed to add token image' },
@@ -175,7 +209,7 @@ export async function POST(request: NextRequest) {
     : []
 
   // Remove from current list if exists to overwrite later
-  currentList = currentList.filter((entry) => entry.address !== tokenAddress)
+  currentList = currentList.filter((entry) => entry.address !== tokenAddress.toLowerCase())
 
   // Append to current list
   const newList = [
@@ -184,7 +218,7 @@ export async function POST(request: NextRequest) {
       address: tokenAddress.toLowerCase(),
       chainId: chainId,
       decimals: Number(tokenDecimals),
-      logoURI: `https://u2u-images.s3.ap-southeast-1.amazonaws.com/amm/2484/${tokenAddress.toLowerCase()}.png`,
+      logoURI: `https://raw.githubusercontent.com/${owner}/default-token-list/master/${imagePath}`,
       name: tokenName,
       symbol: tokenSymbol,
     },
@@ -217,7 +251,8 @@ export async function POST(request: NextRequest) {
       List: ${listType}
       Volume: ${formatUSD(0)}
       Liquidity: ${formatUSD(0)}
-      Image: https://u2u-images.s3.ap-southeast-1.amazonaws.com/amm/2484/${tokenAddress.toLowerCase()}.png
+      Image: https://github.com/${owner}/default-token-list/tree/${branch}/${imagePath}
+      ![${displayName}](https://raw.githubusercontent.com/${owner}/default-token-list/${branch}/${imagePath})
     `,
   })
 
