@@ -84,7 +84,7 @@ export default function Partner() {
               const context = canvas.getContext('2d', { alpha: false })
               if (context) {
                 context.drawImage(image, 0, 0, canvas.width, canvas.height)
-                const resizedImageAsBase64 = canvas.toDataURL('image/jpeg')
+                const resizedImageAsBase64 = canvas.toDataURL('image/png')
                 methods.setValue('logoFile', resizedImageAsBase64)
               }
             }
@@ -97,7 +97,7 @@ export default function Partner() {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: { 'image/jpeg': ['.jpeg', '.jpg'] },
+    accept: { 'image/png': ['.png'] },
     maxFiles: 1,
   })
 
@@ -139,7 +139,7 @@ export default function Partner() {
           Kindly complete the provided form; this action will initiate the
           creation of a pull request on our GitHub repository. For your
           convenience, you can track the progress and updates{' '}
-          <LinkExternal href="https://github.com/sushiswap/list/pulls">
+          <LinkExternal href="https://github.com/frankie060392/default-token-list/pulls">
             there
           </LinkExternal>
           . Thank you for your participation.
@@ -175,7 +175,7 @@ export default function Partner() {
                   </div>
                 </FormControl>
                 <FormMessage>
-                  Allowed formats: .jpeg, .jpg <br />
+                  Only Allowed format: .png <br />
                   Minimum dimensions are 128x128.
                 </FormMessage>
               </FormItem>
