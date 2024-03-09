@@ -20,7 +20,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
     state: { token0, token1 },
     mutate: { switchTokens },
   } = useDerivedStateSimpleSwap()
-
+  const _RESOLUTION: any = RESOLUTION
   const precision = usePriceConnfig(token0?.wrapped.address, token1?.wrapped.address)
 
   // let chartWidget: any
@@ -128,6 +128,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
   ]
   const [currentResolution, setCurrentResolution] = useState('60')
   const [chartWidget, setChartWiget] = useState<any>()
+  const [soketInited, setSocketInited] = useState(false)
   const { createWebsocket, subcribeTransaction } = useSocket()
 
   const updatePrecision = (_chartWidget: any)  => {
@@ -154,7 +155,6 @@ export const SimpleSwapChartContainer: FC = ()=> {
       _chartWidget.onChartReady(() => {
         // chartWidget?.activeChart().setChartType(3)
         const _resolution = resolution ? resolution : '60'
-        const _RESOLUTION: any = RESOLUTION
         getCandle(_RESOLUTION[_resolution], token)
         subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
         //ready
@@ -167,8 +167,10 @@ export const SimpleSwapChartContainer: FC = ()=> {
   const setResolution = (resolution: string) => {
     const chart = chartWidget?.chart()
     if(chart) {
+      const token = `${token0?.wrapped.address}_${token1?.wrapped.address}`
       chart.setResolution(resolution)
       setCurrentResolution(resolution)
+      getCandle(_RESOLUTION[resolution], token)
     }
   }
 
@@ -182,13 +184,18 @@ export const SimpleSwapChartContainer: FC = ()=> {
   useEffect(() => {
     if(token0?.symbol && token1?.symbol) {
       initChart()
-      if(isMounted) {
+      if(isMounted && !soketInited) {
         createWebsocket()
+        setSocketInited(true)
       }
     }
   }, [isMounted, token0, token1, initChart, createWebsocket])
 
-  
+  useEffect(() => {
+    return () => {
+      setSocketInited(false)
+    }
+  }, [])
 
   return (
     <div className='h-full'>
