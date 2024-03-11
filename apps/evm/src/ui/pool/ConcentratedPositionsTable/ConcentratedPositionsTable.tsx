@@ -113,7 +113,7 @@ export const ConcentratedPositionsTable: FC<ConcentratedPositionsTableProps> =
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <span>
                 My Positions{' '}
-                <span className="text-gray-400 dark:text-slate-500">
+                <span className="color-base">
                   ({_positions.length})
                 </span>
               </span>

@@ -199,8 +199,8 @@ export const SimpleSwapChartContainer: FC = ()=> {
 
   return (
     <div className='h-full'>
-      <div className='h-full flex flex-col border-neubrutal rounded-lg background-card'>
-        <div className='flex items-center justify-between p-5'>
+      <div className='h-full p-5 flex flex-col border-neubrutal rounded-lg background-card'>
+        <div className='flex items-center justify-between mb-5'>
           <div className='flex items-center gap-5'>
             <div className='relative w-9 h-9'>
               <span className='absolute top-[-4px] left-[-4px] z-[1] rounded-[50%] shadow-[2px_2px_0_0_rgba(0,0,0,0.25)]'>

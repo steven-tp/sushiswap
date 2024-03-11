@@ -23,7 +23,7 @@ const percentInputProps: Partial<React.InputHTMLAttributes<HTMLInputElement>> =
   }
 
 const textFieldVariants = cva(
-  'truncate appearance-none dark:text-slate-50 text-gray-900 w-full !ring-0 !outline-none',
+  'truncate appearance-none w-full !ring-0 !outline-none',
   {
     variants: {
       size: {
@@ -142,7 +142,7 @@ const Component = <T extends InputType>(
   }
 
   return (
-    <div className="group relative flex items-center justify-between w-full">
+    <div className={(unit ? 'background-input shadow-[2px_2px_0_0_rgba(0,0,0,1)] border-2 border-black rounded mr-0.5 mb-0.5' : '') + " group relative flex items-center justify-between w-full"}>
       {Icon ? (
         <Icon
           {...iconProps}
@@ -181,7 +181,7 @@ const Component = <T extends InputType>(
             isError: isError ? 'yes' : 'no',
             variant,
             size,
-            className: 'text-muted-foreground rounded-l-none !w-[unset]',
+            className: 'rounded-l-none !w-[unset]',
           })}
         >
           {unit}

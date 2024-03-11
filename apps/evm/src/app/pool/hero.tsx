@@ -30,7 +30,7 @@ export const Hero: FC = () => {
           <div className="flex flex-col">
             <h1 className={typographyVariants({ variant: 'h1' }) + ' normal-case'}>
               Put your funds to work <br />
-              by providing liquidity
+              by providing liquidity.
             </h1>
             <p
               className={typographyVariants({

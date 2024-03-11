@@ -12,7 +12,7 @@ const typographyVariants = cva('scroll-m-20', {
       lead: 'leading-7 [&:not(:first-child)]:mt-6 text-lg text-muted-foreground sm:text-xl',
       large: 'text-lg font-semibold',
       small: 'text-sm font-medium leading-none',
-      muted: 'text-muted-foreground',
+      muted: 'color-base',
     },
   },
 })
