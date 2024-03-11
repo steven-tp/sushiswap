@@ -107,11 +107,11 @@ const PARTNER_NAVIGATION_LINKS: {
   href: string
   description: string
 }[] = [
-  {
-    title: 'Partner with U2U',
-    href: '/partner',
-    description: 'Incentivize your token with U2U rewards.',
-  },
+  // {
+  //   title: 'Partner with U2U',
+  //   href: '/partner',
+  //   description: 'Incentivize your token with U2U rewards.',
+  // },
   {
     title: 'List enquiry',
     href: '/tokenlist-request',

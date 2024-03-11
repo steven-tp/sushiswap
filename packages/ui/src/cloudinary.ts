@@ -8,7 +8,7 @@ export function cloudinaryFetchLoader({
   quality,
 }: ImageLoaderProps) {
   // const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
-  return `https://u2u-images.s3.ap-southeast-1.amazonaws.com/amm/${normalizeSrc(
+  return `https://raw.githubusercontent.com/frankie060392/default-token-list/master/logos/network/${normalizeSrc(
     src,
   )}`
 }
@@ -19,7 +19,7 @@ export function cloudinaryImageLoader({
   quality,
 }: ImageLoaderProps) {
   // const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
-  return `https://u2u-images.s3.ap-southeast-1.amazonaws.com/amm/${normalizeSrc(
+  return `https://raw.githubusercontent.com/frankie060392/default-token-list/master/logos/network/${normalizeSrc(
     src,
   )}`
 }

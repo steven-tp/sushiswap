@@ -2,15 +2,18 @@ import { createAppAuth } from '@octokit/auth-app'
 import { CHAIN_NAME } from '@sushiswap/graph-config'
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
-import stringify from 'fast-json-stable-stringify'
 import { NextRequest, NextResponse } from 'next/server'
 import { Octokit } from 'octokit'
-import { ChainId, ChainKey } from 'sushi/chain'
+import { ChainKey } from 'sushi/chain'
 import { formatUSD } from 'sushi/format'
 
 import { ApplyForTokenListTokenSchemaType } from '../../schema'
 
-const owner = 'sushiswap'
+const owner: any = process.env.GITHUB_USERNAME
+
+if (!owner) {
+  throw new Error('Please provide owner')
+}
 
 interface ListEntry {
   address: string
@@ -58,8 +61,8 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  if (!process.env.TOKEN_LIST_PR_WEBHOOK_URL)
-    throw new Error('TOKEN_LIST_PR_WEBHOOK_URL undefined')
+  // if (!process.env.TOKEN_LIST_PR_WEBHOOK_URL)
+  //   throw new Error('TOKEN_LIST_PR_WEBHOOK_URL undefined')
   if (!process.env.OCTOKIT_KEY) throw new Error('OCTOKIT_KEY undefined')
 
   const {
@@ -71,13 +74,12 @@ export async function POST(request: NextRequest) {
     chainId,
     listType,
   } = (await request.json()) as MutationParams
-
   const octoKit = new Octokit({
     authStrategy: createAppAuth,
     auth: {
-      appId: 169875,
+      appId: 852600,
       privateKey: process.env.OCTOKIT_KEY?.replace(/\\n/g, '\n'),
-      installationId: 23112528,
+      installationId: 48228446,
     },
   })
 
@@ -86,10 +88,9 @@ export async function POST(request: NextRequest) {
     data: { commit: { sha: latestIconsSha } },
   } = await octoKit.request('GET /repos/{owner}/{repo}/branches/{branch}', {
     owner,
-    repo: 'list',
+    repo: 'default-token-list',
     branch: 'master',
   })
-
   // Filter out characters that github / ... might not like
   const displayName = tokenSymbol.toLowerCase().replace(/( )|(\.)/g, '_')
 
@@ -102,7 +103,7 @@ export async function POST(request: NextRequest) {
         'GET /repos/{owner}/{repo}/branches',
         {
           owner,
-          repo: 'list',
+          repo: 'default-token-list',
           per_page: 100,
           page: i,
         },
@@ -126,18 +127,15 @@ export async function POST(request: NextRequest) {
 
     return createBranchName(displayName)
   })()
-
   // Create new branch
   await octoKit.request('POST /repos/{owner}/{repo}/git/refs', {
     owner,
-    repo: 'list',
+    repo: 'default-token-list',
     ref: `refs/heads/${branch}`,
     sha: latestIconsSha,
   })
 
-  const imagePath = `logos/token-logos/network/${ChainKey[
-    chainId
-  ].toLowerCase()}/${tokenAddress}.jpg`
+  const imagePath = `logos/network/${chainId}/${tokenAddress.toLowerCase()}.png`
 
   try {
     // Figure out if image already exists, overwrite if it does
@@ -148,7 +146,7 @@ export async function POST(request: NextRequest) {
         'GET /repos/{owner}/{repo}/contents/{path}',
         {
           owner,
-          repo: 'list',
+          repo: 'default-token-list',
           branch: 'master',
           path: imagePath,
         },
@@ -164,13 +162,14 @@ export async function POST(request: NextRequest) {
     // Upload image
     await octoKit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
       owner,
-      repo: 'list',
+      repo: 'default-token-list',
       branch: branch,
       path: imagePath,
       content: logoFile.split(',')[1],
       message: `Upload ${displayName} icon`,
       sha: previousImageFileSha,
     })
+    // Figure out if image already exists, overwrite if it does
   } catch (_e: unknown) {
     return NextResponse.json(
       { error: 'Failed to add token image' },
@@ -178,7 +177,7 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  const listPath = `lists/token-lists/${listType}/tokens/${ChainKey[
+  const listPath = `tokens/${ChainKey[
     chainId
   ].toLowerCase()}.json`
 
@@ -190,7 +189,7 @@ export async function POST(request: NextRequest) {
       'GET /repos/{owner}/{repo}/contents/{path}',
       {
         owner,
-        repo: 'list',
+        repo: 'default-token-list',
         branch: 'master',
         path: listPath,
       },
@@ -210,16 +209,16 @@ export async function POST(request: NextRequest) {
     : []
 
   // Remove from current list if exists to overwrite later
-  currentList = currentList.filter((entry) => entry.address !== tokenAddress)
+  currentList = currentList.filter((entry) => entry.address !== tokenAddress.toLowerCase())
 
   // Append to current list
   const newList = [
     ...currentList,
     {
-      address: tokenAddress,
+      address: tokenAddress.toLowerCase(),
       chainId: chainId,
       decimals: Number(tokenDecimals),
-      logoURI: `https://raw.githubusercontent.com/${owner}/list/master/${imagePath}`,
+      logoURI: `https://raw.githubusercontent.com/${owner}/default-token-list/master/${imagePath}`,
       name: tokenName,
       symbol: tokenSymbol,
     },
@@ -228,7 +227,7 @@ export async function POST(request: NextRequest) {
   // Upload new list
   await octoKit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
     owner,
-    repo: 'list',
+    repo: 'default-token-list',
     branch: branch,
     path: listPath,
     content: Buffer.from(JSON.stringify(newList, null, 2)).toString('base64'),
@@ -241,7 +240,7 @@ export async function POST(request: NextRequest) {
     data: { html_url: listPr },
   } = await octoKit.request('POST /repos/{owner}/{repo}/pulls', {
     owner,
-    repo: 'list',
+    repo: 'default-token-list',
     title: `Token: ${displayName}`,
     head: branch,
     base: 'master',
@@ -252,34 +251,33 @@ export async function POST(request: NextRequest) {
       List: ${listType}
       Volume: ${formatUSD(0)}
       Liquidity: ${formatUSD(0)}
-      CoinGecko: ${await getCoinGecko(chainId, tokenAddress)}
-      Image: https://github.com/${owner}/list/tree/${branch}/${imagePath}
-      ![${displayName}](https://raw.githubusercontent.com/${owner}/list/${branch}/${imagePath})
+      Image: https://github.com/${owner}/default-token-list/tree/${branch}/${imagePath}
+      ![${displayName}](https://raw.githubusercontent.com/${owner}/default-token-list/${branch}/${imagePath})
     `,
   })
 
   // Send Discord notification using webhook
-  await fetch(process.env.TOKEN_LIST_PR_WEBHOOK_URL, {
-    method: 'POST',
-    body: stringify({
-      content: null,
-      embeds: [
-        {
-          description: 'New pull request',
-          color: 5814783,
-          author: {
-            name: `${tokenName} - ${CHAIN_NAME[chainId]}`,
-            url: listPr,
-            icon_url: `https://raw.githubusercontent.com/${owner}/list/${branch}/${imagePath}`,
-          },
-        },
-      ],
-      username: 'GitHub List Repo',
-      avatar_url:
-        'https://banner2.cleanpng.com/20180824/jtl/kisspng-computer-icons-logo-portable-network-graphics-clip-icons-for-free-iconza-circle-social-5b7fe46b0bac53.1999041115351082030478.jpg',
-    }),
-    headers: { 'Content-Type': 'application/json' },
-  })
+  // await fetch(process.env.TOKEN_LIST_PR_WEBHOOK_URL, {
+  //   method: 'POST',
+  //   body: stringify({
+  //     content: null,
+  //     embeds: [
+  //       {
+  //         description: 'New pull request',
+  //         color: 5814783,
+  //         author: {
+  //           name: `${tokenName} - ${CHAIN_NAME[chainId]}`,
+  //           url: listPr,
+  //           icon_url: `https://raw.githubusercontent.com/${owner}/list/${branch}/${imagePath}`,
+  //         },
+  //       },
+  //     ],
+  //     username: 'GitHub List Repo',
+  //     avatar_url:
+  //       'https://banner2.cleanpng.com/20180824/jtl/kisspng-computer-icons-logo-portable-network-graphics-clip-icons-for-free-iconza-circle-social-5b7fe46b0bac53.1999041115351082030478.jpg',
+  //   }),
+  //   headers: { 'Content-Type': 'application/json' },
+  // })
 
   return NextResponse.json(
     { listPr },
@@ -292,16 +290,4 @@ export async function POST(request: NextRequest) {
       },
     },
   )
-}
-
-async function getCoinGecko(chainId: ChainId, address: string) {
-  return await fetch(
-    `https://api.coingecko.com/api/v3/coins/${CHAIN_NAME[
-      chainId
-    ].toLowerCase()}/contract/${address}`,
-  )
-    .then((data) => data.json())
-    .then((data) =>
-      data.id ? `https://www.coingecko.com/en/coins/${data.id}` : 'Not Found',
-    )
 }

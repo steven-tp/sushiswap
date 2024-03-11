@@ -127,7 +127,6 @@ const Incentivize = withCheckerRoot(() => {
   }, [startDate, endDate])
 
   const { data: signature, signMessage } = useSignMessage()
-  console.log(signature, '*****')
   const { data: angleRewardTokens, isLoading: angleRewardTokensLoading } =
     useAngleRewardTokens({ chainId })
 
@@ -179,10 +178,9 @@ const Incentivize = withCheckerRoot(() => {
   const sign = useCallback(async () => {
     const message = await readContract({
       abi: DistributionCreator,
-      address: '0xC07a828EcdC3cb31cEF05e4348eBd843920203e7',
+      address: '0x3c8378679BaC61CBC9f47745dc54a1BEFc436E4c',
       functionName: 'message',
     })
-    console.log(message)
     signMessage({ message })
   }, [signMessage])
 
@@ -519,7 +517,7 @@ const Incentivize = withCheckerRoot(() => {
                         <Checker.ApproveERC20
                           id="approve-erc20"
                           amount={amount[0]}
-                          contract="0xC07a828EcdC3cb31cEF05e4348eBd843920203e7"
+                          contract="0x3c8378679BaC61CBC9f47745dc54a1BEFc436E4c"
                         >
                           <Checker.Custom
                             showChildren={Boolean(signature)}
@@ -546,7 +544,7 @@ const Incentivize = withCheckerRoot(() => {
                                         </DialogTitle>
                                         <DialogDescription>
                                           {token0?.symbol}/{token1?.symbol} •
-                                          SushiSwap V3 • {feeAmount / 10000}%
+                                          U2U Swap • {feeAmount / 10000}%
                                         </DialogDescription>
                                       </DialogHeader>
                                       <div className="flex flex-col gap-4">

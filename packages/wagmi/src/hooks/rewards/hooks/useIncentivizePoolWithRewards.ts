@@ -38,12 +38,11 @@ export const useIncentivizePoolWithRewards = ({
   const prepare = usePrepareContractWrite({
     chainId,
     abi: DistributionCreator,
-    address: '0xC07a828EcdC3cb31cEF05e4348eBd843920203e7',
+    address: '0x3c8378679BaC61CBC9f47745dc54a1BEFc436E4c',
     functionName: 'signAndCreateDistribution',
     args: args ? args : undefined,
     enabled: Boolean(enabled && args && chainId === chain?.id),
   })
-
   const onSettled = useCallback(
     (data: SendTransactionResult | undefined, e: Error | null) => {
       if (e instanceof Error) {
