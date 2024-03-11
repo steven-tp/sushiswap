@@ -52,7 +52,7 @@ export const TradeRoutePathView: FC<{
             pools to get you the best price.
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="bg-secondary border border-accent rounded-xl">
+        <ScrollArea className="background-card rounded-lg border-neubrutal">
           <div className="flex flex-col max-h-[300px] divide-y divide-accent">
             {trade?.route?.legs?.map((directPath, i) => (
               <ComplexRoutePath
@@ -69,7 +69,7 @@ export const TradeRoutePathView: FC<{
         </ScrollArea>
         <DialogFooter>
           <DialogClose className="w-full">
-            <Button fullWidth size="xl">
+            <Button fullWidth variant="border" className='!font-bold'>
               Close
             </Button>
           </DialogClose>

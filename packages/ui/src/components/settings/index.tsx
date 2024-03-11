@@ -63,7 +63,7 @@ export const SettingsOverlay: FC<SettingsOverlayProps> = ({
         ) : (
           <Button
             size="sm"
-            className="!rounded-full hover:!text-hover focus:!text-hover hover:border-hover focus:border-hover color-base dark:bg-transparent bg-transparent border-color-base border-2 w-9 h-9 px-[0px]"
+            className="!rounded-full hover:!text-hover focus:!text-hover hover:border-hover hover:!bg-transparent focus:!bg-transparent focus:border-hover color-base dark:bg-transparent bg-transparent border-color-base border-2 w-9 h-9 px-[0px]"
             variant="secondary"
             onClick={() => setOpen(true)}
           >

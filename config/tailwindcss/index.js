@@ -36,7 +36,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        sans: ['var(--font-metuo)'],
         mono: ['var(--font-roboto-mono)'],
       },
       backgroundImage: () => ({

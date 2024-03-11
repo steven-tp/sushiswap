@@ -36,7 +36,7 @@ export const ProtocolBadge: Record<Protocol, JSX.Element> = {
     </div>
   ),
   [Protocol.SUSHISWAP_V3]: (
-    <div className="whitespace-nowrap bg-blue/20 text-blue text-[10px] px-2 rounded-full">
+    <div className="whitespace-nowrap bg-hover text-black text-[10px] px-2 rounded-full">
       V3
     </div>
   ),
@@ -70,9 +70,9 @@ export const PoolNameCell: FC<Row<PositionWithPool>> = ({ original }) => {
         )}
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="flex items-center gap-1 text-sm font-medium text-gray-900 dark:text-slate-50">
+        <span className="flex items-center gap-1 text-sm font-medium">
           {token0?.symbol}{' '}
-          <span className="font-normal text-gray-900 dark:text-slate-500">
+          <span className="font-normal color-base">
             /
           </span>{' '}
           {token1?.symbol}{' '}
@@ -84,7 +84,7 @@ export const PoolNameCell: FC<Row<PositionWithPool>> = ({ original }) => {
         </span>
         <div className="flex gap-1">
           {ProtocolBadge[original.pool.protocol]}
-          <div className="bg-gray-200 text-gray-700 dark:bg-slate-800 dark:text-slate-300 text-[10px] px-2 rounded-full">
+          <div className="background-base text-black text-[10px] px-2 rounded-full">
             {formatNumber(original.pool.swapFee * 100)}%
           </div>
           {original.pool.isIncentivized && (
@@ -151,9 +151,9 @@ export const PoolNameCellPool: FC<{ pool: Pool }> = ({ pool }) => {
         )}
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="flex items-center gap-1 text-sm font-medium text-gray-900 dark:text-slate-50">
+        <span className="flex items-center gap-1 text-sm font-medium">
           {token0?.symbol}{' '}
-          <span className="font-normal text-gray-900 dark:text-slate-500">
+          <span className="font-normal color-base">
             /
           </span>{' '}
           {token1?.symbol}{' '}
@@ -177,7 +177,7 @@ export const PoolNameCellPool: FC<{ pool: Pool }> = ({ pool }) => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <div className="bg-gray-200 text-gray-700 dark:bg-slate-800 dark:text-slate-300 text-[10px] px-2 rounded-full">
+                <div className="background-base text-black text-[10px] px-2 rounded-full">
                   {formatNumber(pool.swapFee * 100)}%
                 </div>
               </TooltipTrigger>

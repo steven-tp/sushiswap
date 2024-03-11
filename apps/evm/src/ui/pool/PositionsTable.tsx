@@ -86,7 +86,7 @@ export const PositionsTable: FC<PositionsTableProps> = ({
       <CardHeader>
         <CardTitle>
           My Positions{' '}
-          <span className="text-gray-400 dark:text-slate-500">
+          <span className="color-base">
             ({_positions.length})
           </span>
         </CardTitle>

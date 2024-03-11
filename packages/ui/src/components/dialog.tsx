@@ -29,12 +29,12 @@ import { CheckMarkIcon } from './icons/CheckmarkIcon'
 import { FailedMarkIcon } from './icons/FailedMarkIcon'
 
 const dialogVariants = cva(
-  'duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 border-2 border-black rounded-lg',
+  'duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 border-neubrutal rounded-lg',
   {
     variants: {
       variant: {
         default:
-          'bottom-0 md:bottom-[unset] fixed left-[50%] md:top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] md:translate-y-[-50%] gap-4 bg-gray-100 dark:bg-slate-800 p-6 shadow-lg rounded-2xl md:w-full data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-bottom-[48%] md:data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-bottom-[48%] md:data-[state=open]:slide-in-from-top-[48%]',
+          'bottom-0 md:bottom-[unset] fixed left-[50%] md:top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] md:translate-y-[-50%] gap-4 background-card p-6 shadow-lg rounded-2xl md:w-full data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-bottom-[48%] md:data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-bottom-[48%] md:data-[state=open]:slide-in-from-top-[48%]',
         opaque: 'px-4 fixed z-50 top-4 grid w-full max-w-xl',
       },
     },
@@ -49,7 +49,7 @@ const dialogOverlayVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-black/20 backdrop-blur-md',
+        default: 'bg-black/80 backdrop-blur-[6px]',
         opaque: 'bg-gray-100 dark:bg-slate-900',
       },
     },
@@ -130,7 +130,7 @@ const DialogContent = React.forwardRef<
           asChild
           className={dialogCloseVariants({ variant })}
         >
-          <IconButton icon={XMarkIcon} className='button-neubrutal rounded-lg' size='sm' name="Close" />
+          <IconButton icon={XMarkIcon} className='!background-card button-neubrutal rounded-lg hover:text-black hover:!bg-hover' size='sm' name="Close" />
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>
     </DialogPortal>
@@ -173,7 +173,7 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={classNames(
-      'text-lg font-semibold leading-none tracking-tight mr-[64px]',
+      'font-display text-xl font-black leading-none tracking-tight mr-[64px]',
       className,
     )}
     {...props}
@@ -187,7 +187,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={classNames('text-sm text-muted-foreground mr-[64px]', className)}
+    className={classNames('text-sm color-base mr-[64px]', className)}
     {...props}
   />
 ))
