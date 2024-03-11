@@ -59,7 +59,7 @@ export const PoolNameCellV3: FC<Row<ConcentratedLiquidityPositionWithV3Pool>> =
             <div className="bg-blue/20 text-blue text-[10px] px-2 rounded-full">
               V3
             </div>
-            <div className="bg-gray-200 text-gray-700 dark:bg-slate-800 dark:text-slate-300 text-[10px] px-2 rounded-full">
+            <div className="background-base text-black text-[10px] px-2 rounded-full">
               {formatNumber(original.fee / 10000)}%
             </div>
           </div>

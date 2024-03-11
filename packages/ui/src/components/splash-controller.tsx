@@ -4,7 +4,7 @@ import { U2DexIcon } from './icons/U2DexIcon'
 
 const Splash: FC = () => {
   return (
-    <div className="fixed inset-0 bg-gray-100 dark:bg-neutral-800 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 background-card z-50 flex items-center justify-center">
       <div className="absolute top-[calc(50%-20px)] left-[calc(50%-20px)]">
         <div className="w-[50px] h-[50px] animate-[bounce_.5s_linear_infinite_0.17s] absolute">
           <U2DexIcon width={50} height={50} />

@@ -9,28 +9,49 @@
 @tailwind utilities;
 
 @layer base {
+  /* @font-face {
+    font-family: 'Metuo';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/apps/evm/public/fonts/metuo-metuo-regular-400.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'Metuo';
+    font-style: normal;
+    font-weight: 700;
+    src: url(/apps/evm/public/fonts/metuo-metuo-bold-700.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'Metuo';
+    font-style: normal;
+    font-weight: 800;
+    src: url(/apps/evm/public/fonts/metuo-metuo-black-800.woff2) format('woff2');
+  } */
+
   :root {
-    --font-sans: "Urbanist", 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    --font-sans: 'Metuo', 'Urbanist', 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 
-    --background-color: #f4f5f6;
-    --color: #000;
-    --secondary: #0000000a;
-    --muted: #0000000f;
-    --muted-foreground: #6b7280;
-    --accent: #00000014;
-    --accent-foreground: #111827;
-    --background: #f4f5f6;
+    --background-color: #212121;
+    --color: #ffffff;
+    --secondary: #ffffff0a;
+    --muted: #ffffff0f;
+    --muted-foreground: #94a3b8;
+    --accent: #ffffff14;
+    --accent-foreground: #e2e8f0;
+    --background: #101828;
     --primary: #8ef102;
     --primary_hover: 195 249 118;
     --default: 162 179 152;
     --background-card: #272727;
+    --background-card-hover: #363636;
     --background-item: #404040;
+    --background-input: rgba(191, 252, 251, 0.2);
     --color-base: #9f9f9f;
-    --color-yellow:#ffa800;
+    --color-yellow:#ffe500;
     --color-green: #00e778;
-    --color-red: #f53309;
-    --color-placeholder: #696969;
+    --color-red: #fb8d75;
+    --color-placeholder: var(--color-base);
   }
 
   .paper {
@@ -47,25 +68,36 @@
     --color: #ffffff;
     --background: #101828;
     --background-card: #272727;
+    --background-card-hover: #363636;
     --background-item: #404040;
+    --background-input: rgba(191, 252, 251, 0.2);
     --color-base: #9f9f9f;
     --color-yellow:#ffe500;
     --color-green: #00e778;
     --color-red: #fb8d75;
-    --color-placeholder: #696969;
+    --color-placeholder: var(--color-base);
   }
 
   .dark .paper {
-    backdrop-filter: blur(10px) saturate(190%) contrast(70%) brightness(80%);
+    backdrop-filter: blur(10px) saturate(200%) contrast(50%) brightness(120%);
   }
   .background-main {
     background: var(--background-color);
   }
+  .background-base {
+    background: var(--color-base);
+  }
   .background-card {
     background: var(--background-card);
   }
+  .background-card-hover:hover {
+    background: var(--background-card-hover);
+  }
   .background-item {
     background: var(--background-item);
+  }
+  .background-input {
+    background: var(--background-input);
   }
   .border-color-base {
     border-color: var(--color-base);
@@ -98,6 +130,7 @@ html {
   box-sizing: border-box;
   touch-action: manipulation;
   background-color: var(--background-color) !important;
+  font-family: var(--font-metuo) !important;
 }
 
 body {
@@ -172,11 +205,11 @@ input::placeholder, textarea::placeholder {
 
 *.scroll::-webkit-scrollbar-thumb {
   height: 30px;
-  border: 4px solid rgba(0, 0, 0, 0);
+  border: 4px solid rgba(255, 255, 255, 0);
   background-clip: padding-box;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   -webkit-border-radius: 7px;
-  -webkit-box-shadow: inset -1px -1px 0px rgba(255, 255, 255, 0.05), inset 1px 1px 0px rgba(255, 255, 255, 0.05);
+  -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
 }
 
 html[class='dark'] *.scroll::-webkit-scrollbar-thumb {

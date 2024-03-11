@@ -44,7 +44,7 @@ export const UserProfile: FC<ProfileProps> = () => {
 
   const chainId = (chain?.id as ChainId) || ChainId.ETHEREUM
 
-  if (!address || !isMounted) return <ConnectButton variant="secondary" className='button-neubrutal' />
+  if (!address || !isMounted) return <ConnectButton variant="secondary" className='button-neubrutal hover:!text-black focus:!text-black data-[state=open]:bg-hover data-[state=open]:text-black data-[state=open]:shadow-[0_4px_0_0_rgba(0,0,0,1)]' />
 
   return (
     <Popover>

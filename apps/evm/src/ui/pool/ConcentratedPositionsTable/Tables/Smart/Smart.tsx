@@ -59,7 +59,7 @@ export const Smart: FC<Smart> = ({ chainId, poolAddress, onRowClick }) => {
       <CardHeader>
         <CardTitle>
           My Positions{' '}
-          <span className="text-gray-400 dark:text-slate-500">
+          <span className="color-base">
             ({data?.length})
           </span>
         </CardTitle>

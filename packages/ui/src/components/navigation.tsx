@@ -125,7 +125,7 @@ const navigationContainerVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-gray-100 dark:bg-[#212121]',
+          'background-main',
         transparent: '',
       },
     },

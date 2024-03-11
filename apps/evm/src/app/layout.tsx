@@ -4,6 +4,7 @@ import { SanctionedAddressDialog } from '@sushiswap/wagmi/components/sanctioned-
 import type { Metadata } from 'next'
 import { Inter, Roboto_Mono } from 'next/font/google'
 import React from 'react'
+import localFont from 'next/font/local'
 
 import { Providers } from './providers'
 // import { Trackers } from './trackers'
@@ -18,6 +19,27 @@ const roboto_mono = Roboto_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-roboto-mono',
+})
+
+const metuo = localFont({
+  variable: '--font-metuo',
+  src: [
+    {
+      path: '../../public/fonts/metuo-metuo-regular-400.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/metuo-metuo-bold-700.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/metuo-metuo-black-800.woff2',
+      weight: '800',
+      style: 'normal',
+    },
+  ],
 })
 
 export const metadata: Metadata = {
@@ -36,7 +58,7 @@ export default function RootLayout({
     // <html lang="en" className="[color-scheme:dark]">
     <html
       lang="en"
-      className={`${inter.variable} ${roboto_mono.variable} dark`}
+      className={`${metuo.variable} ${inter.variable} ${roboto_mono.variable} dark`}
       // suppressHydrationWarning={true}
     >
       <link

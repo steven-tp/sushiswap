@@ -100,9 +100,9 @@ const COLUMNS = [
             </Badge>
           </div>
           <div className="flex flex-col gap-0.5">
-            <span className="flex items-center gap-1 text-sm font-medium text-gray-900 dark:text-slate-50">
+            <span className="flex items-center gap-1 text-sm font-medium">
               {unwrapToken(token0).symbol}{' '}
-              <span className="font-normal text-gray-900 dark:text-slate-500">
+              <span className="font-normal color-base">
                 /
               </span>{' '}
               {unwrapToken(token1).symbol}{' '}
@@ -126,7 +126,7 @@ const COLUMNS = [
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className="bg-gray-200 text-gray-700 dark:bg-slate-800 dark:text-slate-300 text-[10px] px-2 rounded-full">
+                    <div className="background-base text-black text-[10px] px-2 rounded-full">
                       {formatNumber(original.pool.swapFee * 100)}%
                     </div>
                   </TooltipTrigger>

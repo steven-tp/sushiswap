@@ -54,11 +54,11 @@ export const SlippageTolerance: FC<{
           <>
             <div className="flex justify-between items-center gap-4">
               <div className="flex flex-col gap-2">
-                <Label>Automatic Slippage Tolerance</Label>
+                <Label className='!text-base'>Automatic Slippage Tolerance</Label>
                 <span
                   className={typographyVariants({
                     variant: 'muted',
-                    className: 'text-sm',
+                    className: 'text-sm !color-base',
                   })}
                 >
                   Turn off automatic slippage tolerance <br /> to adjust the
@@ -77,7 +77,7 @@ export const SlippageTolerance: FC<{
         ) : null}
         <div className="flex justify-between gap-[60px]">
           <div className="flex flex-col gap-2">
-            <Label className="flex items-center gap-1">
+            <Label className="flex items-center gap-1 !text-base">
               {options?.title || 'Slippage'}{' '}
               <HoverCardTrigger>
                 <InformationCircleIcon width={16} height={16} />
@@ -87,7 +87,7 @@ export const SlippageTolerance: FC<{
                   <CardHeader>
                     <CardTitle>Slippage</CardTitle>
                     <CardDescription className="prose">
-                      <p>
+                      <p className='color-base mt-3'>
                         Slippage is the difference between the expected value of
                         output from a trade and the actual value due to asset
                         volatility and liquidity depth. If the actual slippage
@@ -95,7 +95,7 @@ export const SlippageTolerance: FC<{
                         transaction will revert.
                       </p>
                       <a
-                        className="text-blue hover:underline"
+                        className="text-primary hover:underline hover:text-hover"
                         target="_blank"
                         href="https://www.sushi.com/academy/articles/what-is-slippage-price-impact"
                         rel="noreferrer"
@@ -117,20 +117,20 @@ export const SlippageTolerance: FC<{
           </div>
           <span
             className={classNames(
-              isDangerous ? '!text-red' : 'dark:text-slate-400 text-gray-600',
-              'text-sm font-semibold',
+              isDangerous ? '!text-red' : '',
+              'text-base',
             )}
           >
             {slippageTolerance === 'AUTO' ? '0.5%' : `${slippageTolerance}%`}
           </span>
         </div>
         <Collapsible open={slippageTolerance !== 'AUTO'}>
-          <div className="flex gap-1 items-center border border-accent rounded-xl bg-secondary p-0.5">
+          <div className="flex gap-3 items-center">
             <RadioGroup value={slippageTolerance} onChange={onChange}>
-              <div className="flex gap-1 items-center">
+              <div className="flex gap-3 items-center">
                 {TABS.map((tab, i) => (
                   <RadioGroup.Option
-                    className="h-[40px]"
+                    className="!h-10 !bg-primary button-neubrutal font-semibold rounded-lg hover:!bg-hover !text-black data-[state=on]:!bg-hover data-[state=on]:shadow-[0_4px_0_0_rgba(0,0,0,1)]"
                     key={i}
                     value={tab}
                     as={Toggle}
@@ -142,8 +142,6 @@ export const SlippageTolerance: FC<{
                 ))}
               </div>
             </RadioGroup>
-
-            <Separator orientation="vertical" className="min-h-[36px]" />
             <TextField
               type="number"
               value={slippageTolerance}

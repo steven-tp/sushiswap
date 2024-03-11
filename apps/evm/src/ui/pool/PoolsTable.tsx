@@ -370,7 +370,7 @@ export const PoolsTable: FC<PositionsTableProps> = ({ onRowClick }) => {
           <CardTitle>
             Pools{' '}
             {poolCount?.count ? (
-              <span className="text-gray-400 dark:text-slate-500">
+              <span className="color-base">
                 ({poolCount.count})
               </span>
             ) : null}

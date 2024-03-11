@@ -41,7 +41,7 @@ const tailwindConfig = {
     },
     extend: {
       fontFamily: {
-        display: 'Metuo Personal Use, sans-serif',
+        display: 'Metuo, sans-serif',
       },
       display: ['group-hover'],
       visibility: ['group-hover'],
