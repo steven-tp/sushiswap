@@ -1,5 +1,3 @@
-import { ChainId } from '../chain'
-
 export const ANGLE_ENABLED_NETWORKS = [
   // ChainId.ARBITRUM,
   // ChainId.ETHEREUM,
@@ -10,7 +8,7 @@ export const ANGLE_ENABLED_NETWORKS = [
   // ChainId.THUNDERCORE,
   // ChainId.CORE,
   // ChainId.GNOSIS,
-  ChainId.U2U_NEBULAS
+  // ChainId.U2U_NEBULAS
 ]
 export type AngleEnabledChainId = typeof ANGLE_ENABLED_NETWORKS[number]
 export const isAngleEnabledChainId = (

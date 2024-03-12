@@ -7,6 +7,7 @@ import tokensByChainAndAddress from './handlers/token-by-chain-and-address.js'
 import tokensByChain from './handlers/tokens-by-chain.js'
 import tokens from './handlers/tokens.js'
 import v0TokenByChainAndAddress from './handlers/v0-token-by-chain-and-address.js'
+import decimal from './handlers/token-decimals.js'
 
 const app: Express = express()
 
@@ -20,6 +21,7 @@ app.get('/v0', tokens)
 app.get('/v0/:chainId/:address', v0TokenByChainAndAddress)
 app.get('/v1/:chainId', tokensByChain)
 app.get('/v1/:chainId/:address', tokensByChainAndAddress)
+app.get('/v2/decimal-places', decimal)
 app.listen(PORT, () => {
   console.log(`Tokens list ${CHAIN_ID} app listening on port ${PORT}`)
 })
