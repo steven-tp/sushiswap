@@ -86,11 +86,14 @@ export const TokenSelector: FC<TokenSelectorProps> = ({
   const { data: otherTokenMap, isLoading: isOtherTokensLoading } =
     useOtherTokenListsQuery({ chainId, query })
   const { data: pricesMap } = usePrices({ chainId })
-  const {
-    data: balancesMap,
-    isInitialLoading: isBalanceLoading,
-    refetch,
-  } = useBalances({ chainId, account: address, enabled: open })
+  const balancesMap = null
+  const isBalanceLoading = false
+  const refetch = () => {}
+  // const {
+  //   data: balancesMap,
+  //   isInitialLoading: isBalanceLoading,
+  //   refetch,
+  // } = useBalances({ chainId, account: address, enabled: open })
 
   const tokenMap = useMemo(() => {
     return {

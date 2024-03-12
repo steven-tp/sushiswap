@@ -70,6 +70,8 @@ enum AprTimeRange {
   ONE_MONTH = 'ONE_MONTH',
 }
 
+const subgraphStartedBlock = 18909781
+
 export async function execute(protocol: Protocol) {
   try {
     const startTime = performance.now()
@@ -420,8 +422,9 @@ async function fetchV3Pools(
 
   do {
     const where = cursor !== '' ? { id_gt: cursor } : null
-    const block = blockNumber ? { number: blockNumber } : null
-
+    let block = null
+    if (blockNumber && blockNumber > subgraphStartedBlock) block = { number: blockNumber }
+    else if (blockNumber && blockNumber <= subgraphStartedBlock) block = { number: subgraphStartedBlock }
     const request = await sdk
       .V3Pools({
         first: 1000,

@@ -334,7 +334,7 @@ export const SUSHISWAP_V3_SUBGRAPH_NAME: Record<number, string> = {
   // [ChainId.BTTC]: 'sushi-v3/v3-bttc',
   // [ChainId.FILECOIN]: 'sushiswap/v3-filecoin',
   // [ChainId.HAQQ]: 'sushi/v3-haqq',
-  [ChainId.U2U_NEBULAS]: 'sushi-v3/v3-u2u',
+  [ChainId.U2U_NEBULAS]: 'u2u-amm/v3-exchange',
 }
 
 export const TRIDENT_SUBGRAPH_NAME: Record<number, string> = {
