@@ -71,7 +71,7 @@ const Pool: FC<{ pool: Awaited<ReturnType<typeof getPool>> }> = ({ pool }) => {
 
   return (
     <Container maxWidth="5xl" className="px-2 sm:px-4">
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-8">
         {pool.hasEnabledSteerVault && (
           <Message variant="info" size="sm">
             {`This pool has been activated to leverage our smart pool feature. Smart pools are designed to optimize the
@@ -95,12 +95,9 @@ const Pool: FC<{ pool: Awaited<ReturnType<typeof getPool>> }> = ({ pool }) => {
             poolId={pool.address as Address}
           />
         </PoolsFiltersProvider>
-        <div className="py-4">
-          <Separator />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-[auto_400px] gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-[auto_400px] gap-4">
           <StatisticsCharts address={address} chainId={chainId} />
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <Card>
               <CardHeader>
                 <CardTitle>Pool Liquidity</CardTitle>
@@ -221,9 +218,6 @@ const Pool: FC<{ pool: Awaited<ReturnType<typeof getPool>> }> = ({ pool }) => {
               </CardContent>
             </Card>
           </div>
-        </div>
-        <div className="py-4">
-          <Separator />
         </div>
         <PoolRewardDistributionsCard pool={pool} />
         <PoolTransactionsV3 pool={pool} poolId={pool.address} />

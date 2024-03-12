@@ -119,7 +119,7 @@ export const ConcentratedPositionsTable: FC<ConcentratedPositionsTableProps> =
               </span>
               <div className="flex gap-4">
                 <div className="flex gap-3 items-center px-2.5">
-                  <span className="text-sm font-medium text-gray-600 dark:text-slate-400">
+                  <span className="text-sm font-medium color-base">
                     Hide closed
                   </span>
                   <Switch
@@ -132,7 +132,7 @@ export const ConcentratedPositionsTable: FC<ConcentratedPositionsTableProps> =
                     shallow={true}
                     href={`/pool/${chainId}:${poolId}/positions/create`}
                   >
-                    <Button icon={PlusIcon} asChild size="sm">
+                    <Button icon={PlusIcon} asChild size="sm" variant="border">
                       Create position
                     </Button>
                   </LinkInternal>
