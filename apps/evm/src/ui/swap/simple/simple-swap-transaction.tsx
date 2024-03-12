@@ -1,5 +1,5 @@
 import { Card, Loader, DataTable } from "@sushiswap/ui";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { GetTransactionsArgs } from '@sushiswap/client'
 import {
@@ -21,6 +21,7 @@ import { config } from "src/config";
 export const  SimpleSwapTransaction: FC = () => {
   const {
     state: { token0, token1, transactions: newTransactions },
+    mutate: { addNewTransaction },
   } = useDerivedStateSimpleSwap()
 
   const args = useMemo<GetTransactionsArgs>(() => {
@@ -55,6 +56,12 @@ export const  SimpleSwapTransaction: FC = () => {
     return transactions ?  _newTransaction.concat(...transactions.map(page => page?.data)) : []
   }
   , [transactions, newTransactions])
+
+  useEffect(() => {
+    if(token0?.wrapped.address && token1?.wrapped.address) {
+      addNewTransaction()
+    }
+  }, [token0?.wrapped.address, token1?.wrapped.address])
 
 
   const state: Partial<TableState> = useMemo(() => {

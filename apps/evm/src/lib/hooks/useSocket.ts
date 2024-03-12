@@ -86,6 +86,11 @@ export const useSocket = () => {
       })
     }
   }
+
+  function clearSocket() {
+    clearInterval(intervalWs)
+    _socket?.close()
+  }
   
   function unsubcribe(message: TOPIC_MESSAGE) {
     if (!message) return
@@ -138,6 +143,7 @@ export const useSocket = () => {
   return {
     subcribeTransaction,
     getCandle,
+    clearSocket,
     createWebsocket
   }
 },[handleCandle, handleTransaction])

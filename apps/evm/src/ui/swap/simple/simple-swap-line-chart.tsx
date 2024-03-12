@@ -1,44 +1,68 @@
-import { FC, useCallback, useMemo } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import ReactECharts from 'echarts-for-react'
 import { EChartsOption } from 'echarts-for-react/lib/types'
-import { SkeletonBox, classNames } from "@sushiswap/ui"
+import { CardDescription, CardHeader, CardTitle, SkeletonBox, SkeletonText, classNames } from "@sushiswap/ui"
 import { format } from 'date-fns'
 import { formatUSD } from 'sushi/format'
 import { graphic } from 'echarts'
 import tailwindConfig from 'tailwind.config.js'
 import resolveConfig from 'tailwindcss/resolveConfig'
+import { SWAP_TRANSACTION_API } from "@sushiswap/client"
+import { useDerivedStateSimpleSwap } from "./derivedstate-simple-swap-provider"
 const tailwind = resolveConfig(tailwindConfig)
-enum LineChartPeriod {
-  Day = 0,
-  Week = 1,
-  Month = 2,
-  Year = 3,
-  All = 4,
+
+interface ISimpleSwapLineChart {
+  resolution: string
 }
-const chartTimespans: Record<LineChartPeriod, number> = {
-  [LineChartPeriod.Day]: 86400 * 1000,
-  [LineChartPeriod.Week]: 604800 * 1000,
-  [LineChartPeriod.Month]: 2629746 * 1000,
-  [LineChartPeriod.Year]: 31556952 * 1000,
-  [LineChartPeriod.All]: Infinity,
-}
-export const SimpleSwapLineChart: FC = () => {
-  const xData = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  const yData = [820, 932, 901, 934, 1290, 1330, 1320]
+
+export const SimpleSwapLineChart: FC<ISimpleSwapLineChart> = ({
+  resolution
+}) => {
+  const [xData, setXData] = useState<Array<number>>([])
+  const [yData, setYData] = useState<Array<number>>([])
+  const {
+    state: { token0, token1 },
+  } = useDerivedStateSimpleSwap()
   // Transient update for performance
   const onMouseOver = useCallback(
     ({ name, value }: { name: number; value: number }) => {
-      const valueNodes = document.getElementsByClassName('hoveredItemValueTVL')
-      const nameNodes = document.getElementsByClassName('hoveredItemNameTVL')
+      const valueNodes = document.getElementsByClassName('hoveredItemValue')
+      const nameNodes = document.getElementsByClassName('hoveredItemName')
 
-      // valueNodes[0].innerHTML = formatUSD(value)
-      // nameNodes[0].innerHTML = format(
-      //   new Date(name * 1000),
-      //   'dd MMM yyyy HH:mm',
-      // )
+      valueNodes[0].innerHTML = formatUSD(value)
+      nameNodes[0].innerHTML = format(
+        new Date(Number(name)),
+        'dd MMM yyyy HH:mm',
+      )
     },
     [],
   )
+
+  const fetchHistoryLine = async (token0: string, token1: string, type: string) => {
+    const res = await fetch(`${SWAP_TRANSACTION_API}/market/history-line?token0=${token0}&token1=${token1}&type=${type}`)
+    const dataChart = await res.json()
+    if(dataChart.data?.length > 0) {
+      let xData: Array<number> = []
+      let yData: Array<number> = []
+      dataChart.data.forEach((item: any) => {
+        xData.push(item.xData)
+        yData.push(item.yData)
+      });
+      setXData(xData)
+      setYData(yData)
+
+    }
+  }
+
+  useEffect(() => {
+    if(token0?.wrapped.address && token1?.wrapped.address) {
+      const _resolution = ['D1', 'D7', 'D30'].indexOf(resolution) === -1 ? 'D7' : resolution
+      fetchHistoryLine(token0?.wrapped.address, token1.wrapped.address, _resolution)
+    }
+  }, [token0, token1, resolution])
+
+
+
   const DEFAULT_OPTION: EChartsOption = useMemo(
     () => ({
       tooltip: {
@@ -46,7 +70,7 @@ export const SimpleSwapLineChart: FC = () => {
         extraCssText: 'z-index: 1000',
         responsive: true,
         // @ts-ignore
-        backgroundColor: '#fff',
+        backgroundColor: tailwind.theme?.colors.primary,
         textStyle: {
           // @ts-ignore
           color: tailwind.theme.colors.slate['50'],
@@ -56,12 +80,10 @@ export const SimpleSwapLineChart: FC = () => {
         formatter: (params: any) => {
           onMouseOver({ name: params[0].name, value: params[0].value })
 
-          const date = new Date(Number(params[0].name * 1000))
+          const date = new Date(Number(params[0].name))
           return `<div class="flex flex-col gap-0.5">
-            <span class="text-sm text-slate-50 font-bold">${formatUSD(
-              params[0].value,
-            )}</span>
-            <span class="text-xs text-slate-400 font-medium">${
+            <span class="text-sm text-black font-bold">${params[0].value}</span>
+            <span class="text-xs text-black font-medium">${
               date instanceof Date && !Number.isNaN(date?.getTime())
                 ? format(date, 'dd MMM yyyy HH:mm')
                 : ''
@@ -143,16 +165,41 @@ export const SimpleSwapLineChart: FC = () => {
     [onMouseOver, xData, yData],
   )
   return (
-    <div className="h-[100%] pb-2">
-        {xData ? (
-          <ReactECharts option={DEFAULT_OPTION} style={{ height: '100%' }} />
+    <div>
+    <CardHeader className="border-t border-accent">
+      <CardTitle>
+        {yData?.length ? (
+          <span className="hoveredItemValue">
+            {yData[yData.length - 1]}
+          </span>
         ) : (
-          <SkeletonBox
-            className={classNames(
-              'h-[400px] w-full dark:via-slate-800 dark:to-slate-900',
-            )}
-          />
+          <SkeletonText fontSize="sm" />
         )}
+      </CardTitle>
+      <CardDescription>
+        {xData?.length ? (
+          <div className="text-sm text-gray-500 dark:text-slate-500 hoveredItemName">
+            {format(
+              new Date(xData[xData.length - 1]),
+              'dd MMM yyyy HH:mm',
+            )}
+          </div>
+        ) : (
+          <SkeletonText fontSize="sm" />
+        )}
+      </CardDescription>
+    </CardHeader>
+    <div className="h-[100%] pb-2">
+      {xData ? (
+        <ReactECharts option={DEFAULT_OPTION} style={{ height: '400px' }} />
+      ) : (
+        <SkeletonBox
+          className={classNames(
+            'h-[400px] w-full dark:via-slate-800 dark:to-slate-900',
+          )}
+        />
+      )}
+    </div>
     </div>
   )
 }
