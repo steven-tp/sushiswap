@@ -28,6 +28,7 @@ function PoolChartTypes<C extends string>({
           pressed={chart === selectedChart}
           onClick={() => setChart(chart)}
           key={chart}
+          className='!text-sm font-bold color-base border-2 border-transparent data-[state=on]:border-black data-[state=on]:bg-primary data-[state=on]:text-black'
         >
           {chart}
         </Toggle>

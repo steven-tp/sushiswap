@@ -76,38 +76,38 @@ export const  SimpleSwapTransaction: FC = () => {
   const precision = localStorage.getItem(config.PRECISION_STOGRATE) || 6
 
   const COLUMNS = [
-    DATE_COLUMN,
-    TYPE_COLUMN,
+    // TYPE_COLUMN,
     AMOUNT_IN_COLUMN(token0?.symbol),
     AMOUNT_OUT_COLUMN(token1?.symbol),
     PRICE_COLUMN(`${token0?.symbol} / ${token1?.symbol}`, Number(precision)),
     MAKER_COLUMN,
-    TXN_COLUMN
+    TXN_COLUMN,
+    DATE_COLUMN,
   ]
   return (
-    <div id="scrollableTransaction" className="h-[600px] overflow-auto">
-    <InfiniteScroll
-      dataLength={data.length}
-      next={() => setSize((prev) => prev + 1)}
-      hasMore={isLoadmore}
-      loader={
-        <div className="flex justify-center w-full py-4">
-          <Loader size={16} />
-        </div>
-      }
-      scrollableTarget="scrollableTransaction"
-    >
-      <Card className="border-neubrutal mb-1 mr-1">
-        {
-          data && <DataTable
-            state={state}
-            loading={!data && isValidating}
-            columns={COLUMNS}
-            data={data}
-          />
+    <div id="scrollableTransaction" className="h-[600px] overflow-auto border-neubrutal rounded-lg">
+      <InfiniteScroll
+        dataLength={data.length}
+        next={() => setSize((prev) => prev + 1)}
+        hasMore={isLoadmore}
+        loader={
+          <div className="flex justify-center w-full py-4">
+            <Loader size={16} />
+          </div>
         }
-      </Card>
-    </InfiniteScroll>
+        scrollableTarget="scrollableTransaction"
+      >
+        <Card className="!border-none">
+          {
+            data && <DataTable
+              state={state}
+              loading={!data && isValidating}
+              columns={COLUMNS}
+              data={data}
+            />
+          }
+        </Card>
+      </InfiniteScroll>
     </div>
   )
 }

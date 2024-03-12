@@ -45,7 +45,7 @@ export const Breadcrumb = () => {
   const items = pathname.split('/').slice(2)
 
   return (
-    <div className="pt-4 pb-1">
+    <div className="pt-8 pb-1">
       <div className='flex gap-x-1.5 items-center text-sm rounded-lg border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] w-fit px-2.5 py-2 background-card'>
         <Button
           variant="link"

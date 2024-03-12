@@ -201,7 +201,7 @@ export const Hero: FC = () => {
           <Button
             asChild
             size="lg"
-            className="px-6 font-display !bg-hover text-lg !font-bold !text-black flex-1 w-full sm:flex-0 rounded-md rounded-r-none !justify-between h-full"
+            className="px-6 font-display !bg-hover text-lg !font-bold !text-black flex-1 w-full sm:flex-0 rounded-md !justify-between h-full"
           >
    
               I want to create a position

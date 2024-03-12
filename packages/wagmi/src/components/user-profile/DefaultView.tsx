@@ -100,13 +100,13 @@ export const DefaultView: FC<DefaultProps> = ({
           <p className="text-2xl sm:text-3xl font-medium whitespace-nowrap">
             {balance.toSignificant(3)} {Native.onChain(chainId).symbol}
           </p>
-          <p className="font-medium text-slate-400">
+          <p className="font-medium color-base">
             ${balanceAsUsd?.toFixed(2)}
           </p>
         </div>
       </div>
       <List>
-        <List.Control className="bg-gray-100">
+        <List.Control className='background-item'>
           <List.MenuItem
             icon={InboxArrowDownIcon}
             title="Transactions"
