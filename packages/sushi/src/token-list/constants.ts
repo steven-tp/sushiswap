@@ -31,7 +31,6 @@ export const DEFAULT_TOKEN_LIST_OF_TOKEN_LISTS_TO_DISPLAY: string[] = [
 
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   ...DEFAULT_TOKEN_LIST_OF_TOKEN_LISTS_TO_DISPLAY,
-  ...UNSUPPORTED_TOKEN_LIST_URLS, // need to load dynamic unsupported tokens as well
 ]
 
 // default lists to be 'active' aka searched across

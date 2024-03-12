@@ -18,7 +18,6 @@ export async function fetchTokensFromLists(chainId: number) {
       return [url, value] as [string, TokenList | null]
     }),
   )
-
   const tokenLists = new Map<string, TokenList>(
     redisResult
       .filter(([_, v]) => v !== null)
