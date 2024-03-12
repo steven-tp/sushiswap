@@ -74,7 +74,7 @@ export const TVLChart: FC<{ x: number[]; y: number[] }> = ({ x, y }) => {
         extraCssText: 'z-index: 1000',
         responsive: true,
         // @ts-ignore
-        backgroundColor: tailwind.theme.colors.slate['700'],
+        backgroundColor: tailwind.theme?.colors.primary,
         textStyle: {
           // @ts-ignore
           color: tailwind.theme.colors.slate['50'],
@@ -115,7 +115,7 @@ export const TVLChart: FC<{ x: number[]; y: number[] }> = ({ x, y }) => {
       visualMap: {
         show: false,
         // @ts-ignore
-        color: [tailwind.theme.colors.blue['500']],
+        color: [tailwind.theme.colors.primary],
       },
       xAxis: [
         {
