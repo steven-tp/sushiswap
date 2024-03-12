@@ -25,7 +25,7 @@ export const PoolPageV2: FC<PoolPageV2> = ({ pool, tab }) => {
   return (
     <Container maxWidth="5xl" className="px-2 sm:px-4">
       <UnknownTokenAlert pool={pool} />
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-8">
         <div className="grid grid-cols-1 md:grid-cols-[auto_400px] gap-6">
           <div>
             <ManageV2LiquidityCard pool={pool} tab={tab} />
@@ -41,9 +41,6 @@ export const PoolPageV2: FC<PoolPageV2> = ({ pool, tab }) => {
             </PoolPositionProvider>
           </div>
         </div>
-        <div className="py-4">
-          <Separator />
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-[auto_400px] gap-6">
           <div>
             <PoolChartV2
@@ -56,9 +53,6 @@ export const PoolPageV2: FC<PoolPageV2> = ({ pool, tab }) => {
             <PoolStats pool={pool} />
             {pool.isIncentivized ? <PoolRewards pool={pool} /> : null}
           </div>
-        </div>
-        <div className="py-4">
-          <Separator />
         </div>
         <PoolTransactionsV2 pool={pool} poolId={pool.address} />
       </div>

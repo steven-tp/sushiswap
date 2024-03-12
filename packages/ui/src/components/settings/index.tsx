@@ -3,6 +3,7 @@
 import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useSlippageTolerance } from '@sushiswap/hooks'
 import React, { FC, ReactNode, useState } from 'react'
+import classNames from 'classnames'
 
 import { Button } from '../button'
 import {
@@ -124,7 +125,9 @@ export const SettingsOverlay: FC<SettingsOverlayProps> = ({
           )}
           {modules.length > 1 && (
             <List className="!pt-0">
-              <List.Control>
+              <List.Control className={classNames(
+                modules.includes(SettingsModule.CarbonOffset) || modules.includes(SettingsModule.ExpertMode) ? '' : '!border-none'
+              )}>
                 {modules.includes(SettingsModule.ExpertMode) && <ExpertMode />}
                 {modules.includes(SettingsModule.CarbonOffset) && (
                   <CarbonOffset />

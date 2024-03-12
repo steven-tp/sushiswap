@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { Currency } from './currency'
 import { SkeletonText } from './skeleton'
 
-const cardVariants = cva('relative rounded-lg overflow-hidden border border-accent', {
+const cardVariants = cva('relative rounded-lg overflow-hidden border-neubrutal', {
   variants: {
     variant: {
       default: 'shadow-sm background-card',
