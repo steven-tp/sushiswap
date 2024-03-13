@@ -265,7 +265,7 @@ export const OHM = addressMapToTokenMap(
   OHM_ADDRESS,
 ) as Record<keyof typeof OHM_ADDRESS, Token>
 
-export const WBTC = addressMapToTokenMap(
+const _WBTC = addressMapToTokenMap(
   {
     decimals: 8,
     symbol: 'WBTC',
@@ -273,6 +273,14 @@ export const WBTC = addressMapToTokenMap(
   },
   WBTC_ADDRESS,
 ) as Record<keyof typeof WBTC_ADDRESS, Token>
+
+export const WBTC = {..._WBTC, [ChainId.U2U_NEBULAS]: new Token({
+  chainId: ChainId.U2U_NEBULAS,
+  address: WBTC_ADDRESS[ChainId.U2U_NEBULAS],
+  decimals: 18,
+  name: 'Wrapped BTC',
+  symbol: 'BTC'
+}), }
 
 export const UNI = addressMapToTokenMap(
   {
