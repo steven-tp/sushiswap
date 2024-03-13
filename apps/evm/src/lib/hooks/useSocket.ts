@@ -41,57 +41,57 @@ export const useSocket = () => {
       }
     }, 5000)
   }
-  
-  function createWebsocket() {
-    clearInterval(intervalWs)
-    if(!_socket) {
-      return new Promise((resolve) => {
-        _socket = new WebSocket('wss://w.u2w.io/m')
-        _socket.onopen = () => {
-          isConnected = true
-          socketClosed = false
-          resolve(true)
-          ping()
-
-        }
-    
-        _socket.onclose = (code: any) => {
-          console.log('Close server', code)
-          _socket = null
-          isConnected = false
-          socketClosed = true
-          resolve(false)
-          clearInterval(intervalWs)
-        }
-    
-        _socket.onmessage = (event: any) => {
-          if (event.data instanceof Blob) {
-            event.data?.arrayBuffer().then((e: any) => {
-              const buffer = new Uint8Array(e)
-              const unpacker = decodeMulti(buffer)
-              const type = unpacker.next().value
-              switch (type) {
-                case SOCKET_TYPES.CANDLE:
-                  handleCandle(unpacker)
-                  break
-                case SOCKET_TYPES.TRANSACTION:
-                  handleTransaction(unpacker)
-                  break
-                default:
-              }
-            })
-          }
-          // store.dispatch('socket_b', event)
-        }
-      })
-    }
-  }
 
   function clearSocket() {
     clearInterval(intervalWs)
     _socket?.close()
   }
   
+  function createWebsocket() {
+    clearInterval(intervalWs)
+    clearSocket()
+    if(isConnected) return
+    return new Promise((resolve) => {
+      _socket = new WebSocket('wss://w.u2w.io/m')
+      _socket.onopen = () => {
+        isConnected = true
+        socketClosed = false
+        resolve(true)
+        ping()
+
+      }
+  
+      _socket.onclose = (code: any) => {
+        console.log('Close server', code)
+        _socket = null
+        isConnected = false
+        socketClosed = true
+        resolve(false)
+        clearInterval(intervalWs)
+      }
+  
+      _socket.onmessage = (event: any) => {
+        if (event.data instanceof Blob) {
+          event.data?.arrayBuffer().then((e: any) => {
+            const buffer = new Uint8Array(e)
+            const unpacker = decodeMulti(buffer)
+            const type = unpacker.next().value
+            switch (type) {
+              case SOCKET_TYPES.CANDLE:
+                handleCandle(unpacker)
+                break
+              case SOCKET_TYPES.TRANSACTION:
+                handleTransaction(unpacker)
+                break
+              default:
+            }
+          })
+        }
+        // store.dispatch('socket_b', event)
+      }
+    })
+  }
+
   function unsubcribe(message: TOPIC_MESSAGE) {
     if (!message) return
     if (_socket && _socket.readyState === WebSocket.OPEN) {
@@ -101,6 +101,8 @@ export const useSocket = () => {
           cmd: 'unsubscribe'
         })
       )
+    } else {
+      console.error('Socket close')
     }
   }
   
@@ -112,6 +114,8 @@ export const useSocket = () => {
           ...message
         })
       )
+    } else {
+      console.error('Socket close')
     }
   }
   

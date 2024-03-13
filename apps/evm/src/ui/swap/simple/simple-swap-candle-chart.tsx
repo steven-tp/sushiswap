@@ -86,6 +86,7 @@ interface ISimpleSwappCandleChart {
   actionId: string | undefined,
   soketInited: boolean
 }
+let _chartWidget: any
 export const SimpleSwapCandleChart: FC<ISimpleSwappCandleChart> = ({
   precision,
   resolution,
@@ -103,7 +104,7 @@ export const SimpleSwapCandleChart: FC<ISimpleSwappCandleChart> = ({
   widgetOptions.datafeed = datafeed
 
   const updatePrecision = (_chartWidget: any)  => {
-    if(_chartWidget) {
+    if(_chartWidget?.applyOverrides && typeof _chartWidget.applyOverrides === 'function') {
       const _format = `1${'0'.repeat(precision)}`
       _chartWidget?.applyOverrides({ 'mainSeriesProperties.minTick': _format })
     }
@@ -135,7 +136,7 @@ export const SimpleSwapCandleChart: FC<ISimpleSwappCandleChart> = ({
       const symbol = `${token0?.symbol}/${token1?.symbol}-${token}`
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      const _chartWidget = new widget({ ...widgetOptions, symbol })
+      _chartWidget = new widget({ ...widgetOptions, symbol })
       setChartWiget(_chartWidget)
       _chartWidget.onChartReady(() => {
         // chartWidget?.activeChart().setChartType(3)
@@ -143,6 +144,9 @@ export const SimpleSwapCandleChart: FC<ISimpleSwappCandleChart> = ({
         getCandle(_RESOLUTION[_resolution], token)
         //ready
         updatePrecision(_chartWidget)
+        setTimeout(() => {
+          updatePrecision(_chartWidget)
+        }, 1000)
       })
     }
 
@@ -168,6 +172,7 @@ export const SimpleSwapCandleChart: FC<ISimpleSwappCandleChart> = ({
   useEffect(() => {
     setResolution(resolution)
   }, [resolution])
+
 
   return (
     <div id="tranding-chart" className='h-full'></div>

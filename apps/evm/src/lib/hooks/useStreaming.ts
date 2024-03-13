@@ -1,6 +1,7 @@
 import { config } from 'src/config'
 import { convertResolutionToSeconds, formatNumeral } from '../functions'
 import { useMemo } from 'react'
+import numeral from 'numeral'
 import { useDerivedStateSimpleSwap } from 'src/ui/swap/simple/derivedstate-simple-swap-provider'
 
 export interface PAIR_ITEM {
@@ -13,7 +14,6 @@ export interface PAIR_ITEM {
 }
 
 const channelToSubscription = new Map()
-const precision = localStorage.getItem(config.PRECISION_STOGRATE) || 6
 
 export const useStreaming = () => {
   const { mutate : { addNewTransaction} } = useDerivedStateSimpleSwap()
@@ -33,11 +33,11 @@ export const useStreaming = () => {
     function handleCandle(unpacker: any) {
       const barData: any = {
         time: unpacker.next().value,
-        open: formatNumeral(unpacker.next().value, precision),
-        high: formatNumeral(unpacker.next().value, precision),
-        low: formatNumeral(unpacker.next().value, precision),
-        close: formatNumeral(unpacker.next().value, precision),
-        volume: formatNumeral(unpacker.next().value, precision),//pairInfo?.baseUnit),
+        open: numeral(unpacker.next().value),
+        high: numeral(unpacker.next().value),
+        low: numeral(unpacker.next().value),
+        close: numeral(unpacker.next().value),
+        volume: numeral(unpacker.next().value),//pairInfo?.baseUnit),
         symbol: unpacker.next().value,
         type: unpacker.next().value
       }

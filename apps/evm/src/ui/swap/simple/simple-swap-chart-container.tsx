@@ -48,7 +48,7 @@ export const SimpleSwapChartContainer: FC = ()=> {
   }
   const resolution: any = localStorage.getItem(config.RESOLUTION_STOGRATE)
   if(typeChart === TYPE_CHART.LINE && ['D1', 'D7', 'D30'].indexOf(currentResolution) === -1) {
-    setCurrentResolution('D7')
+    setCurrentResolution('D1')
   }
   const handleUpdateTypeChart = (type: number) => {
     setTypeChart(type)
@@ -61,14 +61,18 @@ export const SimpleSwapChartContainer: FC = ()=> {
     setActionId(`${id}_${Date.now()}`)
   }
 
+  const registerSocket = async () => {
+    await createWebsocket()
+    setSocketInited(true)
+    setTimeout(() => {
+      subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
+    }, 1500)
+  }
+
   useEffect(() => {
     if(token0?.symbol && token1?.symbol) {
       if(isMounted && !soketInited) {
-        createWebsocket()
-        setSocketInited(true)
-        setTimeout(() => {
-          subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
-        }, 1000)
+        registerSocket()
       }
     }
   }, [isMounted, token0, token1, soketInited, createWebsocket, subcribeTransaction])

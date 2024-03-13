@@ -117,7 +117,7 @@ export const VolumeChart: FC<{ x: number[]; y: number[] }> = ({ x, y }) => {
       visualMap: {
         show: false,
         // @ts-ignore
-        color: [tailwind.theme.colors.blue['500']],
+        color: [tailwind.theme.colors.primary],
       },
       xAxis: [
         {
@@ -151,7 +151,7 @@ export const VolumeChart: FC<{ x: number[]; y: number[] }> = ({ x, y }) => {
           },
           areaStyle: {
             // @ts-ignore
-            color: tailwind.theme.colors.blue['500'],
+            color: tailwind.theme.colors.primary,
           },
           animationEasing: 'elasticOut',
           animationDelayUpdate: function (idx: number) {

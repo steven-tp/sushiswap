@@ -140,7 +140,7 @@ export const BarChartGraph: FC<BarChartProps> = ({ chart, period }) => {
       visualMap: {
         show: false,
         // @ts-ignore
-        color: [tailwind.theme.colors.blue['500']],
+        color: [tailwind.theme.colors.primary],
       },
       xAxis: [
         {

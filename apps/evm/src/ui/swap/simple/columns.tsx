@@ -1,5 +1,4 @@
 import { Button, LinkExternal, SkeletonText } from "@sushiswap/ui";
-import { ColumnDef } from "@tanstack/react-table";
 import { shortenAddress, shortenHash } from "sushi/format";
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
 import { formatDistance } from "date-fns";
@@ -11,13 +10,12 @@ export const DATE_COLUMN = {
     <div className="whitespace-nowrap">
       {formatDistance(props.row.original.timestamp * 1000, new Date(), {
         addSuffix: true,
-      })}
+      })?.replaceAll('about', '')}
     </div>
   ),
   meta: {
     skeleton: <SkeletonText fontSize="lg" />
   },
-  size: 300,
 }
 
 export const TYPE_COLUMN = {
@@ -59,12 +57,12 @@ export const AMOUNT_OUT_COLUMN =  (symbol: string | undefined) =>({
   }
 })
 
-export const PRICE_COLUMN = (pair: string, precision: number) => ({
+export const PRICE_COLUMN = (pair: string) => ({
   id: 'price',
   header: `PRICE ${pair ? `(${pair})` : null}`,
-  cell: (props: any) =>  props.row.original.price.toFixed(precision),
+  cell: (props: any) => props.row.original.price,
   meta: {
-    skeleton: <SkeletonText fontSize="lg" />
+    skeleton: <SkeletonText fontSize="lg" align="center" />
   }
 })
 
@@ -75,8 +73,8 @@ export const MAKER_COLUMN = {
     <div title={`${props.row.original.maker}`}>{shortenAddress(props.row.original.maker)}</div>
   ),
   meta: {
-    skeleton: <SkeletonText fontSize="lg" />
-  }
+    skeleton: <SkeletonText align="center" fontSize="lg" />
+  },
 }
 const scanUrl = process.env.NEXT_PUBLIC_U2U_EXPLORER_URL
 export const TXN_COLUMN = {
@@ -99,7 +97,7 @@ export const TXN_COLUMN = {
   </LinkExternal>
   ),
   meta: {
-    skeleton: <SkeletonText fontSize="lg" />
+    skeleton: <SkeletonText align="center" fontSize="lg" />
   }
 }
 
