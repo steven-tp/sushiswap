@@ -149,7 +149,7 @@ export const TVLChart: FC<{ x: number[]; y: number[] }> = ({ x, y }) => {
           },
           areaStyle: {
             // @ts-ignore
-            color: tailwind.theme.colors.blue['500'],
+            color: tailwind.theme.colors.primary,
           },
           animationEasing: 'elasticOut',
           animationDelayUpdate: function (idx: number) {

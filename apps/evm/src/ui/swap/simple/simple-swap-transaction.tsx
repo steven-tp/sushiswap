@@ -80,13 +80,12 @@ export const  SimpleSwapTransaction: FC = () => {
     return true
   }, [data.length, size, args.size])
 
-  const precision = localStorage.getItem(config.PRECISION_STOGRATE) || 6
 
   const COLUMNS = [
     // TYPE_COLUMN,
     AMOUNT_IN_COLUMN(token0?.symbol),
     AMOUNT_OUT_COLUMN(token1?.symbol),
-    PRICE_COLUMN(`${token0?.symbol} / ${token1?.symbol}`, Number(precision)),
+    PRICE_COLUMN(`${token0?.symbol} / ${token1?.symbol}`),
     MAKER_COLUMN,
     TXN_COLUMN,
     DATE_COLUMN,
