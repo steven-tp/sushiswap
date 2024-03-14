@@ -168,7 +168,7 @@ export const ConcentratedLiquidityWidget: FC<ConcentratedLiquidityWidget> = ({
                   Single-asset deposit only.{' '}
                   <a
                     // TODO
-                    href="https://www.sushi.com/academy"
+                    href=""
                     target="_blank"
                     rel="noreferrer"
                     className="text-blue hover:text-blue-600"
@@ -222,7 +222,7 @@ export const ConcentratedLiquidityWidget: FC<ConcentratedLiquidityWidget> = ({
                 <span className="dark:text-slate-400 text-slate-600">
                   The market price is outside your specified price range.
                   Single-asset deposit only.{' '}
-                  <a
+                  {/* <a
                     // TODO
                     href="https://www.sushi.com/academy"
                     target="_blank"
@@ -230,7 +230,7 @@ export const ConcentratedLiquidityWidget: FC<ConcentratedLiquidityWidget> = ({
                     className="text-blue hover:text-blue-600"
                   >
                     Learn More
-                  </a>
+                  </a> */}
                 </span>
               </div>
             </div>

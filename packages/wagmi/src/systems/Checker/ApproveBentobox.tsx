@@ -76,7 +76,7 @@ const ApproveBentobox: FC<ApproveBentoboxProps> = ({
             <LinkExternal
               target="_blank"
               className="text-blue hover:underline"
-              href="https://www.sushi.com/academy/articles/what-is-bentobox"
+              href="/academy/articles/what-is-bentobox"
               rel="noreferrer"
             >
               Learn more

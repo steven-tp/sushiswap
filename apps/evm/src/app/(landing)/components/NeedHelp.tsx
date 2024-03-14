@@ -85,7 +85,7 @@ export const NeedHelp: FC = () => {
                   </span>
                 </div>
                 <div className="flex justify-start mt-4">
-                  <LinkExternal href="https://www.sushi.com/academy">
+                  <LinkExternal href="">
                     <Button variant="secondary">Visit Academy</Button>
                   </LinkExternal>
                 </div>

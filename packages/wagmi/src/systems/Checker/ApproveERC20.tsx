@@ -105,7 +105,7 @@ const ApproveERC20: FC<ApproveERC20Props> = ({
               <LinkExternal
                 target="_blank"
                 className="text-blue hover:underline"
-                href="https://www.sushi.com/academy/articles/what-is-token-approval"
+                href="/academy/articles/what-is-token-approval"
                 rel="noreferrer"
               >
                 Learn more
