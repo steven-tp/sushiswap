@@ -139,7 +139,7 @@ export const CrossChainSwapTokenNotFoundDialog = () => {
                 <a
                   href="https://coinbrain.com/dictionary/honeypot-scam"
                   rel="noreferrer noopener"
-                  className="text-blue"
+                  className="text-primary"
                 >
                   here
                 </a>{' '}
@@ -157,14 +157,14 @@ export const CrossChainSwapTokenNotFoundDialog = () => {
                     Token {tokenFrom?.token && tokenTo?.token ? '1' : ''}
                   </List.Label>
                   <List.Control>
-                    <p className="p-3 text-sm text-gray-900 dark:text-slate-50">
+                    <p className="p-3 text-sm color-base">
                       Could not retrieve token info for{' '}
                       <a
                         target="_blank"
                         href={Chain.from(chainId0)?.getTokenUrl(
                           token0.wrapped.address,
                         )}
-                        className="text-blue font-medium"
+                        className="text-primary font-medium"
                         rel="noreferrer"
                       >
                         {shortenAddress(token0.wrapped.address)}
@@ -181,14 +181,14 @@ export const CrossChainSwapTokenNotFoundDialog = () => {
                     Token {tokenFrom?.token && tokenTo?.token ? '2' : ''}
                   </List.Label>
                   <List.Control>
-                    <p className="p-3 text-sm text-gray-900 dark:text-slate-50">
+                    <p className="p-3 text-sm color-base">
                       Could not retrieve token info for{' '}
                       <a
                         target="_blank"
                         href={Chain.from(chainId1)?.getTokenUrl(
                           token1.wrapped.address,
                         )}
-                        className="text-blue font-medium"
+                        className="text-primary font-medium"
                         rel="noreferrer"
                       >
                         {shortenAddress(token1.wrapped.address)}

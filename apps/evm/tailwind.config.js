@@ -42,7 +42,7 @@ const tailwindConfig = {
     },
     extend: {
       fontFamily: {
-        display: 'Metuo, sans-serif',
+        display: '__metuo_adbc6c',
       },
       display: ['group-hover'],
       visibility: ['group-hover'],

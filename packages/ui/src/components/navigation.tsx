@@ -3,7 +3,7 @@ import Link from 'next/link'
 import * as React from 'react'
 
 import classNames from 'classnames'
-// import { U2DexIcon } from './icons/U2DexIcon'
+import { U2DexIcon } from './icons/U2DexIcon'
 import { navigationMenuTriggerStyle } from './navigation-menu'
 import {
   NavigationMenu,
@@ -147,11 +147,11 @@ const NavigationContainer: React.FC<NavContainerProps> = ({
 }) => {
   return (
     <div className={navigationContainerVariants({ variant })}>
-      <div>
-        <div className='lg:hidden'>
-          {/* <U2DexIcon width={24} height={24} /> */}
+      <div className='relative'>
+        <div className='absolute top-1/2 translate-y-[-50%] left-0 lg:opacity-0'>
+          <U2DexIcon width={24} height={24} />
         </div>
-        <div className='hidden lg:block'>
+        <div className='opacity-0 lg:opacity-100 w-6 lg:w-auto'>
           <U2DexFullIcon/>
         </div>
       </div>

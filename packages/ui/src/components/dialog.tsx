@@ -144,7 +144,7 @@ const DialogHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={classNames(
-      'flex flex-col space-y-1.5 text-center sm:text-left',
+      'flex flex-col space-y-1.5',
       className,
     )}
     {...props}
@@ -187,7 +187,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={classNames('text-sm color-base mr-[64px]', className)}
+    className={classNames('text-sm font-semibold color-base mr-[64px]', className)}
     {...props}
   />
 ))

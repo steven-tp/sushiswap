@@ -3,6 +3,8 @@ import { shortenAddress, shortenHash } from "sushi/format";
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
 import { formatDistance } from "date-fns";
 
+const scanUrl = process.env.NEXT_PUBLIC_U2U_EXPLORER_URL
+
 export const DATE_COLUMN = {
   id: 'date',
   header: 'DATE',
@@ -70,13 +72,25 @@ export const MAKER_COLUMN = {
   id: 'maker',
   header: 'MAKER',
   cell: (props: any) => (
-    <div title={`${props.row.original.maker}`}>{shortenAddress(props.row.original.maker)}</div>
+    <LinkExternal
+    target="_blank" href={`${scanUrl}/address/${props.row.original.maker}`}
+  >
+    <Button
+      asChild
+      variant="link"
+      size="sm"
+      className="!font-medium !text-secondary-foreground"
+      title={`${props.row.original.maker}`}
+    >
+      {shortenAddress(props.row.original.maker, 10)}
+      <ArrowTopRightOnSquareIcon className="w-4 h-4" />
+    </Button>
+  </LinkExternal>
   ),
   meta: {
     skeleton: <SkeletonText align="center" fontSize="lg" />
   },
 }
-const scanUrl = process.env.NEXT_PUBLIC_U2U_EXPLORER_URL
 export const TXN_COLUMN = {
   id: 'txn',
   header: 'TXN',
@@ -91,7 +105,7 @@ export const TXN_COLUMN = {
       className="!font-medium !text-secondary-foreground"
       title={`${props.row.original.hash}`}
     >
-      {shortenHash(props.row.original.hash)}
+      {shortenHash(props.row.original.hash, 10)}
       <ArrowTopRightOnSquareIcon className="w-4 h-4" />
     </Button>
   </LinkExternal>
