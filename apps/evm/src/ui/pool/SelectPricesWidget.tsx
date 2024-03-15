@@ -755,7 +755,7 @@ export const SelectPricesWidget: FC<SelectPricesWidget> = ({
               }
             />
           </div>
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardDescription>
                 We{`'`}re excited to share that Sushi integration is now live on{' '}
@@ -775,7 +775,7 @@ export const SelectPricesWidget: FC<SelectPricesWidget> = ({
                 </Button>
               </LinkExternal>
             </CardFooter>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </FormSection>

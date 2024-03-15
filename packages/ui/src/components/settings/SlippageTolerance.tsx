@@ -97,7 +97,7 @@ export const SlippageTolerance: FC<{
                       <a
                         className="text-primary hover:underline hover:text-hover"
                         target="_blank"
-                        href="https://www.sushi.com/academy/articles/what-is-slippage-price-impact"
+                        href="/academy/articles/what-is-slippage-price-impact"
                         rel="noreferrer"
                       >
                         Learn more

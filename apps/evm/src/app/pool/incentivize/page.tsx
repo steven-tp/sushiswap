@@ -312,11 +312,11 @@ const Incentivize = withCheckerRoot(() => {
             Rewards are distributed per hour. The minimum reward for this
             distribution is dependent on the selected duration. <br />
             <br /> Looking to get your token added here?{' '}
-            <Button variant="link" asChild>
+            {/* <Button variant="link" asChild>
               <LinkExternal href="https://rbieu62gj0f.typeform.com/to/KkrPkOFe">
                 Get in touch with us.
               </LinkExternal>
-            </Button>
+            </Button> */}
           </p>
           <Separator className="!my-10" />
           <div className="flex flex-col gap-4">

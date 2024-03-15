@@ -10,6 +10,7 @@ import { SimpleSwapCandleChart } from './simple-swap-candle-chart'
 import { config } from 'src/config'
 import { useIsMounted } from '@sushiswap/hooks'
 import { useSocket } from 'src/lib/hooks/useSocket'
+let inprogressSubscribeTransaction = false
 export const SimpleSwapChartContainer: FC = ()=> {
   const {
     state: { token0, token1 },
@@ -64,10 +65,17 @@ export const SimpleSwapChartContainer: FC = ()=> {
   const registerSocket = async () => {
     await createWebsocket()
     setSocketInited(true)
-    setTimeout(() => {
-      subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
-    }, 1500)
   }
+
+  useEffect(() => {
+    if(soketInited && !inprogressSubscribeTransaction) {
+      inprogressSubscribeTransaction = true
+      setTimeout(() => {
+        subcribeTransaction(`${token0?.wrapped.address.toLocaleLowerCase()}_${token1?.wrapped?.address.toLocaleLowerCase()}`)
+        inprogressSubscribeTransaction = false
+      })
+    }
+  }, [soketInited, token0, token1])
 
   useEffect(() => {
     if(token0?.symbol && token1?.symbol) {

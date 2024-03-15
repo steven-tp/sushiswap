@@ -39,8 +39,7 @@ export const Hero: FC = () => {
               })}
             >
               When you add liquidity to a pool, you can receive a share of its
-              trading volume and potentially snag extra rewards when there are
-              incentives involved!
+              trading volume!
             </p>
           </div>
         </div>
@@ -345,8 +344,8 @@ export const Hero: FC = () => {
             </DropdownMenuContent>
           </DropdownMenu> */}
         </div>
-        <div className='w-1/2 border-neubrutal rounded-lg h-20'>
-          <LinkInternal href="/pools/incentivize" className='w-full'>
+        {/* <div className='w-1/2 border-neubrutal rounded-lg h-20'> */}
+          {/* <LinkInternal href="/pools/incentivize" className='w-full'>
             <Button
               fullWidth
               asChild
@@ -415,8 +414,8 @@ export const Hero: FC = () => {
                 </svg>
               </div>
             </Button>
-          </LinkInternal>
-        </div>
+          </LinkInternal> */}
+        {/* </div> */}
       </div>
     </section>
   )
