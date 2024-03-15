@@ -191,7 +191,7 @@ export const TokenSelector: FC<TokenSelectorProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="!flex flex-col justify-start min-h-[85vh]">
         <DialogHeader>
-          <DialogTitle>Select a token</DialogTitle>
+          <DialogTitle className='text-xl lg:text-2xl'>Select a token</DialogTitle>
           <DialogDescription>
             Select a token from our default list or search for a token by symbol
             or address.
@@ -201,11 +201,11 @@ export const TokenSelector: FC<TokenSelectorProps> = ({
           <div className="flex gap-2">
             <TextField
               placeholder="Search by token or address"
-              icon={MagnifyingGlassIcon}
               type="text"
               testdata-id={`${id}-address-input`}
               value={query}
               onValueChange={setQuery}
+              className='!background-input border-2 border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] !rounded'
             />
           </div>
         ) : null}
@@ -217,7 +217,7 @@ export const TokenSelector: FC<TokenSelectorProps> = ({
                 <Button
                   size="sm"
                   variant="secondary"
-                  className="group"
+                  className="group border border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:!text-black"
                   key={token.id}
                   onClick={() => _onSelect(token)}
                 >
